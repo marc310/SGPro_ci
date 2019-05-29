@@ -31,7 +31,7 @@
               $tipo = "Jurídica";
             }
             else {
-              $tipo = "Indefinido";
+              $tipo = "Não Definido";
             }
             ?>
             <tr>
@@ -42,8 +42,8 @@
               <td><?php echo $c['celular']; ?></td>
               <td><?php echo $c['email']; ?></td>
               <td>
-                <a href="<?php echo site_url('cliente/edit/'.$c['id_cliente']); ?>" data-toggle="modal" data-target="#modalEditar" class="btn btn-info btn-xs"><span class="fa fa-pencil"></span> Edit</a>
-                <a href="<?php echo site_url('cliente/remove/'.$c['id_cliente']); ?>" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span> Delete</a>
+                <a href="<?php echo site_url('cliente/edit/'.$c['id_cliente']); ?>" data-toggle="modal" data-target="#modalEditar" class="btn btn-info btn-xs"><span class="fa fa-pencil"></span> </a>
+                <a href="<?php echo site_url('cliente/remove/'.$c['id_cliente']); ?>" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span> </a>
               </td>
             </tr>
           <?php } ?>
@@ -86,7 +86,6 @@
         <h4 class="modal-title">Modal Header</h4>
       </div>
       <div class="modal-body">
-        <p>The <strong>shown.bs.modal</strong> event occurs when the modal is fully shown.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -128,9 +127,7 @@
 
 <script>
 $(document).ready(function(){
-  $("#myBtn").click(function(){
-    $("#modalAdd").modal("show");
-  });
+
   $("#modalAdd").on('shown.bs.modal', function(){
     //alert('The modal is fully shown.');
     dataCadastro();
@@ -139,23 +136,30 @@ $(document).ready(function(){
   });
   $("#modalEditar").on('shown.bs.modal', function(){
     //alert('The modal is fully shown.');
+    formataTelefone();
+    formataCelular();
     var inputDataCadastro = new Date().getTime(document.getElementById("data_cadastro_cliente").value);
     var date = new Date(inputDataCadastro);
     var dataFormatada = formatDate(date);
     document.getElementById("labelDataCliente").innerHTML = "Cadastrado desde: " + dataFormatada;
     //
     var inputDocCliente = document.getElementById("inputTipoPessoa").value;
+    //
     if (inputDocCliente == "1")
     {
-      document.getElementById("inputTipoPessoa").value = "Pessoa Física";
+      //document.getElementById("inputTipoPessoa").value = "Pessoa Física";
+      document.getElementById("selectTipoPessoa").value = inputDocCliente;
+      document.getElementById("divDocumentoCliente").hidden=false;
     }
     else if(inputDocCliente == "2")
     {
-      document.getElementById("inputTipoPessoa").value = "Pessoa Jurídica";
+      //document.getElementById("inputTipoPessoa").value = "Pessoa Jurídica";
+      document.getElementById("selectTipoPessoa").value = inputDocCliente;
+      document.getElementById("divDocumentoCliente").hidden=false;
     }
     else
     {
-      document.getElementById("inputTipoPessoa").value = "Documento não Cadastrado";
+      //document.getElementById("inputTipoPessoa").value = "Documento não Cadastrado";
       document.getElementById("divDocumentoCliente").hidden=true;
     }
   });
@@ -163,4 +167,8 @@ $(document).ready(function(){
   $('#modalEditar').on('hidden.bs.modal', function () {
    location.reload();
  });
+ $('#modalAdd').on('hidden.bs.modal', function () {
+  location.reload();
+});
+
 </script>

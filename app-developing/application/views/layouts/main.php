@@ -3,7 +3,7 @@
   <head>
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <title>codex_sgpro</title>
+      <title>SGPro :: Sistema de Gerenciamento de Produção | CodeX WebService 1.0.1</title>
       <!-- Tell the browser to be responsive to screen width -->
       <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
       <!-- Bootstrap 3.3.6 -->
@@ -19,6 +19,7 @@
       <!-- AdminLTE Skins. Choose a skin from the css/skins
            folder instead of downloading all of them to reduce the load. -->
       <link rel="stylesheet" href="<?php echo site_url('resources/css/_all-skins.min.css');?>">
+      <!-- CodeX 1.2.0 -->
       <script src="<?php echo site_url('resources/js/codex/gerenciador.js');?>"></script>
       <script src="<?php echo site_url('resources/js/codex/imask.js');?>"></script>
       <script src="<?php echo site_url('resources/js/codex/jquery-3.4.1.min.js');?>"></script>
