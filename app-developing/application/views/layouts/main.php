@@ -181,7 +181,7 @@
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <strong>Desenvolvido por <a href="http://www.marcelomotta.com/">MarceloMotta</a> 1.2</strong>
+            <strong>Desenvolvido por <a href="http://www.marcelomotta.com/">MarceloMotta</a> 1.0.1</strong>
         </footer>
 
         <!-- Control Sidebar -->

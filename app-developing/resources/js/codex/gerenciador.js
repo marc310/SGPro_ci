@@ -11,7 +11,7 @@
 *
 *************************************************************************************/
 ///
-// ao selecionar verifica
+// VERIFICA TIPO DE PESSOA AO CADASTRAR, FISICA OU JURIDICA PARA FORMATAÇÃO DO DOCUMENTO
 // se o tipo estiver nulo ou vazio entao esconde o label e input documento
 // se o tipo for pessoa fisica entao altera o label "documento" para "CPF: "
 // se o tipo for pessoa juridica entao altera o label "documento" para "CNPJ: "
@@ -21,7 +21,7 @@ function documentoCliente()
 
   if (tipoPessoa == ""){
     document.getElementById("divDocumentoCliente").hidden=true;
-    alert("Você deve selecionar o tipo de pessoa para Cadastrar o Documento.");
+    //alert("Você deve selecionar o tipo de pessoa para Cadastrar o Documento.");
   }
   if (tipoPessoa == "1"){
     //alert(1 Pessoa Física);
@@ -37,6 +37,28 @@ function documentoCliente()
   }
 
 }
+
+
+function mostraCamposEndereco() {
+  //document.getElementById("demo").innerHTML = Date();
+  //
+  var box;
+  var addEndereco;
+  //
+  box = document.getElementById("box-endereco-add");
+  addEndereco = document.getElementById("adicionarEndereco");
+
+  if (box.hidden == true){
+  box.hidden = false;
+  addEndereco.innerHTML = '<i class="fa fa-plus"></i> Esconder';
+  }
+  else {
+    box.hidden = true;
+    addEndereco.innerHTML = '<i class="fa fa-plus"></i> Adicionar';
+
+  }
+}
+
 //
 //*************************************************************************************//
 //

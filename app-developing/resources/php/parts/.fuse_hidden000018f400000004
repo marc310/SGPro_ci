@@ -1,0 +1,158 @@
+<table class="table table-striped">
+    <tr>
+<th hidden>Id Endereco</th>
+<th>Rua</th>
+<th>Bairro</th>
+<th>Cidade</th>
+<th>Numero</th>
+<th>Uf</th>
+<th>Cep</th>
+<th> </th>
+</tr>
+<?php
+ foreach($enderecos as $e){
+ //
+ // cases para seleção de estados
+ // part lista de estados-case
+ //
+ switch ($e['uf'])
+    {
+ case 1:
+       $uf = "AC";
+ break;
+
+ case 2:
+       $uf = "AL";
+ break;
+
+ case 3:
+       $uf = "AM";
+ break;
+
+ case 4:
+       $uf = "AP";
+ break;
+
+ case 5:
+       $uf = "BA";
+ break;
+
+ case 6:
+       $uf = "CE";
+ break;
+
+ case 7:
+       $uf = "DF";
+ break;
+
+ case 8:
+       $uf = "ES";
+ break;
+
+ case 9:
+       $uf = "GO";
+ break;
+
+ case 10:
+       $uf = "MA";
+ break;
+
+ case 11:
+       $uf = "MG";
+ break;
+
+ case 12:
+       $uf = "MS";
+ break;
+
+ case 13:
+       $uf = "MT";
+ break;
+
+ case 14:
+       $uf = "PA";
+ break;
+
+ case 15:
+       $uf = "PB";
+ break;
+
+ case 16:
+       $uf = "PE";
+ break;
+
+ case 17:
+       $uf = "PI";
+ break;
+
+ case 18:
+       $uf = "PR";
+ break;
+
+ case 19:
+       $uf = "RJ";
+ break;
+
+ case 20:
+       $uf = "RN";
+ break;
+
+ case 21:
+       $uf = "RO";
+ break;
+
+ case 22:
+       $uf = "RR";
+ break;
+
+ case 23:
+       $uf = "RS";
+ break;
+
+ case 24:
+       $uf = "SC";
+ break;
+
+ case 25:
+       $uf = "SE";
+ break;
+
+ case 26:
+       $uf = "SP";
+ break;
+
+ case 27:
+       $uf = "TO";
+ break;
+ }
+
+
+?>
+<tr>
+<td hidden><?php echo $e['id_endereco']; ?></td>
+<td><?php echo $e['rua']; ?></td>
+<td><?php echo $e['bairro']; ?></td>
+<td><?php echo $e['cidade']; ?></td>
+<td><?php echo $e['numero']; ?></td>
+<td><?php echo $uf; ?></td>
+<td><?php echo $e['cep']; ?></td>
+<td>
+<a
+href="<?php echo site_url('endereco/edit/'.$e['id_endereco']); ?>"
+class="btn btn-info btn-xs"
+data-toggle="modal"
+data-target="#modalEditar"
+>
+<span class="fa fa-pencil"></span>
+</a>
+
+<a
+href="<?php echo site_url('endereco/remove/'.$e['id_endereco']); ?>"
+class="btn btn-danger btn-xs"
+onclick="return confirm('Tem certeza que deseja deletar este item?');">
+<span class="fa fa-trash"></span>
+</a>
+        </td>
+    </tr>
+    <?php } ?>
+</table>

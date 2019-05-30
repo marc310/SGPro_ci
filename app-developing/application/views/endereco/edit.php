@@ -60,7 +60,10 @@
             	<button type="submit" class="btn btn-success">
 					<i class="fa fa-check"></i> Save
 				</button>
-	        </div>				
+
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        
+	        </div>
 			<?php echo form_close(); ?>
 		</div>
     </div>

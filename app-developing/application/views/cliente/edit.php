@@ -13,11 +13,19 @@
 
             <div class="tab-content">
                <div class="tab-pane active" id="infoCliente">
+                 <div class="box-body">
+                   <div class="row">
                  <div class="col-md-12">
 
 
 
-      <form name="frmEditCliente" id="frmEditarCliente" method="post" action="<?php echo site_url('cliente/edit/'.$cliente['id_cliente']);?>" onsubmit="return validaForm(this);">
+      <form
+      name="frmEditCliente"
+      id="frmEditarCliente"
+      method="post"
+      action="<?php echo site_url('cliente/edit/'.$cliente['id_cliente']);?>"
+      onsubmit="return validaForm(this);"
+      >
 
 			<div class="box-body">
 				<div class="row clearfix">
@@ -49,7 +57,11 @@
               }
               ?>
               </select>
-							<input type="text" id="inputTipoPessoa" name="tipo_pessoa" value="<?php echo ($this->input->post('tipo_pessoa') ? $this->input->post('tipo_pessoa') : $cliente['tipo_pessoa']); ?>" class="form-control hidden"/>
+							<input type="text"
+              id="inputTipoPessoa"
+              name="inputTipoPessoa"
+              value="<?php echo ($this->input->post('tipo_pessoa') ? $this->input->post('tipo_pessoa') : $cliente['tipo_pessoa']); ?>"
+              class="form-control hidden"/>
 						</div>
 					</div>
 					<div class="col-md-6" id="divDocumentoCliente" hidden>
@@ -85,24 +97,371 @@
 					</div>
 				</div>
 			</div>
-			<div class="box-footer">
-            	<button type="submit" id="SalvarFormulario" class="btn btn-success">
-      					<i class="fa fa-check"></i> Salvar
+			       <div class="box-footer">
+
+            	<button id="SalvarFormulario" class="btn btn-success span12">
+      					<i class="fa fa-check"></i> Salvar & Continuar
       				</button>
 
-              <button type="button" id="cancelaEdit" data-dismiss="modal" class="btn btn-outline-secondary">
+              <button type="button" id="cancelaEdit"
+              class="btn btn-outline-secondary"
+              onclick="location.href='<?php echo site_url('cliente/index');?>'"
+              >
                 <i class="fa fa-check"></i> Fechar
               </button>
 	        </div>
         </form>
+        <div id="resultCliente" class="col-md-12"></div>
 
     </div>
   </div>
-  <div class="tab-pane" id="redesSociais">Social Contacts</div>
-  <div class="tab-pane" id="enderecoCliente">Endereços</div>
+</div>
+  </div>
+  <!-- ######################################################################################### -->
+  <!-- TAB 2 REDES SOCIAIS -->
+  <div class="tab-pane" id="redesSociais">
+    <div class="box-body">
+      <div class="row">
+    <div class="col-md-12">
+
+
+    </div>
+  </div>
+    </div>
+  </div>
+  <!-- FIM DA TAB 2 REDES SOCIAIS -->
+  <!-- ######################################################################################### -->
+  <!-- ######################################################################################### -->
+  <!-- ######################################################################################### -->
+
+
+ <!-- ######################################################################################### -->
+               <!-- TAB 4 LISTA DE ENDEREÇO -->
+               <div class="tab-pane" id="enderecoCliente">
+                 <div class="box-body" id="">
+                   <div class="row">
+                       <div class="col-md-12">
+                       <div class="box-header">
+                         <div class="box-tools">
+                           
+                       <button
+                       href="<?php echo site_url('endereco/add'); ?>"
+                       id="adicionarEndereco"
+                       class="btn btn-info btn-sm"
+                       ><i class="fa fa-plus"></i> Novo Endereço</button>
+
+                        </div>
+
+             <!-- div hidden de cadastro de endereço -->
+             <!-- ENDEREÇO ADD -->
+             <div class="box-body" id="box-endereco-add" hidden>
+               <div class="row">
+                 <div class="row">
+                     <div class="col-md-12">
+                             <div class="box-header with-border">
+                               	<h3 class="box-title">Cadastrar Novo Endereço</h3>
+                             </div>
+
+                             <form
+                             name="frmAddEndereco"
+                             id="frmAddEndereco"
+                             method="post"
+                             action="<?php echo site_url('endereco/add');?>"
+                             > <!-- form open -->
+
+                           	<div class="box-body">
+                           		<div class="row clearfix">
+                 					<div class="col-md-6">
+                 						<label for="rua" class="control-label"><span class="text-danger">*</span>Rua</label>
+                 						<div class="form-group">
+                 							<input type="text" name="rua" value="<?php echo $this->input->post('rua'); ?>" class="form-control" id="rua" />
+                 							<span class="text-danger"><?php echo form_error('rua');?></span>
+                 						</div>
+                 					</div>
+                 					<div class="col-md-6">
+                 						<label for="bairro" class="control-label"><span class="text-danger">*</span>Bairro</label>
+                 						<div class="form-group">
+                 							<input type="text" name="bairro" value="<?php echo $this->input->post('bairro'); ?>" class="form-control" id="bairro" />
+                 							<span class="text-danger"><?php echo form_error('bairro');?></span>
+                 						</div>
+                 					</div>
+                 					<div class="col-md-6">
+                 						<label for="cidade" class="control-label"><span class="text-danger">*</span>Cidade</label>
+                 						<div class="form-group">
+                 							<input type="text" name="cidade" value="<?php echo $this->input->post('cidade'); ?>" class="form-control" id="cidade" />
+                 							<span class="text-danger"><?php echo form_error('cidade');?></span>
+                 						</div>
+                 					</div>
+                 					<div class="col-md-6">
+                 						<label for="referencia" class="control-label">Referencia</label>
+                 						<div class="form-group">
+                 							<input type="text" name="referencia" value="<?php echo $this->input->post('referencia'); ?>" class="form-control" id="referencia" />
+                 						</div>
+                 					</div>
+                 					<div class="col-md-6">
+                 						<label for="numero" class="control-label">Numero</label>
+                 						<div class="form-group">
+                 							<input type="text" name="numero" value="<?php echo $this->input->post('numero'); ?>" class="form-control" id="numero" />
+                 							<span class="text-danger"><?php echo form_error('numero');?></span>
+                 						</div>
+                 					</div>
+                 					<div class="col-md-6">
+                 						<label for="uf" class="control-label"><span class="text-danger">*</span>Uf</label>
+                 						<div class="form-group">
+                              <select name="uf" class="form-control" id="uf">
+                                <option value="">Selecione o Estado</option>
+                              <?php
+                              require 'resources/php/array-uf_values.php';
+                              foreach($uf_values as $value => $display_text)
+                              {
+                                $selected = ($value == $this->input->post('uf')) ? ' selected="selected"' : "";
+
+                                echo '<option value="'.$value.'" '.$selected.'>'.$display_text.'</option>';
+                              }
+                              ?>
+                              </select>
+                 							<span class="text-danger"><?php echo form_error('uf');?></span>
+                 						</div>
+                 					</div>
+                 					<div class="col-md-6">
+                 						<label for="cep" class="control-label">Cep</label>
+                 						<div class="form-group">
+                 							<input type="text" name="cep" value="<?php echo $this->input->post('cep'); ?>" class="form-control" id="cep" />
+                 						</div>
+                 					</div>
+                 				</div>
+                 			</div>
+                           	<div class="box-footer">
+                             	<button class="btn btn-success span12">
+                             		<i class="fa fa-plus"></i> Salvar Endereço
+                             	</button>
+                           	</div>
+                          </form>
+                          <div id="resultendereco" class="col-md-12"></div>
+
+                     </div>
+                 </div>
+
+               </div>
+             </div>
+             <!-- FIM DO ENDEREÇO ADD -->
+                   </div>
+                   <div class="box-info" id="listaEnderecos">
+                     <table class="table table-striped">
+                         <tr>
+                 <th hidden>Id Endereco</th>
+                 <th>Rua</th>
+                 <th>Bairro</th>
+                 <th>Cidade</th>
+                 <th>Numero</th>
+                 <th>Uf</th>
+                 <th>Cep</th>
+                 <th> </th>
+                   </tr>
+                   <?php
+                      foreach($enderecos as $e){
+                      require 'resources/php/estados-case.php';
+                     ?>
+                   <tr>
+                 <td hidden><?php echo $e['id_endereco']; ?></td>
+                 <td><?php echo $e['rua']; ?></td>
+                 <td><?php echo $e['bairro']; ?></td>
+                 <td><?php echo $e['cidade']; ?></td>
+                 <td><?php echo $e['numero']; ?></td>
+                 <td><?php echo $uf; ?></td>
+                 <td><?php echo $e['cep']; ?></td>
+                 <td>
+                 <a
+                 href="<?php echo site_url('endereco/edit/'.$e['id_endereco']); ?>"
+                 class="btn btn-info btn-xs"
+                 data-toggle="modal"
+                 data-target="#modalEditar"
+                 >
+                 <span class="fa fa-pencil"></span>
+               </a>
+
+                 <a
+                 href="<?php echo site_url('endereco/remove/'.$e['id_endereco']); ?>"
+                 class="btn btn-danger btn-xs"
+                 onclick="return confirm('Tem certeza que deseja deletar este item?');">
+                 <span class="fa fa-trash"></span>
+                 </a>
+                             </td>
+                         </tr>
+                         <?php } ?>
+                     </table>
+                     <div class="pull-right">
+                         <?php echo $this->pagination->create_links(); ?>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+
+               </div>
+               </div>
+               <!-- FIM DA TAB 4 LISTA DE ENDEREÇO -->
+ <!-- ######################################################################################### -->
 </div>
 
 
 		</div>
     </div>
 </div>
+
+
+<!-- ########################################################################################### -->
+<!-- ###################################  MODAL EDITAR  ######################################## -->
+<!-- ########################################################################################### -->
+
+<!-- Modal -->
+<div class="modal fade" id="modalEditar" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Editando Endereço</h4>
+      </div>
+      <div class="modal-body">
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ########################################################################################### -->
+<!-- ########################################################################################### -->
+<!-- ########################################################################################### -->
+
+<script>
+
+$(document).ready(function(){
+
+  document.getElementById("adicionarEndereco").addEventListener("click", mostraCamposEndereco);
+
+    //alert('The modal is fully shown.');
+    var inputDataCadastro = new Date().getTime(document.getElementById("data_cadastro_cliente").value);
+    var date = new Date(inputDataCadastro);
+    var dataFormatada = formatDate(date);
+    document.getElementById("labelDataCliente").innerHTML = "Cadastrado desde: " + dataFormatada;
+    //
+    var inputDocCliente = document.getElementById("inputTipoPessoa").value;
+    //
+    if (inputDocCliente == "1")
+    {
+      //document.getElementById("inputTipoPessoa").value = "Pessoa Física";
+      document.getElementById("selectTipoPessoa").value = inputDocCliente;
+      document.getElementById("divDocumentoCliente").hidden=false;
+    }
+    else if(inputDocCliente == "2")
+    {
+      //document.getElementById("inputTipoPessoa").value = "Pessoa Jurídica";
+      document.getElementById("selectTipoPessoa").value = inputDocCliente;
+      document.getElementById("divDocumentoCliente").hidden=false;
+    }
+    else
+    {
+      //document.getElementById("inputTipoPessoa").value = "Documento não Cadastrado";
+      document.getElementById("divDocumentoCliente").hidden=true;
+    }
+    documentoCliente();
+    formataTelefone();
+    formataCelular();
+});
+
+//######################################################################################
+
+$("#modalEditar").on('shown.bs.modal', function(){
+    //alert('The modal is fully shown.');
+
+  });
+
+$("#modalAdicionar").on('shown.bs.modal', function(){
+  //alert('The modal is fully shown.');
+
+});
+//######################################################################################
+
+//######################################################################################
+// SALVA CLIENTE COM AJAX
+$(function(){
+	$("#frmEditarCliente").submit(function(){
+		dataString = $("#frmEditarCliente").serialize();
+    var frm = document.getElementById("frmEditarCliente");
+    //VALIDAÇÃO ANTES DE SALVAR ALTERAÇÕES
+    //Verifica se o campo nome foi preenchido e
+    //contém no mínimo três caracteres.
+    if (frm.email.value != ""){
+      // se o campo for preenchido deve ser preenchido direito
+      if(frm.email.value.indexOf("@") == -1 ||
+        frm.email.value.indexOf(".") == -1 ||
+        frm.email.value == "" ||
+        frm.email.value == null) {
+          alert("Por favor, indique um e-mail válido.");
+          frm.email.focus();
+          return false;
+      }
+    }
+    if(frm.nome_cliente.value == "" || frm.nome_cliente.value == null || frm.nome_cliente.value.lenght < 3) {
+        //É mostrado um alerta, caso o campo esteja vazio.
+        alert("Por favor, indique o seu nome.");
+        //Foi definido um focus no campo.
+        frm.nome_cliente.focus();
+        //o form não é enviado.
+        return false;
+    }
+		$.ajax({
+			type: "POST",
+			url: "<?php echo base_url('cliente/edit/'.$cliente['id_cliente']);?>",
+			data: dataString,
+			//target: "#listaClientes",
+			success: function(data){
+				// alert('Successful!');
+				$("#resultCliente").html('Cliente Alterado com Sucesso!').show().fadeOut( 5000 );
+				$("#resultCliente").addClass("alert alert-success");
+				//$("#listaClientes").load("<?php echo current_url();?> #listaClientes");
+
+			}
+
+		});
+
+		return false;  //stop the actual form post !important!
+
+	});
+});
+//
+//######################################################################################
+// SALVA ENDEREÇO COM AJAX
+$(function(){
+	$("#frmAddEndereco").submit(function(){
+		dataString = $("#frmAddEndereco").serialize();
+
+
+		$.ajax({
+			type: "POST",
+			url: "<?php echo base_url('endereco/add');?>",
+			data: dataString,
+			target: "#listaEnderecos",
+			success: function(data){
+				// alert('Successful!');
+				$("#resultendereco").html('Tamanho Adicionado com Sucesso!').show().fadeOut( 3000 );
+				$("#resultendereco").addClass("alert alert-success");
+				$("#listaEnderecos").load("<?php echo current_url();?> #listaEnderecos");
+
+			}
+
+		});
+
+		return false;  //stop the actual form post !important!
+
+	});
+});
+//
+//
+</script>
