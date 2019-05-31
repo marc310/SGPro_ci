@@ -46,20 +46,19 @@ function mostraCamposEndereco() {
   var btnAddEndereco;
   //
   box = document.getElementById("box-endereco-add");
-  btnAddEndereco = document.getElementById("btnAddEndereco");
+  btnAddEndereco = document.getElementById("divBtnAddEndereco");
+  
 
   if (box.hidden == true){
-  btnAddEndereco.hidden=true;
   box.hidden = false;
+  btnAddEndereco.hidden = true;
   // btnAddEndereco.innerHTML = '<i class="fa fa-arrow-up"></i> Esconder Painel';
   // btnAddEndereco.classList.add("btn-danger");
   // btnAddEndereco.classList.remove("btn-info");
   }
   else {
     box.hidden = true;
-    btnAddEndereco.innerHTML = '<i class="fa fa-plus"></i> Cadastrar Novo Endereço';
-    btnAddEndereco.classList.add("btn-info");
-    btnAddEndereco.classList.remove("btn-danger");
+    btnAddEndereco.hidden = false;
   }
 }
 //
@@ -67,12 +66,10 @@ function mostraCamposEndereco() {
 //
 function escondeCamposEndereco() {
   box = document.getElementById("box-endereco-add");
-  //btnEsconde = document.getElementById("btnEsconderPainelEndereco");
+  btnAddEndereco = document.getElementById("divBtnAddEndereco");
 
     box.hidden = true;
-    btnAddEndereco.innerHTML = '<i class="fa fa-plus"></i> Cadastrar Novo Endereço';
-    btnAddEndereco.classList.add("btn-info");
-    btnAddEndereco.classList.remove("btn-danger");
+    btnAddEndereco.hidden = false;
     //btnEsconde.hidden=false;
     // btnAddEndereco.innerHTML = '<i class="fa fa-plus"></i> Cadastrar Novo Endereço';
     // btnAddEndereco.classList.add("btn-info");

@@ -136,26 +136,26 @@
 
 
  <!-- ######################################################################################### -->
-               <!-- TAB 4 LISTA DE ENDEREÇO -->
-               <div class="tab-pane" id="enderecoCliente">
-                 <div class="box-body" id="">
-                   <div class="row">
-                       <div class="col-md-12">
-                       <div class="box-header">
+ <!-- TAB 4 LISTA DE ENDEREÇO -->
+ <div class="tab-pane" id="enderecoCliente">
+   <div class="box-body" id="">
+     <div class="row">
+       <div class="col-md-12">
+         <div class="box-header">
 
-                         <div class="box-tools">
-                           <div class="row" id="divBtnAddEndereco">
-                       <button
-                       href="<?php echo site_url('endereco/add'); ?>"
-                       id="btnAddEndereco"
-                       class="btn btn-info"
-                       onclick="mostraCamposEndereco()"
-                       ><i class="fa fa-plus"></i> Cadastrar Novo Endereço</button>
+           <div class="box-tools">
+             <div class="row" id="divBtnAddEndereco">
+               <div style="padding-top:18px">
+               <button
+               href="<?php echo site_url('endereco/add'); ?>"
+               id="btnAddEndereco"
+               class="btn btn-info"
+               onclick="mostraCamposEndereco()"
+               ><i class="fa fa-plus"></i> Adicionar Endereço</button>
+               </div>
 
-                     </div>
-                        </div>
-                        <div style="margin-top:35px">
-                        </div>
+             </div>
+           </div>
              <!-- div hidden de cadastro de endereço -->
              <!-- ENDEREÇO ADD -->
              <div class="box-body" id="box-endereco-add" hidden>
@@ -237,8 +237,8 @@
                  			</div>
                            	<div class="box-footer">
                               <div class="pull-right">
-                             	<button class="btn btn-info">
-                             		<i class="fa fa-plus"></i> Adicionar Endereço
+                             	<button class="btn btn-success">
+                             		<i class="fa fa-check"></i> Adicionar Endereço
                              	</button>
 
                               <button class="btn btn-danger" id="btnEsconderPainelEndereco" onclick="escondeCamposEndereco()">
