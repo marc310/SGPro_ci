@@ -52,7 +52,7 @@ class Cliente extends CI_Controller{
       $this->load->library('form_validation');
 
       $this->form_validation->set_rules('nome_cliente','Nome Cliente','required');
-      $this->form_validation->set_rules('email','Email Cliente','validEmail');
+      // $this->form_validation->set_rules('email','Email Cliente','validEmail');
 
       if($this->form_validation->run())
       {

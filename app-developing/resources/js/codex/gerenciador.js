@@ -43,22 +43,41 @@ function mostraCamposEndereco() {
   //document.getElementById("demo").innerHTML = Date();
   //
   var box;
-  var addEndereco;
+  var btnAddEndereco;
   //
   box = document.getElementById("box-endereco-add");
-  addEndereco = document.getElementById("adicionarEndereco");
+  btnAddEndereco = document.getElementById("btnAddEndereco");
 
   if (box.hidden == true){
+  btnAddEndereco.hidden=true;
   box.hidden = false;
-  addEndereco.innerHTML = '<i class="fa fa-plus"></i> Esconder';
+  // btnAddEndereco.innerHTML = '<i class="fa fa-arrow-up"></i> Esconder Painel';
+  // btnAddEndereco.classList.add("btn-danger");
+  // btnAddEndereco.classList.remove("btn-info");
   }
   else {
     box.hidden = true;
-    addEndereco.innerHTML = '<i class="fa fa-plus"></i> Adicionar';
-
+    btnAddEndereco.innerHTML = '<i class="fa fa-plus"></i> Cadastrar Novo Endereço';
+    btnAddEndereco.classList.add("btn-info");
+    btnAddEndereco.classList.remove("btn-danger");
   }
 }
+//
+//*************************************************************************************//
+//
+function escondeCamposEndereco() {
+  box = document.getElementById("box-endereco-add");
+  //btnEsconde = document.getElementById("btnEsconderPainelEndereco");
 
+    box.hidden = true;
+    btnAddEndereco.innerHTML = '<i class="fa fa-plus"></i> Cadastrar Novo Endereço';
+    btnAddEndereco.classList.add("btn-info");
+    btnAddEndereco.classList.remove("btn-danger");
+    //btnEsconde.hidden=false;
+    // btnAddEndereco.innerHTML = '<i class="fa fa-plus"></i> Cadastrar Novo Endereço';
+    // btnAddEndereco.classList.add("btn-info");
+    // btnAddEndereco.classList.remove("btn-danger");
+}
 //
 //*************************************************************************************//
 //
@@ -160,33 +179,3 @@ function dataCadastro(){
 //
 //*************************************************************************************//
 //
-function validaForm(frm) {
-/*
-o parâmetro frm desta função significa: this.form,
-pois a chamada da função - validaForm(this) foi
-definida na tag form.
-*/
-    //Verifica se o campo nome foi preenchido e
-    //contém no mínimo três caracteres.
-    if(frm.nome.value == "" || frm.nome.value == null || frm.nome.value.lenght < 3) {
-        //É mostrado um alerta, caso o campo esteja vazio.
-        alert("Por favor, indique o seu nome.");
-        //Foi definido um focus no campo.
-        frm.nome.focus();
-        //o form não é enviado.
-        return false;
-    }
-    //o campo e-mail precisa de conter: "@", "." e pode estar vazio
-    if (frm.email.value != ""){
-      // se o campo for preenchido deve ser preenchido direito
-      if(frm.email.value.indexOf("@") == -1 ||
-        frm.email.value.indexOf(".") == -1 ||
-        frm.email.value == "" ||
-        frm.email.value == null) {
-          alert("Por favor, indique um e-mail válido.");
-          frm.email.focus();
-          return false;
-      }
-    }
-
-}

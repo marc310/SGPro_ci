@@ -22,6 +22,8 @@
       <!-- CodeX 1.2.0 -->
       <script src="<?php echo site_url('resources/js/codex/gerenciador.js');?>"></script>
       <script src="<?php echo site_url('resources/js/codex/imask.js');?>"></script>
+      <script src="<?php echo site_url('resources/js/codex/validacao.js');?>"></script>
+      <script src="<?php echo site_url('resources/js/codex/parts/clientes.js');?>"></script>
       <script src="<?php echo site_url('resources/js/codex/jquery-3.4.1.min.js');?>"></script>
       <script src="<?php echo site_url('resources/js/codex/bootstrap.min.js');?>"></script>
   </head>

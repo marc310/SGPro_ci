@@ -140,9 +140,9 @@ $(document).ready(function(){
 
   $("#modalAdd").on('shown.bs.modal', function(){
     //alert('The modal is fully shown.');
-    dataCadastro();
-    formataTelefone();
-    formataCelular();
+    // dataCadastro();
+    // formataTelefone();
+    // formataCelular();
   });
 //   $("#modalEditar").on('shown.bs.modal', function(){
 //     //alert('The modal is fully shown.');

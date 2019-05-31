@@ -2,7 +2,7 @@
     <div class="col-md-12">
       	<div class="box box-info">
             <div class="box-header with-border">
-              	<h3 class="box-title">Editar Cliente</h3>
+              	<h3 class="box-title">Cadastrar Novo Cliente</h3>
             </div>
 
             <ul class="nav nav-tabs">
@@ -20,11 +20,11 @@
 
 
       <form
-      name="frmEditCliente"
-      id="frmEditarCliente"
+      name="frmAddCliente"
+      id="frmAddCliente"
       method="post"
-      action="<?php echo site_url('cliente/edit/'.$cliente['id_cliente']);?>"
-      onsubmit="return validaForm(this);"
+      action="<?php echo site_url('cliente/add');?>"
+      onsubmit="return validaCliente(this);"
       >
 
 			<div class="box-body">
@@ -33,7 +33,7 @@
 					<div class="col-md-6">
 						<label for="nome_cliente" class="control-label"><span class="text-danger">*</span>Nome Cliente</label>
 						<div class="form-group">
-							<input type="text" name="nome_cliente" value="<?php echo ($this->input->post('nome_cliente') ? $this->input->post('nome_cliente') : $cliente['nome_cliente']); ?>" class="form-control" id="nome_cliente" />
+              <input type="text" name="nome_cliente" value="<?php echo $this->input->post('nome_cliente'); ?>" class="form-control" id="nome_cliente" />
 							<span class="text-danger"><?php echo form_error('nome_cliente');?></span>
 						</div>
 					</div>
@@ -57,50 +57,46 @@
               }
               ?>
               </select>
-							<input type="text"
-              id="inputTipoPessoa"
-              name="inputTipoPessoa"
-              value="<?php echo ($this->input->post('tipo_pessoa') ? $this->input->post('tipo_pessoa') : $cliente['tipo_pessoa']); ?>"
-              class="form-control hidden"/>
+
 						</div>
 					</div>
 					<div class="col-md-6" id="divDocumentoCliente" hidden>
 						<label for="documento" id="labelDocumentoCliente" class="control-label">Documento</label>
 						<div class="form-group">
-							<input type="text" id="documento" name="documento" value="<?php echo ($this->input->post('documento') ? $this->input->post('documento') : $cliente['documento']); ?>" class="form-control"/>
+							<input type="text" id="documento" name="documento" value="<?php echo $this->input->post('documento'); ?>" class="form-control"/>
 						</div>
 					</div>
 
 					<div class="col-md-6">
 						<label for="telefone" class="control-label">Telefone</label>
 						<div class="form-group">
-							<input type="text" id="telefone" name="telefone" value="<?php echo ($this->input->post('telefone') ? $this->input->post('telefone') : $cliente['telefone']); ?>" class="form-control"/>
+							<input type="text" id="telefone" name="telefone" value="<?php echo $this->input->post('telefone'); ?>" class="form-control"/>
 						</div>
 					</div>
 					<div class="col-md-6">
 						<label for="celular" class="control-label">Celular</label>
 						<div class="form-group">
-							<input type="text" name="celular" value="<?php echo ($this->input->post('celular') ? $this->input->post('celular') : $cliente['celular']); ?>" class="form-control" id="celular" />
+							<input type="text" name="celular" value="<?php echo $this->input->post('celular'); ?>" class="form-control" id="celular" />
 						</div>
 					</div>
 					<div class="col-md-6">
 						<label for="email" class="control-label">Email</label>
 						<div class="form-group">
-							<input type="text" id="email" name="email" onkeypress="formataEmailCliente()" value="<?php echo ($this->input->post('email') ? $this->input->post('email') : $cliente['email']); ?>" class="form-control"  />
+							<input type="text" id="email" name="email" onkeypress="formataEmailCliente()" value="<?php echo $this->input->post('email'); ?>" class="form-control"  />
 						</div>
 					</div>
 					<div class="col-md-6">
 						<label id="labelDataCliente" for="data_cadastro_cliente" class="control-label">Data Cadastro Cliente</label>
 						<div class="form-group">
-							<input type="text" name="data_cadastro_cliente" value="<?php echo ($this->input->post('data_cadastro_cliente') ? $this->input->post('data_cadastro_cliente') : $cliente['data_cadastro_cliente']); ?>" class="form-control hidden" id="data_cadastro_cliente" />
+							<input type="text" name="data_cadastro_cliente" value="<?php echo $this->input->post('data_cadastro_cliente'); ?>" class="form-control hidden" id="data_cadastro_cliente" />
 						</div>
 					</div>
 				</div>
 			</div>
 			       <div class="box-footer">
 
-            	<button id="salvarEditarCliente" type="button" class="btn btn-success">
-      					<i class="fa fa-check"></i> Salvar
+            	<button type="submit" class="btn btn-success">
+      					<i class="fa fa-check"></i> Salvar & Continuar
       				</button>
 
               <button type="button" id="cancelaEdit"
@@ -144,7 +140,7 @@
                        <div class="box-header">
 
                          <div class="box-tools">
-                           <div class="row" id="divBtnAddEndereco">
+                           <div class="row">
                        <button
                        href="<?php echo site_url('endereco/add'); ?>"
                        id="btnAddEndereco"
@@ -236,15 +232,13 @@
                  				</div>
                  			</div>
                            	<div class="box-footer">
-                              <div class="pull-right">
-                             	<button class="btn btn-info">
-                             		<i class="fa fa-plus"></i> Adicionar Endereço
+                             	<button class="btn btn-success span12">
+                             		<i class="fa fa-check"></i> Salvar Endereço
                              	</button>
 
                               <button class="btn btn-danger" id="btnEsconderPainelEndereco" onclick="escondeCamposEndereco()">
                              		<i class="fa fa-arrow-up"></i> Esconder Painel
                              	</button>
-                            </div>
                            	</div>
                           </form>
                           <div id="resultendereco" class="col-md-12"></div>
@@ -353,10 +347,12 @@
 
 $(document).ready(function(){
 
-  document.getElementById("salvarEditarCliente").addEventListener("click", editaCliente);
+  // document.getElementById("btnAddEndereco").addEventListener("click", mostraCamposEndereco);
   // document.getElementById("btnEsconderPainelEndereco").addEventListener("click", escondeCamposEndereco);
-
-    //alert('The modal is fully shown.');
+    documentoCliente();
+    formataTelefone();
+    formataCelular();
+    // alert('The modal is fully shown.');
     var inputDataCadastro = new Date().getTime(document.getElementById("data_cadastro_cliente").value);
     var date = new Date(inputDataCadastro);
     var dataFormatada = formatDate(date);
@@ -381,55 +377,26 @@ $(document).ready(function(){
       //document.getElementById("inputTipoPessoa").value = "Documento não Cadastrado";
       document.getElementById("divDocumentoCliente").hidden=true;
     }
-    documentoCliente();
-    formataTelefone();
-    formataCelular();
+
 });
 // fim do construtor
 //######################################################################################
 
-$("#modalEditar").on('shown.bs.modal', function(){
-    //alert('The modal is fully shown.');
-
-  });
-
-$("#modalAdicionar").on('shown.bs.modal', function(){
-  //alert('The modal is fully shown.');
-
-});
+// $("#modalEditar").on('shown.bs.modal', function(){
+//     //alert('The modal is fully shown.');
+//
+//   });
+//
+// $("#modalAdicionar").on('shown.bs.modal', function(){
+//   //alert('The modal is fully shown.');
+//
+// });
 //######################################################################################
 //######################################################################################
 //######################################################################################
 
 //######################################################################################
-$(function(){
-// SALVA CLIENTE COM AJAX
-	// $("#frmEditarCliente").submit(function(){
-	// 	dataString = $("#frmEditarCliente").serialize();
-  //   var frm = document.getElementById("frmEditarCliente");
-  //   //VALIDAÇÃO ANTES DE SALVAR ALTERAÇÕES
-  //   //Verifica se o campo nome foi preenchido e
-  //   //contém no mínimo três caracteres.
-  //   validaCliente(frm);
-  //
-	// 	$.ajax({
-	// 		type: "POST",
-	// 		url: "<?php echo base_url('cliente/edit/'.$cliente['id_cliente']);?>",
-	// 		data: dataString,
-	// 		//target: "#listaClientes",
-	// 		success: function(data){
-	// 			// alert('Successful!');
-	// 			$("#resultCliente").html('Cliente Alterado com Sucesso!').show().fadeOut( 5000 );
-	// 			$("#resultCliente").addClass("alert alert-success");
-	// 			//$("#listaClientes").load("<?php echo current_url();?> #listaClientes");
-  //
-	// 		}
-  //
-	// 	});
-  //
-	// 	return false;  //stop the actual form post !important!
-  //
-	// });
+
   // cliente salvo
   //
   //######################################################################################
@@ -457,7 +424,6 @@ $(function(){
 
 	});
 // fim da function
-});
 //######################################################################################
 //
 

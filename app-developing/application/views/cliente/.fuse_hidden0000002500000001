@@ -137,7 +137,7 @@
 
     <div class="box-footer">
 
-      <button id="btnSalvarCliente" class="btn btn-success" type="button">
+      <button id="btnSalvarCliente" class="btn btn-success" type="submit">
         <i class="fa fa-check"></i> Salvar
       </button>
 
@@ -167,7 +167,7 @@
 
 $(document).ready(function(){
 
-  document.getElementById("btnSalvarCliente").addEventListener("click", salvaCliente);
+  // document.getElementById("btnAddEndereco").addEventListener("click", mostraCamposEndereco);
   // document.getElementById("btnEsconderPainelEndereco").addEventListener("click", escondeCamposEndereco);
   // construtor iniciando
   // code...
