@@ -14,9 +14,6 @@
             </ul>
 
 <!-- ######################################################################################### -->
-<!-- ######################################################################################### -->
-<!-- ######################################################################################### -->
-<!-- ######################################################################################### -->
 <!-- INICIAR TABS CLIENTE -->
 
 <div class="tab-content">
@@ -35,22 +32,6 @@
 
     <div class="box-body">
       <div class="row clearfix">
-  <!-- <div class="col-md-6" hidden>
-    <label for="endereco_id_cliente" class="control-label">Endereco</label>
-    <div class="form-group">
-      <select name="endereco_id_cliente" class="form-control">
-        <option value="">Selecione endereco</option>
-        <?php
-        foreach($all_enderecos as $endereco)
-        {
-          $selected = ($endereco['id_endereco'] == $this->input->post('endereco_id_cliente')) ? ' selected="selected"' : "";
-
-          echo '<option value="'.$endereco['id_endereco'].'" '.$selected.'>'.$endereco['id_endereco'].'</option>';
-        }
-        ?>
-      </select>
-    </div>
-  </div> -->
   <div class="col-md-6">
     <label for="nome_cliente" class="control-label"><span class="text-danger">*</span>Nome Cliente</label>
     <div class="form-group">
@@ -168,104 +149,11 @@
 $(document).ready(function(){
 
   document.getElementById("btnSalvarCliente").addEventListener("click", salvaCliente);
-  // document.getElementById("btnEsconderPainelEndereco").addEventListener("click", escondeCamposEndereco);
+
   // construtor iniciando
   // code...
 
 });
 // fim do construtor
 //######################################################################################
-//######################################################################################
-//######################################################################################
-//######################################################################################
-
-
-//######################################################################################
-// salvaCliente = function(){
-//
-//   var frm = document.getElementById("frmAddCliente");
-//   if (1 == 1){
-//     //your before submit logic
-//     if(validaCliente(frm)==0){
-//       // alert("se for falso cancela");
-//       // $("#resultCliente").html('Cliente não pode ser adicionado!').show().fadeOut( 5000 );
-//       // $("#resultCliente").addClass("alert alert-danger");
-//       return false;
-//     }
-//     //
-//   }
-//   //
-//   // alert("submited");
-//   $("#resultCliente").removeClass("alert alert-danger");
-//
-//   $("#resultCliente").addClass("alert alert-success");
-//   $("#resultCliente").html('Cliente Cadastrado com Sucesso!').show().fadeOut( 5000 );
-//
-//     // SALVA CLIENTE COM AJAX
-//     $("#frmAddCliente").submit(function(){
-//       dataString = $("#frmAddCliente").serialize();
-//       var frm = document.getElementById("frmAddCliente");
-//
-//       $.ajax({
-//         type: "POST",
-//         url: "<?php echo base_url('cliente/add');?>",
-//         data: dataString,
-//         //target: "#listaClientes",
-//         success: function(data){
-//           // alert('Successful!');
-//           $("#resultCliente").html('Cliente Alterado com Sucesso!').show().fadeOut( 5000 );
-//           $("#resultCliente").addClass("alert alert-success");
-//         }
-//
-//       });
-//       //$("#listaClientes").load("<?php echo current_url();?> #listaClientes");
-//
-//
-//       return false;  //stop the actual form post !important!
-//
-//     });
-//
-// }
-
-// $(function(){
-// // SALVA CLIENTE COM AJAX
-// 	$("#frmAddCliente").submit(function(){
-// 		dataString = $("#frmAddCliente").serialize();
-//     var frm = document.getElementById("frmAddCliente");
-//
-//
-//         // validação
-//         if(validaCliente(frm)==0){
-//
-//           alert ("negado");
-//           // $("#resultCliente").html('Cliente não pode ser adicionado!').show().fadeOut( 5000 );
-//           // $("#resultCliente").addClass("alert alert-danger");
-//           // return false;  //stop the actual form post !important!
-//
-//         }
-//         else {
-//           $.ajax({
-//       			type: "POST",
-//       			url: "<?php echo base_url('cliente/add');?>",
-//       			data: dataString,
-//       			//target: "#listaClientes",
-//       			success: function(data){
-//       				// alert('Successful!');
-//           $("#resultCliente").html('Cliente Alterado com Sucesso!').show().fadeOut( 5000 );
-//           $("#resultCliente").addClass("alert alert-success");
-//         }
-//
-//       });
-//         }
-// 				//$("#listaClientes").load("<?php echo current_url();?> #listaClientes");
-//
-//         console.log(validaCliente(frm));
-//
-// 		return false;  //stop the actual form post !important!
-//
-//   });
-//   });
-  // cliente salvo
-  //
-//
 </script>

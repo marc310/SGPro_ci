@@ -2,7 +2,8 @@
     <div class="col-md-12">
       	<div class="box box-info">
             <div class="box-header with-border">
-              	<h3 class="box-title">Editar Cliente</h3>
+              <h3 class="box-title">Editando Cliente  | ID: </h3>
+              	<h3 id="idClienteShow" class="box-title"><?php echo $cliente['id_cliente'];?></h3>
             </div>
 
             <ul class="nav nav-tabs">
@@ -123,14 +124,105 @@
     <div class="box-body">
       <div class="row">
     <div class="col-md-12">
+      <!-- ######################################################################################### -->
+      <!-- INNER -->
+      <form
+      name="frmAddRedeSocial"
+      id="frmAddRedeSocial"
+      method="post"
+      action="<?php echo site_url('endereco_rede_social_cliente/add');?>"
+      >
+      <div class="box-body">
+        <div class="row clearfix">
+    <div class="col-md-6" hidden>
+      <label for="cliente_id" class="control-label">Cliente</label>
+      <div class="form-group">
+        <select id="selectClienteIdRedeSocial" name="cliente_id" class="form-control">
+          <option value="">select cliente</option>
+          <?php
+          foreach($all_clientes as $cliente)
+          {
+            $selected = ($cliente['id_cliente'] == $this->input->post('cliente_id')) ? ' selected="selected"' : "";
+
+            echo '<option value="'.$cliente['id_cliente'].'" '.$selected.'>'.$cliente['nome_cliente'].'</option>';
+          }
+          ?>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <label for="redesocial_id" class="control-label">Redes Sociais</label>
+      <div class="form-group">
+        <select name="redesocial_id" class="form-control">
+          <option value="">Selecione a Rede Social</option>
+          <?php
+          foreach($all_redes_sociais as $redes_sociais)
+          {
+            $selected = ($redes_sociais['id_redesocial'] == $this->input->post('redesocial_id')) ? ' selected="selected"' : "";
+
+            echo '<option value="'.$redes_sociais['id_redesocial'].'" '.$selected.'>'.$redes_sociais['nome_redesocial'].'</option>';
+          }
+          ?>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="cliente_redesocial" class="control-label">Cliente Redesocial</label>
+      <div class="form-group">
+        <input type="text" name="cliente_redesocial" value="<?php echo $this->input->post('cliente_redesocial'); ?>" class="form-control" id="cliente_redesocial" />
+      </div>
+    </div>
+    <div class="col-md-2 pull-right" style="padding-top:25px;">
+      <button id="btnAddRedeSocial" class="btn btn-success pull-right">
+        <i class="fa fa-plus"></i> Adicionar
+      </button>
+    </div>
+  </div>
+</div>
+      <!-- <div class="box-footer">
+        <button id="btnAddRedeSocial" class="btn btn-success pull-right">
+          <i class="fa fa-plus"></i> Adicionar Rede Social
+        </button>
+      </div> -->
+    </form>
+    <div id="resultsocial" class="col-md-12"></div>
 
 
+
+      <div class="box-body" id="listaRedeSocial">
+          <table class="table table-striped">
+              <tr>
+      <th hidden>Id Endereco Redesocial</th>
+      <th>Redesocial Id</th>
+      <th>Cliente Redesocial</th>
+      <th>Actions</th>
+              </tr>
+              <?php foreach($endereco_rede_social_cliente as $e){ ?>
+              <tr>
+      <td hidden><?php echo $e['id_endereco_redesocial']; ?></td>
+      <td><?php echo $e['nome_redesocial']; ?></td>
+      <td><?php echo $e['cliente_redesocial']; ?></td>
+      <td>
+                      <a href="<?php echo site_url('endereco_rede_social_cliente/edit/'.$e['id_endereco_redesocial']); ?>" class="btn btn-info btn-xs"><span class="fa fa-pencil"></span> Edit</a>
+                      <a href="<?php echo site_url('endereco_rede_social_cliente/remove/'.$e['id_endereco_redesocial']); ?>" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span> Delete</a>
+                  </td>
+              </tr>
+              <?php } ?>
+          </table>
+
+      </div>
+
+
+
+
+
+
+      <!-- INNER -->
     </div>
   </div>
     </div>
   </div>
   <!-- FIM DA TAB 2 REDES SOCIAIS -->
-  <!-- ######################################################################################### -->
   <!-- ######################################################################################### -->
   <!-- ######################################################################################### -->
 
@@ -353,37 +445,18 @@
 
 $(document).ready(function(){
 
-  document.getElementById("salvarEditarCliente").addEventListener("click", editaCliente);
+  loadClienteDoc();
+  documentoCliente();
+  formataTelefone();
+  formataCelular();
   // document.getElementById("btnEsconderPainelEndereco").addEventListener("click", escondeCamposEndereco);
-
-    //alert('The modal is fully shown.');
-    var inputDataCadastro = new Date().getTime(document.getElementById("data_cadastro_cliente").value);
-    var date = new Date(inputDataCadastro);
-    var dataFormatada = formatDate(date);
-    document.getElementById("labelDataCliente").innerHTML = "Cadastrado desde: " + dataFormatada;
-    //
-    var inputDocCliente = document.getElementById("inputTipoPessoa").value;
-    //
-    if (inputDocCliente == "1")
-    {
-      //document.getElementById("inputTipoPessoa").value = "Pessoa Física";
-      document.getElementById("selectTipoPessoa").value = inputDocCliente;
-      document.getElementById("divDocumentoCliente").hidden=false;
-    }
-    else if(inputDocCliente == "2")
-    {
-      //document.getElementById("inputTipoPessoa").value = "Pessoa Jurídica";
-      document.getElementById("selectTipoPessoa").value = inputDocCliente;
-      document.getElementById("divDocumentoCliente").hidden=false;
-    }
-    else
-    {
-      //document.getElementById("inputTipoPessoa").value = "Documento não Cadastrado";
-      document.getElementById("divDocumentoCliente").hidden=true;
-    }
-    documentoCliente();
-    formataTelefone();
-    formataCelular();
+  var inputDataCadastro = new Date().getTime(document.getElementById("data_cadastro_cliente").value);
+  var date = new Date(inputDataCadastro);
+  var dataFormatada = formatDate(date);
+  document.getElementById("labelDataCliente").innerHTML = "Cadastrado desde: " + dataFormatada;
+  document.getElementById("salvarEditarCliente").addEventListener("click", editaCliente);
+  var idCliente = document.getElementById("idClienteShow").innerHTML;
+  document.getElementById("selectClienteIdRedeSocial").value = idCliente;
 });
 // fim do construtor
 //######################################################################################
@@ -432,6 +505,28 @@ $(function(){
 	// });
   // cliente salvo
   //
+
+
+
+  $("#frmAddRedeSocial").submit(function(){
+    dataString = $("#frmAddRedeSocial").serialize();
+
+    $.ajax({
+      type: "POST",
+      url: "<?php echo base_url('endereco_rede_social_cliente/add');?>",
+      data: dataString,
+      target: "#listaRedeSocial",
+      success: function(data){
+        // alert('Successful!');
+        $("#resultsocial").html('Rede Social Adicionada com Sucesso!').show().fadeOut( 3000 );
+        $("#resultsocial").addClass("alert alert-success");
+        $("#listaRedeSocial").load("<?php echo current_url();?> #listaRedeSocial");
+      }
+    });
+
+    return false;  //stop the actual form post !important!
+
+  });
   //######################################################################################
   // SALVA ENDEREÇO COM AJAX
 

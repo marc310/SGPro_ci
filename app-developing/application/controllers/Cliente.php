@@ -57,7 +57,6 @@ class Cliente extends CI_Controller{
       if($this->form_validation->run())
       {
         $params = array(
-          'endereco_id_cliente' => $this->input->post('endereco_id_cliente'),
           'nome_cliente' => $this->input->post('nome_cliente'),
           'tipo_pessoa' => $this->input->post('tipo_pessoa'),
           'documento' => $this->input->post('documento'),
@@ -115,7 +114,6 @@ class Cliente extends CI_Controller{
 			if($this->form_validation->run())
             {
                 $params = array(
-					'endereco_id_cliente' => $this->input->post('endereco_id_cliente'),
 					'nome_cliente' => $this->input->post('nome_cliente'),
 					'sexo' => $this->input->post('sexo'),
 					'tipo_pessoa' => $this->input->post('tipo_pessoa'),
@@ -133,6 +131,15 @@ class Cliente extends CI_Controller{
             {
     				$this->load->model('Endereco_model');
     				$data['all_enderecos'] = $this->Endereco_model->get_all_enderecos();
+
+            $this->load->model('Cliente_model');
+      			$data['all_clientes'] = $this->Cliente_model->get_all_clientes();
+
+      			$this->load->model('Redes_sociais_model');
+      			$data['all_redes_sociais'] = $this->Redes_sociais_model->get_all_redes_sociais();
+
+            $this->load->model('Endereco_rede_social_cliente_model');
+            $data['endereco_rede_social_cliente'] = $this->Endereco_rede_social_cliente_model->get_redesPeloId_Cliente($id_cliente);
 
             // LISTA DE ENDEREÇOS DO CLIENTE
             $params['limit'] = 20;

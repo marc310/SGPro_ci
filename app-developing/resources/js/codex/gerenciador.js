@@ -11,71 +11,7 @@
 *
 *************************************************************************************/
 ///
-// VERIFICA TIPO DE PESSOA AO CADASTRAR, FISICA OU JURIDICA PARA FORMATAÇÃO DO DOCUMENTO
-// se o tipo estiver nulo ou vazio entao esconde o label e input documento
-// se o tipo for pessoa fisica entao altera o label "documento" para "CPF: "
-// se o tipo for pessoa juridica entao altera o label "documento" para "CNPJ: "
-function documentoCliente()
-{
-  var tipoPessoa = document.getElementById("selectTipoPessoa").value;
 
-  if (tipoPessoa == ""){
-    document.getElementById("documento").value = "";
-    document.getElementById("divDocumentoCliente").hidden=true;
-    //alert("Você deve selecionar o tipo de pessoa para Cadastrar o Documento.");
-  }
-  if (tipoPessoa == "1"){
-    //alert(1 Pessoa Física);
-    document.getElementById("divDocumentoCliente").hidden=false;
-    document.getElementById("labelDocumentoCliente").innerHTML = "CPF:";
-    formataCPF();
-  }
-  if (tipoPessoa == "2"){
-    //alert(2 Pessoa Jurídica);
-    document.getElementById("divDocumentoCliente").hidden=false;
-    document.getElementById("labelDocumentoCliente").innerHTML = "CNPJ:";
-    formataCNPJ();
-  }
-
-}
-
-
-function mostraCamposEndereco() {
-  //document.getElementById("demo").innerHTML = Date();
-  //
-  var box;
-  var btnAddEndereco;
-  //
-  box = document.getElementById("box-endereco-add");
-  btnAddEndereco = document.getElementById("divBtnAddEndereco");
-
-
-  if (box.hidden == true){
-  box.hidden = false;
-  btnAddEndereco.hidden = true;
-  // btnAddEndereco.innerHTML = '<i class="fa fa-arrow-up"></i> Esconder Painel';
-  // btnAddEndereco.classList.add("btn-danger");
-  // btnAddEndereco.classList.remove("btn-info");
-  }
-  else {
-    box.hidden = true;
-    btnAddEndereco.hidden = false;
-  }
-}
-//
-//*************************************************************************************//
-//
-function escondeCamposEndereco() {
-  box = document.getElementById("box-endereco-add");
-  btnAddEndereco = document.getElementById("divBtnAddEndereco");
-
-    box.hidden = true;
-    btnAddEndereco.hidden = false;
-    //btnEsconde.hidden=false;
-    // btnAddEndereco.innerHTML = '<i class="fa fa-plus"></i> Cadastrar Novo Endereço';
-    // btnAddEndereco.classList.add("btn-info");
-    // btnAddEndereco.classList.remove("btn-danger");
-}
 //
 //*************************************************************************************//
 //
@@ -120,13 +56,7 @@ function formataCNPJ(){
   placeholderChar: '_'     // defaults to '_'
 });
 }
-//
-//*************************************************************************************//
-//
-function formataEmailCliente(){
-  var emailCliente = document.getElementById("email");
-  emailCliente.value = emailCliente.value.toLowerCase();
-}
+
 //
 //*************************************************************************************//
 //
@@ -154,20 +84,6 @@ function formatDate(date) {
 }
 //console.log(formatDate(new Date()));  // show current date-time in console
 
-//
-//*************************************************************************************//
-//
-function dataCadastro(){
-  var date = new Date();
-  var dataTempo = date.getTime();
-  var dataFormatada = formatDate(date);
-  var dataCadastroLabel = "Data Cadastro: ";
-  //alert("data do cadastro é: " + dataTempo + "<br>" + date);
-  var inputDataCadastro = document.getElementById("dataCadastro");
-  var labelDataCadastro = document.getElementById("labelDataCadastro");
-  inputDataCadastro.value = dataTempo;
-  labelDataCadastro.innerHTML = dataCadastroLabel + dataFormatada;
-}
 //
 //*************************************************************************************//
 //

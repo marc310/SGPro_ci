@@ -145,6 +145,10 @@
                     </li>
 
                     <li>
+                      <a href="<?php echo site_url('redes_sociais');?>"><i class="fa fa-hashtag"></i> Redes Sociais</a>
+                    </li>
+
+                    <li>
                       <a href="<?php echo site_url('tipos_pagamento/index');?>"><i class="fa fa-list-ul"></i> Tipos Pagamento</a>
                     </li>
 
