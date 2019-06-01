@@ -16,7 +16,15 @@ class Enderecos_cliente extends CI_Controller{
      */
     function index()
     {
-        $data['enderecos_cliente'] = $this->Enderecos_cliente_model->get_all_enderecos_cliente();
+        $params['limit'] = RECORDS_PER_PAGE; 
+        $params['offset'] = ($this->input->get('per_page')) ? $this->input->get('per_page') : 0;
+        
+        $config = $this->config->item('pagination');
+        $config['base_url'] = site_url('enderecos_cliente/index?');
+        $config['total_rows'] = $this->Enderecos_cliente_model->get_all_enderecos_cliente_count();
+        $this->pagination->initialize($config);
+
+        $data['enderecos_cliente'] = $this->Enderecos_cliente_model->get_all_enderecos_cliente($params);
         
         $data['_view'] = 'enderecos_cliente/index';
         $this->load->view('layouts/main',$data);
@@ -38,7 +46,13 @@ class Enderecos_cliente extends CI_Controller{
             redirect('enderecos_cliente/index');
         }
         else
-        {            
+        {
+			$this->load->model('Cliente_model');
+			$data['all_clientes'] = $this->Cliente_model->get_all_clientes();
+
+			$this->load->model('Endereco_model');
+			$data['all_enderecos'] = $this->Endereco_model->get_all_enderecos();
+            
             $data['_view'] = 'enderecos_cliente/add';
             $this->load->view('layouts/main',$data);
         }
@@ -66,6 +80,12 @@ class Enderecos_cliente extends CI_Controller{
             }
             else
             {
+				$this->load->model('Cliente_model');
+				$data['all_clientes'] = $this->Cliente_model->get_all_clientes();
+
+				$this->load->model('Endereco_model');
+				$data['all_enderecos'] = $this->Endereco_model->get_all_enderecos();
+
                 $data['_view'] = 'enderecos_cliente/edit';
                 $this->load->view('layouts/main',$data);
             }
