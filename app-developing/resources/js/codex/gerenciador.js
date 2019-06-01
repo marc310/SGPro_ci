@@ -20,6 +20,7 @@ function documentoCliente()
   var tipoPessoa = document.getElementById("selectTipoPessoa").value;
 
   if (tipoPessoa == ""){
+    document.getElementById("documento").value = "";
     document.getElementById("divDocumentoCliente").hidden=true;
     //alert("Você deve selecionar o tipo de pessoa para Cadastrar o Documento.");
   }
@@ -47,7 +48,7 @@ function mostraCamposEndereco() {
   //
   box = document.getElementById("box-endereco-add");
   btnAddEndereco = document.getElementById("divBtnAddEndereco");
-  
+
 
   if (box.hidden == true){
   box.hidden = false;

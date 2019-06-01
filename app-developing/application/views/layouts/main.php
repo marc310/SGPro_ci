@@ -107,31 +107,31 @@
 
                 <li>
                   <a href="<?php echo site_url('cliente/index');?>">
-                    <i class="fa fa-desktop"></i> <span>Clientes</span>
+                    <i class="fa fa-users"></i> <span>Clientes</span>
                   </a>
                 </li>
 
                 <li>
                   <a href="<?php echo site_url('funcionario/index');?>">
-                    <i class="fa fa-desktop"></i> <span>Funcionários</span>
+                    <i class="fa fa-user"></i> <span>Funcionários</span>
                   </a>
                 </li>
 
                 <li>
                   <a href="<?php echo site_url('fornecedor/index');?>">
-                    <i class="fa fa-desktop"></i> <span>Fornecedores</span>
+                    <i class="fa fa-address-book"></i> <span>Fornecedores</span>
                   </a>
                 </li>
 
                 <li>
                   <a href="<?php echo site_url('os/index');?>">
-                    <i class="fa fa-desktop"></i> <span>Ordem de Serviço</span>
+                    <i class="fa fa-tasks"></i> <span>Ordem de Serviço</span>
                   </a>
                 </li>
 
                 <li>
                   <a href="<?php echo site_url('pagamento/index');?>">
-                    <i class="fa fa-desktop"></i> <span>Pagamento</span>
+                    <i class="fa fa-hand-holding-usd"></i> <span>Pagamento</span>
                   </a>
                 </li>
 
@@ -141,7 +141,7 @@
                   </a>
                   <ul class="treeview-menu">
                     <li>
-                      <a href="<?php echo site_url('dados_empresa/index');?>"><i class="fa fa-list-ul"></i> Dados da Empresa</a>
+                      <a href="<?php echo site_url('dados_empresa/index');?>"><i class="fa fa-building"></i> Dados da Empresa</a>
                     </li>
 
                     <li>
@@ -149,19 +149,19 @@
                     </li>
 
                     <li>
-                      <a href="<?php echo site_url('servico/index');?>"><i class="fa fa-list-ul"></i> Serviços</a>
+                      <a href="<?php echo site_url('servico/index');?>"><i class="fa fa-wrench"></i> Serviços</a>
                     </li>
 
                     <li>
-                      <a href="<?php echo site_url('unidades_medida/index');?>"><i class="fa fa-list-ul"></i> Unidades Medida</a>
+                      <a href="<?php echo site_url('unidades_medida/index');?>"><i class="fa fa-compress-arrows-alt"></i> Unidades Medida</a>
                     </li>
 
                     <li>
-                      <a href="<?php echo site_url('material/index');?>"><i class="fa fa-list-ul"></i> Materiais</a>
+                      <a href="<?php echo site_url('material/index');?>"><i class="fa fa-buffer"></i> Materiais</a>
                     </li>
 
                     <li>
-                      <a href="<?php echo site_url('acabamento/index');?>"><i class="fa fa-list-ul"></i> Acabamentos</a>
+                      <a href="<?php echo site_url('acabamento/index');?>"><i class="fa fa-crop"></i> Acabamentos</a>
                     </li>
                   </ul>
                 </li>
