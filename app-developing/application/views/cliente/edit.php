@@ -258,6 +258,54 @@
                                	<h3 class="box-title">Cadastrar Novo Endereço</h3>
                              </div>
 
+
+
+                             <!-- FORM 1 -->
+                             <?php echo form_open('enderecos_cliente/add',array("class"=>"form-horizontal")); ?>
+
+                             <div class="form-group">
+                               <label for="endereco_id_cliente" class="col-md-4 control-label">Endereco</label>
+                               <div class="col-md-8">
+                                 <select id="endereco_id_cliente" name="endereco_id_cliente" class="form-control">
+                                   <option value="">select endereco</option>
+                                   <?php
+                                   foreach($all_enderecos as $endereco)
+                                   {
+                                     $selected = ($endereco['id_endereco'] == $this->input->post('endereco_id_cliente')) ? ' selected="selected"' : "";
+
+                                     echo '<option value="'.$endereco['id_endereco'].'" '.$selected.'>'.$endereco['id_endereco'].'</option>';
+                                   }
+                                   ?>
+                                 </select>
+                               </div>
+                             </div>
+                             <div class="form-group">
+                               <label for="cliente_id_endereco" class="col-md-4 control-label">Cliente</label>
+                               <div class="col-md-8">
+                                 <select id="cliente_id_endereco" name="cliente_id_endereco" class="form-control">
+                                   <option value="">select cliente</option>
+                                   <?php
+                                   foreach($all_clientes as $cliente)
+                                   {
+                                     $selected = ($cliente['id_cliente'] == $this->input->post('cliente_id_endereco')) ? ' selected="selected"' : "";
+
+                                     echo '<option value="'.$cliente['id_cliente'].'" '.$selected.'>'.$cliente['id_cliente'].'</option>';
+                                   }
+                                   ?>
+                                 </select>
+                               </div>
+                             </div>
+
+                             <div class="form-group">
+                               <div class="col-sm-offset-4 col-sm-8">
+                                 <button type="submit" class="btn btn-success">Salvar</button>
+                               </div>
+                             </div>
+
+                             <?php echo form_close(); ?>
+                             <!-- FIM DO FORM 1 -->
+
+                                   <!-- FORM 2 -->
                              <form
                              name="frmAddEndereco"
                              id="frmAddEndereco"
@@ -267,13 +315,20 @@
 
                            	<div class="box-body">
                            		<div class="row clearfix">
-                 					<div class="col-md-6">
-                 						<label for="rua" class="control-label"><span class="text-danger">*</span>Rua</label>
-                 						<div class="form-group">
-                 							<input type="text" name="rua" value="<?php echo $this->input->post('rua'); ?>" class="form-control" id="rua" />
-                 							<span class="text-danger"><?php echo form_error('rua');?></span>
-                 						</div>
-                 					</div>
+                                <div class="col-md-6">
+                       						<label for="id_endereco" class="control-label"><span class="text-danger">*</span>ID</label>
+                       						<div class="form-group">
+                       							<input type="text" id_endereco="rua" value="<?php echo $this->input->post('id_endereco'); ?>" class="form-control" id="id_endereco" />
+                       							<span class="text-danger"><?php echo form_error('id_endereco');?></span>
+                       						</div>
+                       					</div>
+                                <div class="col-md-6">
+                       						<label for="rua" class="control-label"><span class="text-danger">*</span>Rua</label>
+                       						<div class="form-group">
+                       							<input type="text" name="rua" value="<?php echo $this->input->post('rua'); ?>" class="form-control" id="rua" />
+                       							<span class="text-danger"><?php echo form_error('rua');?></span>
+                       						</div>
+                       					</div>
                  					<div class="col-md-6">
                  						<label for="bairro" class="control-label"><span class="text-danger">*</span>Bairro</label>
                  						<div class="form-group">
@@ -365,7 +420,7 @@
                       require 'resources/php/estados-case.php';
                      ?>
                    <tr>
-                 <td hidden><?php echo $e['id_endereco']; ?></td>
+                 <td id="id_endereco" hidden><?php echo $e['id_endereco']; ?></td>
                  <td><?php echo $e['rua']; ?></td>
                  <td><?php echo $e['bairro']; ?></td>
                  <td><?php echo $e['cidade']; ?></td>
@@ -455,8 +510,11 @@ $(document).ready(function(){
   var dataFormatada = formatDate(date);
   document.getElementById("labelDataCliente").innerHTML = "Cadastrado desde: " + dataFormatada;
   document.getElementById("salvarEditarCliente").addEventListener("click", editaCliente);
+  // PREENCHE VALOR DO SELECT DE CLIENTE DE REDE SOCIAL
   var idCliente = document.getElementById("idClienteShow").innerHTML;
   document.getElementById("selectClienteIdRedeSocial").value = idCliente;
+  // PREENCHE VALOR DO SELECT DE ENDEREÇO
+  var selectClienteEndereco = document.getElementById("cliente_id_endereco").value = idCliente;
 });
 // fim do construtor
 //######################################################################################
@@ -473,7 +531,6 @@ $("#modalAdicionar").on('shown.bs.modal', function(){
 //######################################################################################
 //######################################################################################
 //######################################################################################
-
 //######################################################################################
 $(function(){
 // SALVA CLIENTE COM AJAX
@@ -534,22 +591,30 @@ $(function(){
   // verifica se campos estao nulos se for diferente entao prossegue
   $("#frmAddEndereco").submit(function(){
 		dataString = $("#frmAddEndereco").serialize();
+    // pre codigo
+    if (1 == 1){
+      //your before submit logic
+      $.ajax({
+  			type: "POST",
+  			url: "<?php echo base_url('endereco/add');?>",
+  			data: dataString,
+  			target: "#listaEnderecos",
+  			success: function(data){
+  				// alert('Successful!');
+  				$("#resultendereco").html('Endereço Adicionado com Sucesso!').show().fadeOut( 3000 );
+  				$("#resultendereco").addClass("alert alert-success");
+  				$("#listaEnderecos").load("<?php echo current_url();?> #listaEnderecos");
+  			}
+  		});
+      alert("fim do ajax");
 
-		$.ajax({
-			type: "POST",
-			url: "<?php echo base_url('endereco/add');?>",
-			data: dataString,
-			target: "#listaEnderecos",
-			success: function(data){
-				// alert('Successful!');
-				$("#resultendereco").html('Endereço Adicionado com Sucesso!').show().fadeOut( 3000 );
-				$("#resultendereco").addClass("alert alert-success");
-				$("#listaEnderecos").load("<?php echo current_url();?> #listaEnderecos");
-			}
-		});
-
-		return false;  //stop the actual form post !important!
-
+      // fim do pre-loader
+    }
+    var id = document.getElementById("id_endereco").innerHTML;
+    var endereco = "teste";
+    // aqui seque o cod..
+    alert("aqui segue" + endereco + " " + id);
+    return false;  //stop the actual form post !important!
 	});
 // fim da function
 });

@@ -23,6 +23,15 @@ function dataCadastro(){
 //
 //*************************************************************************************//
 //
+function preencheElementosCliente(){
+  // PREENCHE VALOR DO SELECT DE CLIENTE DE REDE SOCIAL
+  var idCliente = document.getElementById("idClienteShow").innerHTML;
+  document.getElementById("selectClienteIdRedeSocial").value = idCliente;
+  // PREENCHE VALOR DO SELECT DE ENDEREÇO
+  var selectClienteEndereco = document.getElementById("endereco_id_cliente").value = idCliente;
+
+
+}
 // VERIFICA TIPO DE PESSOA AO CADASTRAR, FISICA OU JURIDICA PARA FORMATAÇÃO DO DOCUMENTO
 // se o tipo estiver nulo ou vazio entao esconde o label e input documento
 // se o tipo for pessoa fisica entao altera o label "documento" para "CPF: "

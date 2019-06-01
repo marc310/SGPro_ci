@@ -114,14 +114,14 @@ class Cliente extends CI_Controller{
 			if($this->form_validation->run())
             {
                 $params = array(
-					'nome_cliente' => $this->input->post('nome_cliente'),
-					'sexo' => $this->input->post('sexo'),
-					'tipo_pessoa' => $this->input->post('tipo_pessoa'),
-					'documento' => $this->input->post('documento'),
-					'telefone' => $telefone,
-					'celular' => $celular,
-					'email' => $this->input->post('email'),
-					'data_cadastro_cliente' => $this->input->post('data_cadastro_cliente'),
+        					'nome_cliente' => $this->input->post('nome_cliente'),
+        					'sexo' => $this->input->post('sexo'),
+        					'tipo_pessoa' => $this->input->post('tipo_pessoa'),
+        					'documento' => $this->input->post('documento'),
+        					'telefone' => $telefone,
+        					'celular' => $celular,
+        					'email' => $this->input->post('email'),
+        					'data_cadastro_cliente' => $this->input->post('data_cadastro_cliente'),
                 );
 
                 $this->Cliente_model->update_cliente($id_cliente,$params);
@@ -160,6 +160,41 @@ class Cliente extends CI_Controller{
         else
             show_error('O Cliente que você tentou editar parece que não existir ou aconteceu algum problema nos registros.');
     }
+
+
+    /*
+     * Ler produto
+     */
+    // public function read($idP)
+    // {
+    //     if($this->session->userdata('nomeusuario') == '')
+    //        {
+    //             redirect(site_url('login'));
+    //        }
+    //     $row = $this->Produto_model->produtosPorID($idP);
+    //     if ($row) {
+    //         $data = array(
+    //             'idP' => $row->idP,
+    //             'nome' => $row->nome,
+    //             'descricao' => $row->descricao,
+    //             'modeloID' => $row->modeloID,
+    //             'modelo' => $row->modelo,
+    //             'categoriaID' => $row->categoriaID,
+    //             'categoria' => $row->categoria
+    //                 );
+    //         $this->load->model('Tamanhos_produto_model');
+    //         $data['tamanhos_produtos'] = $this->Tamanhos_produto_model->lista_tamanhos_produto($idP);
+    //
+    //     $this->load->view('common/header');
+    //     $this->load->view('common/menu');
+    //     $this->load->view('produto/produto_read', $data);
+    //     $this->load->view('common/footer');
+    //     } else {
+    //         $this->session->set_flashdata('message', 'Record Not Found');
+    //         redirect(site_url('produtos'));
+    //     }
+    // }
+
 
     /*
      * Deleting cliente
