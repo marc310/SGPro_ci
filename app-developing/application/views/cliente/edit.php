@@ -344,9 +344,9 @@
                  						</div>
                  					</div>
                  					<div class="col-md-6">
-                 						<label for="referencia" class="control-label">Referencia</label>
+                 						<label for="complemento" class="control-label">complemento</label>
                  						<div class="form-group">
-                 							<input type="text" name="referencia" value="<?php echo $this->input->post('referencia'); ?>" class="form-control" id="referencia" />
+                 							<input type="text" name="complemento" value="<?php echo $this->input->post('complemento'); ?>" class="form-control" id="complemento" />
                  						</div>
                  					</div>
                  					<div class="col-md-6">

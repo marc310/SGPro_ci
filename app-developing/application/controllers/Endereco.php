@@ -48,13 +48,13 @@ class Endereco extends CI_Controller{
 		if($this->form_validation->run())
         {
             $params = array(
-				'rua' => $this->input->post('rua'),
-				'bairro' => $this->input->post('bairro'),
-				'cidade' => $this->input->post('cidade'),
-				'referencia' => $this->input->post('referencia'),
-				'numero' => $this->input->post('numero'),
-				'uf' => $this->input->post('uf'),
-				'cep' => $this->input->post('cep'),
+      				'rua' => $this->input->post('rua'),
+      				'bairro' => $this->input->post('bairro'),
+      				'cidade' => $this->input->post('cidade'),
+      				'complemento' => $this->input->post('complemento'),
+      				'numero' => $this->input->post('numero'),
+      				'uf' => $this->input->post('uf'),
+      				'cep' => $this->input->post('cep'),
             );
 
             $endereco_id = $this->Endereco_model->add_endereco($params);
@@ -91,7 +91,7 @@ class Endereco extends CI_Controller{
 					'rua' => $this->input->post('rua'),
 					'bairro' => $this->input->post('bairro'),
 					'cidade' => $this->input->post('cidade'),
-					'referencia' => $this->input->post('referencia'),
+					'complemento' => $this->input->post('complemento'),
 					'numero' => $this->input->post('numero'),
 					'uf' => $this->input->post('uf'),
 					'cep' => $this->input->post('cep'),
