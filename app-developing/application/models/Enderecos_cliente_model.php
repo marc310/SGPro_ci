@@ -12,11 +12,11 @@ class Enderecos_cliente_model extends CI_Model
     }
     
     /*
-     * Get enderecos_cliente by id_endereco_cliente
+     * Get enderecos_cliente by id_endereco
      */
-    function get_enderecos_cliente($id_endereco_cliente)
+    function get_enderecos_cliente($id_endereco)
     {
-        return $this->db->get_where('enderecos_cliente',array('id_endereco_cliente'=>$id_endereco_cliente))->row_array();
+        return $this->db->get_where('enderecos_cliente',array('id_endereco'=>$id_endereco))->row_array();
     }
     
     /*
@@ -33,7 +33,7 @@ class Enderecos_cliente_model extends CI_Model
      */
     function get_all_enderecos_cliente($params = array())
     {
-        $this->db->order_by('id_endereco_cliente', 'desc');
+        $this->db->order_by('id_endereco', 'desc');
         if(isset($params) && !empty($params))
         {
             $this->db->limit($params['limit'], $params['offset']);
@@ -53,17 +53,17 @@ class Enderecos_cliente_model extends CI_Model
     /*
      * function to update enderecos_cliente
      */
-    function update_enderecos_cliente($id_endereco_cliente,$params)
+    function update_enderecos_cliente($id_endereco,$params)
     {
-        $this->db->where('id_endereco_cliente',$id_endereco_cliente);
+        $this->db->where('id_endereco',$id_endereco);
         return $this->db->update('enderecos_cliente',$params);
     }
     
     /*
      * function to delete enderecos_cliente
      */
-    function delete_enderecos_cliente($id_endereco_cliente)
+    function delete_enderecos_cliente($id_endereco)
     {
-        return $this->db->delete('enderecos_cliente',array('id_endereco_cliente'=>$id_endereco_cliente));
+        return $this->db->delete('enderecos_cliente',array('id_endereco'=>$id_endereco));
     }
 }

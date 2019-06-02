@@ -239,7 +239,7 @@
              <div class="row" id="divBtnAddEndereco">
                <div style="padding-top:18px">
                <button
-               href="<?php echo site_url('endereco/add'); ?>"
+               href="#"
                id="btnAddEndereco"
                class="btn btn-info"
                onclick="mostraCamposEndereco()"
@@ -256,9 +256,7 @@
                      <div class="col-md-12">
                              <div class="box-header with-border">
                                	<h3 class="box-title">Cadastrar Novo Endereço</h3>
-
                              </div>
-
 
 
 
@@ -267,94 +265,89 @@
                              name="frmAddEndereco"
                              id="frmAddEndereco"
                              method="post"
-                             action="<?php echo site_url('cliente/addEndereco');?>"
+                             action="<?php echo site_url('enderecos_cliente/add');?>"
                              > <!-- form open -->
 
+                             	<div class="box-body">
+                             		<div class="row clearfix">
 
-                           	<div class="box-body">
-                           		<div class="row clearfix">
 
-                                <div class="col-md-12 btn-danger" id="referenciadores" hidden>
+                                  	<div class="form-group">
+                                  		<label for="cliente_id" class="col-md-4 control-label"><span class="text-danger">*</span>Cliente</label>
+                                  		<div class="col-md-8">
+                                  			<select id="cliente_id_endereco" name="cliente_id" class="form-control">
+                                  				<option value="">select cliente</option>
+                                  				<?php
+                                  				foreach($all_clientes as $cliente)
+                                  				{
+                                  					$selected = ($cliente['id_cliente'] == $this->input->post('cliente_id')) ? ' selected="selected"' : "";
 
-                                  <div class="col-md-6">
-                                    <label for="grupo" class="control-label"><span class="text-danger">*</span>Grupo</label>
-                                    <div class="form-group">
-                                      <!-- grupo valor setado como 2 = cliente -->
-                                      <input type="text" name="grupo" value="2" class="form-control" id="grupo" />
-                                      <span class="text-danger"><?php echo form_error('grupo');?></span>
-                                    </div>
-                                  </div>
+                                  					echo '<option value="'.$cliente['id_cliente'].'" '.$selected.'>'.$cliente['nome_cliente'].'</option>';
+                                  				}
+                                  				?>
+                                  			</select>
+                                  			<span class="text-danger"><?php echo form_error('cliente_id');?></span>
+                                  		</div>
+                                  	</div>
+                                  	<div class="form-group">
+                                  		<label for="rua" class="col-md-4 control-label"><span class="text-danger">*</span>Rua</label>
+                                  		<div class="col-md-8">
+                                  			<input type="text" name="rua" value="<?php echo $this->input->post('rua'); ?>" class="form-control" id="rua" />
+                                  			<span class="text-danger"><?php echo form_error('rua');?></span>
+                                  		</div>
+                                  	</div>
+                                  	<div class="form-group">
+                                  		<label for="bairro" class="col-md-4 control-label">Bairro</label>
+                                  		<div class="col-md-8">
+                                  			<input type="text" name="bairro" value="<?php echo $this->input->post('bairro'); ?>" class="form-control" id="bairro" />
+                                  		</div>
+                                  	</div>
+                                  	<div class="form-group">
+                                  		<label for="cidade" class="col-md-4 control-label">Cidade</label>
+                                  		<div class="col-md-8">
+                                  			<input type="text" name="cidade" value="<?php echo $this->input->post('cidade'); ?>" class="form-control" id="cidade" />
+                                  		</div>
+                                  	</div>
+                                  	<div class="form-group">
+                                  		<label for="complemento" class="col-md-4 control-label">Complemento</label>
+                                  		<div class="col-md-8">
+                                  			<input type="text" name="complemento" value="<?php echo $this->input->post('complemento'); ?>" class="form-control" id="complemento" />
+                                  		</div>
+                                  	</div>
+                                  	<div class="form-group">
+                                  		<label for="numero" class="col-md-4 control-label">Numero</label>
+                                  		<div class="col-md-8">
+                                  			<input type="text" name="numero" value="<?php echo $this->input->post('numero'); ?>" class="form-control" id="numero" />
+                                  			<span class="text-danger"><?php echo form_error('numero');?></span>
+                                  		</div>
+                                  	</div>
+                                  	<div class="form-group">
+                                  		<label for="uf" class="col-md-4 control-label"><span class="text-danger">*</span>Uf</label>
+                                  		<div class="col-md-8">
+                                  			<select name="uf" class="form-control" id="uf">
+                                            <option value="">Selecione o Estado</option>
+                                          <?php
+                                          require 'resources/php/array-uf_values.php';
+                                          foreach($uf_values as $value => $display_text)
+                                          {
+                                            $selected = ($value == $this->input->post('uf')) ? ' selected="selected"' : "";
+                                            echo '<option value="'.$value.'" '.$selected.'>'.$display_text.'</option>';
+                                          }
+                                          ?>
+                                        </select>
+                                  			<span class="text-danger"><?php echo form_error('uf');?></span>
+                                  		</div>
+                                  	</div>
+                                  	<div class="form-group">
+                                  		<label for="cep" class="col-md-4 control-label">Cep</label>
+                                  		<div class="col-md-8">
+                                  			<input type="text" name="cep" value="<?php echo $this->input->post('cep'); ?>" class="form-control" id="cep" />
+                                  			<span class="text-danger"><?php echo form_error('cep');?></span>
+                                  		</div>
+                                  	</div>
 
-                                  <div class="col-md-6">
-                                    <label for="id_referencia" class="control-label"><span class="text-danger">*</span>ID Referencia</label>
-                                    <div class="form-group">
-                                      <input type="text" name="id_referencia" value="<?php echo $this->input->post('id_referencia'); ?>" class="form-control" id="id_referencia" />
-                                      <span class="text-danger"><?php echo form_error('id_referencia');?></span>
-                                    </div>
-                                  </div>
-
-                                </div>
-
-                                <div class="col-md-6">
-                       						<label for="rua" class="control-label"><span class="text-danger">*</span>Rua</label>
-                       						<div class="form-group">
-                       							<input type="text" name="rua" value="<?php echo $this->input->post('rua'); ?>" class="form-control" id="rua" />
-                       							<span class="text-danger"><?php echo form_error('rua');?></span>
-                       						</div>
-                       					</div>
-                 					<div class="col-md-6">
-                 						<label for="bairro" class="control-label"><span class="text-danger">*</span>Bairro</label>
-                 						<div class="form-group">
-                 							<input type="text" name="bairro" value="<?php echo $this->input->post('bairro'); ?>" class="form-control" id="bairro" />
-                 							<span class="text-danger"><?php echo form_error('bairro');?></span>
-                 						</div>
-                 					</div>
-                 					<div class="col-md-6">
-                 						<label for="cidade" class="control-label"><span class="text-danger">*</span>Cidade</label>
-                 						<div class="form-group">
-                 							<input type="text" name="cidade" value="<?php echo $this->input->post('cidade'); ?>" class="form-control" id="cidade" />
-                 							<span class="text-danger"><?php echo form_error('cidade');?></span>
-                 						</div>
-                 					</div>
-                 					<div class="col-md-6">
-                 						<label for="complemento" class="control-label">complemento</label>
-                 						<div class="form-group">
-                 							<input type="text" name="complemento" value="<?php echo $this->input->post('complemento'); ?>" class="form-control" id="complemento" />
-                 						</div>
-                 					</div>
-                 					<div class="col-md-6">
-                 						<label for="numero" class="control-label">Numero</label>
-                 						<div class="form-group">
-                 							<input type="text" name="numero" value="<?php echo $this->input->post('numero'); ?>" class="form-control" id="numero" />
-                 							<span class="text-danger"><?php echo form_error('numero');?></span>
-                 						</div>
-                 					</div>
-                 					<div class="col-md-6">
-                 						<label for="uf" class="control-label"><span class="text-danger">*</span>Uf</label>
-                 						<div class="form-group">
-                              <select name="uf" class="form-control" id="uf">
-                                <option value="">Selecione o Estado</option>
-                              <?php
-                              require 'resources/php/array-uf_values.php';
-                              foreach($uf_values as $value => $display_text)
-                              {
-                                $selected = ($value == $this->input->post('uf')) ? ' selected="selected"' : "";
-
-                                echo '<option value="'.$value.'" '.$selected.'>'.$display_text.'</option>';
-                              }
-                              ?>
-                              </select>
-                 							<span class="text-danger"><?php echo form_error('uf');?></span>
-                 						</div>
-                 					</div>
-                 					<div class="col-md-6">
-                 						<label for="cep" class="control-label">Cep</label>
-                 						<div class="form-group">
-                 							<input type="text" name="cep" value="<?php echo $this->input->post('cep'); ?>" class="form-control" id="cep" />
-                 						</div>
-                 					</div>
-                 				</div>
-                 			</div>
+                         				</div>
+                         			</div>
                            	<div class="box-footer">
                               <div class="pull-right">
                              	<button class="btn btn-success">
@@ -374,7 +367,6 @@
 
                </div>
              </div>
-
              <!-- FIM DO ENDEREÇO ADD -->
                    </div>
                    <div class="box-info" id="listaEnderecos">
@@ -390,7 +382,7 @@
                  <th> </th>
                    </tr>
                    <?php
-                      foreach($enderecos as $e){
+                      foreach($enderecos_cliente as $e){
                       require 'resources/php/estados-case.php';
                      ?>
                    <tr>
@@ -403,8 +395,10 @@
                  <td><?php echo $e['cep']; ?></td>
                  <td>
                  <a
-                 href="<?php echo site_url('cliente/editarEndereco/'.$e['id_endereco']); ?>"
+                 href="<?php echo site_url('endereco/edit/'.$e['id_endereco']); ?>"
                  class="btn btn-info btn-xs"
+                 data-toggle="modal"
+                 data-target="#modalEditar"
                  >
                  <span class="fa fa-pencil"></span>
                </a>
@@ -437,6 +431,33 @@
     </div>
 </div>
 
+
+<!-- ########################################################################################### -->
+<!-- ###################################  MODAL EDITAR  ######################################## -->
+<!-- ########################################################################################### -->
+
+<!-- Modal -->
+<div class="modal fade" id="modalEditar" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Editando Endereço</h4>
+      </div>
+      <div class="modal-body">
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <!-- ########################################################################################### -->
 <!-- ########################################################################################### -->
 <!-- ########################################################################################### -->
@@ -458,12 +479,16 @@ $(document).ready(function(){
   // PREENCHE VALOR DO SELECT DE CLIENTE DE REDE SOCIAL
   var idCliente = document.getElementById("idClienteShow").innerHTML;
   document.getElementById("selectClienteIdRedeSocial").value = idCliente;
-  document.getElementById("id_referencia").value = idCliente;
   // PREENCHE VALOR DO SELECT DE ENDEREÇO
   var selectClienteEndereco = document.getElementById("cliente_id_endereco").value = idCliente;
 });
 // fim do construtor
 //######################################################################################
+
+$("#modalEditar").on('shown.bs.modal', function(){
+    //alert('The modal is fully shown.');
+
+  });
 
 $("#modalAdicionar").on('shown.bs.modal', function(){
   //alert('The modal is fully shown.');
@@ -474,6 +499,37 @@ $("#modalAdicionar").on('shown.bs.modal', function(){
 //######################################################################################
 //######################################################################################
 $(function(){
+// SALVA CLIENTE COM AJAX
+	// $("#frmEditarCliente").submit(function(){
+	// 	dataString = $("#frmEditarCliente").serialize();
+  //   var frm = document.getElementById("frmEditarCliente");
+  //   //VALIDAÇÃO ANTES DE SALVAR ALTERAÇÕES
+  //   //Verifica se o campo nome foi preenchido e
+  //   //contém no mínimo três caracteres.
+  //   validaCliente(frm);
+  //
+	// 	$.ajax({
+	// 		type: "POST",
+	// 		url: "<?php echo base_url('cliente/edit/'.$cliente['id_cliente']);?>",
+	// 		data: dataString,
+	// 		//target: "#listaClientes",
+	// 		success: function(data){
+	// 			// alert('Successful!');
+	// 			$("#resultCliente").html('Cliente Alterado com Sucesso!').show().fadeOut( 5000 );
+	// 			$("#resultCliente").addClass("alert alert-success");
+	// 			//$("#listaClientes").load("<?php echo current_url();?> #listaClientes");
+  //
+	// 		}
+  //
+	// 	});
+  //
+	// 	return false;  //stop the actual form post !important!
+  //
+	// });
+  // cliente salvo
+  //
+
+
 
   $("#frmAddRedeSocial").submit(function(){
     dataString = $("#frmAddRedeSocial").serialize();
@@ -499,32 +555,32 @@ $(function(){
 
   // validação de formulario de endereço
   // verifica se campos estao nulos se for diferente entao prossegue
-  // $("#frmAddEndereco").submit(function(){
-	// 	dataString = $("#frmAddEndereco").serialize();
-  //   // pre codigo
-  //   if (1 == 1){
-  //     //your before submit logic
-  //     $.ajax({
-  // 			type: "POST",
-  // 			url: "<?php echo base_url('cliente/addEndereco');?>",
-  // 			data: dataString,
-  // 			target: "#listaEnderecos",
-  // 			success: function(data){
-  // 				// alert('Successful!');
-  // 				$("#resultendereco").html('Endereço Adicionado com Sucesso!').show().fadeOut( 3000 );
-  // 				$("#resultendereco").addClass("alert alert-success");
-  // 				$("#listaEnderecos").load("<?php echo current_url();?> #listaEnderecos");
-  // 			}
-  // 		});
-  //
-  //     // fim do pre-loader
-  //   }
-  //   var id = document.getElementById("id_endereco").innerHTML;
-  //   var endereco = "teste";
-  //   // aqui seque o cod..
-  //   // alert("aqui segue" + endereco + " " + id);
-  //   return false;  //stop the actual form post !important!
-	// });
+  $("#frmAddEndereco").submit(function(){
+		dataString = $("#frmAddEndereco").serialize();
+    // pre codigo
+    if (1 == 1){
+      //your before submit logic
+      $.ajax({
+  			type: "POST",
+  			url: "<?php echo base_url('enderecos_cliente/add');?>",
+  			data: dataString,
+  			target: "#listaEnderecos",
+  			success: function(data){
+  				// alert('Successful!');
+  				$("#resultendereco").html('Endereço Adicionado com Sucesso!').show().fadeOut( 3000 );
+  				$("#resultendereco").addClass("alert alert-success");
+  				$("#listaEnderecos").load("<?php echo current_url();?> #listaEnderecos");
+  			}
+  		});
+
+      // fim do pre-loader
+    }
+    var id = document.getElementById("id_endereco").innerHTML;
+    var endereco = "teste";
+    // aqui seque o cod..
+    // alert("aqui segue" + endereco + " " + id);
+    return false;  //stop the actual form post !important!
+	});
 // fim da function
 });
 //######################################################################################

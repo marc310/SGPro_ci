@@ -35,11 +35,25 @@ class Enderecos_cliente extends CI_Controller{
      */
     function add()
     {   
-        if(isset($_POST) && count($_POST) > 0)     
+        $this->load->library('form_validation');
+
+		$this->form_validation->set_rules('numero','Numero','numeric');
+		$this->form_validation->set_rules('uf','Uf','required');
+		$this->form_validation->set_rules('rua','Rua','required');
+		$this->form_validation->set_rules('cep','Cep','numeric');
+		$this->form_validation->set_rules('cliente_id','Cliente Id','required');
+		
+		if($this->form_validation->run())     
         {   
             $params = array(
-				'endereco_id_cliente' => $this->input->post('endereco_id_cliente'),
-				'cliente_id_endereco' => $this->input->post('cliente_id_endereco'),
+				'cliente_id' => $this->input->post('cliente_id'),
+				'rua' => $this->input->post('rua'),
+				'bairro' => $this->input->post('bairro'),
+				'cidade' => $this->input->post('cidade'),
+				'complemento' => $this->input->post('complemento'),
+				'numero' => $this->input->post('numero'),
+				'uf' => $this->input->post('uf'),
+				'cep' => $this->input->post('cep'),
             );
             
             $enderecos_cliente_id = $this->Enderecos_cliente_model->add_enderecos_cliente($params);
@@ -47,9 +61,6 @@ class Enderecos_cliente extends CI_Controller{
         }
         else
         {
-			$this->load->model('Endereco_model');
-			$data['all_enderecos'] = $this->Endereco_model->get_all_enderecos();
-
 			$this->load->model('Cliente_model');
 			$data['all_clientes'] = $this->Cliente_model->get_all_clientes();
             
@@ -61,28 +72,39 @@ class Enderecos_cliente extends CI_Controller{
     /*
      * Editing a enderecos_cliente
      */
-    function edit($id_endereco_cliente)
+    function edit($id_endereco)
     {   
         // check if the enderecos_cliente exists before trying to edit it
-        $data['enderecos_cliente'] = $this->Enderecos_cliente_model->get_enderecos_cliente($id_endereco_cliente);
+        $data['enderecos_cliente'] = $this->Enderecos_cliente_model->get_enderecos_cliente($id_endereco);
         
-        if(isset($data['enderecos_cliente']['id_endereco_cliente']))
+        if(isset($data['enderecos_cliente']['id_endereco']))
         {
-            if(isset($_POST) && count($_POST) > 0)     
+            $this->load->library('form_validation');
+
+			$this->form_validation->set_rules('numero','Numero','numeric');
+			$this->form_validation->set_rules('uf','Uf','required');
+			$this->form_validation->set_rules('rua','Rua','required');
+			$this->form_validation->set_rules('cep','Cep','numeric');
+			$this->form_validation->set_rules('cliente_id','Cliente Id','required');
+		
+			if($this->form_validation->run())     
             {   
                 $params = array(
-					'endereco_id_cliente' => $this->input->post('endereco_id_cliente'),
-					'cliente_id_endereco' => $this->input->post('cliente_id_endereco'),
+					'cliente_id' => $this->input->post('cliente_id'),
+					'rua' => $this->input->post('rua'),
+					'bairro' => $this->input->post('bairro'),
+					'cidade' => $this->input->post('cidade'),
+					'complemento' => $this->input->post('complemento'),
+					'numero' => $this->input->post('numero'),
+					'uf' => $this->input->post('uf'),
+					'cep' => $this->input->post('cep'),
                 );
 
-                $this->Enderecos_cliente_model->update_enderecos_cliente($id_endereco_cliente,$params);            
+                $this->Enderecos_cliente_model->update_enderecos_cliente($id_endereco,$params);            
                 redirect('enderecos_cliente/index');
             }
             else
             {
-				$this->load->model('Endereco_model');
-				$data['all_enderecos'] = $this->Endereco_model->get_all_enderecos();
-
 				$this->load->model('Cliente_model');
 				$data['all_clientes'] = $this->Cliente_model->get_all_clientes();
 
@@ -97,14 +119,14 @@ class Enderecos_cliente extends CI_Controller{
     /*
      * Deleting enderecos_cliente
      */
-    function remove($id_endereco_cliente)
+    function remove($id_endereco)
     {
-        $enderecos_cliente = $this->Enderecos_cliente_model->get_enderecos_cliente($id_endereco_cliente);
+        $enderecos_cliente = $this->Enderecos_cliente_model->get_enderecos_cliente($id_endereco);
 
         // check if the enderecos_cliente exists before trying to delete it
-        if(isset($enderecos_cliente['id_endereco_cliente']))
+        if(isset($enderecos_cliente['id_endereco']))
         {
-            $this->Enderecos_cliente_model->delete_enderecos_cliente($id_endereco_cliente);
+            $this->Enderecos_cliente_model->delete_enderecos_cliente($id_endereco);
             redirect('enderecos_cliente/index');
         }
         else

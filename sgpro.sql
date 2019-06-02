@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 01-Jun-2019 às 18:17
+-- Generation Time: 02-Jun-2019 às 16:33
 -- Versão do servidor: 10.1.13-MariaDB
 -- PHP Version: 7.0.8
 
@@ -64,6 +64,7 @@ CREATE TABLE `anexos` (
 CREATE TABLE `clientes` (
   `id_cliente` int(11) NOT NULL,
   `nome_cliente` varchar(255) NOT NULL,
+  `empresa` varchar(100) DEFAULT NULL,
   `sexo` varchar(20) DEFAULT NULL,
   `tipo_pessoa` int(1) NOT NULL,
   `documento` varchar(20) NOT NULL,
@@ -77,39 +78,9 @@ CREATE TABLE `clientes` (
 -- Extraindo dados da tabela `clientes`
 --
 
-INSERT INTO `clientes` (`id_cliente`, `nome_cliente`, `sexo`, `tipo_pessoa`, `documento`, `telefone`, `celular`, `email`, `data_cadastro_cliente`) VALUES
-(1, 'Marcelo', NULL, 0, '', '+55(21)2606-3333', '+55(22)9 8818-9303', 'marcelomotta.art@gmail.com', 2147483647),
-(2, 'Lalá', NULL, 1, '260.546.598-46', '+55(21)3616-4989', '', '', 2147483647),
-(3, 'Cliente 12', NULL, 0, '125.000.300-36', '', '+55(22)9 8482-9382', 'desenvolvimento@marcelomotta.com', 2147483647),
-(4, 'Cliente 2', NULL, 1, '123.600.696-66', '+55(21)3245-6666', '+55(22)9 8658-5565', 'cliente2@', 2147483647),
-(5, 'Cliente 3', NULL, 2, '31.223.300/0001-56', '+55(22)2604-5465', '+55(22)9 8885-6544', 'marcelomotta.art@gmail.com', 2147483647),
-(6, 'Novo Cliente', NULL, 1, '123.423.422-23', '+55(25)2522-3232', '+55(23)9 2342-3222', '', 2147483647),
-(7, 'Jozé', NULL, 2, '22.312.123/0001-56', '', '', 'asdfasd@cliente.com', 2147483647),
-(8, 'Ziraldo', NULL, 1, '123.123.424-25', '', '+55(21)9 5565-4687', '', 2147483647),
-(13, 'Cliente 14', NULL, 0, '', '', '', 'desenvolvimento@marcelomotta.com', 2147483647),
-(18, 'Testando Testando', NULL, 0, '', '', '', '', 2147483647),
-(21, 'outro', NULL, 0, '', '', '', '', 2147483647),
-(22, 'Capacitados', NULL, 0, '', '', '', '', 2147483647),
-(23, 'Andar', NULL, 0, '', '', '', '', 2147483647),
-(31, 'Novo Teste ae', NULL, 1, '222.222.222-23', '', '', '', 2147483647),
-(33, 'Preciso Dizer', NULL, 1, '___.___.___-__', '', '', 'ta@massa.pacarai', 2147483647),
-(34, 'OP', NULL, 1, '222.222.222-22', '', '', 'email@validado.com', 2147483647),
-(35, 'Jyraia', NULL, 1, '232.323.232-22', '+55(22)2604-6565', '+55(22)9 8886-8545', 'validando@teste.c', 0),
-(36, 'Super Novo teste', NULL, 1, '121.212.121-21', '', '+55(22)9 3234-4223', '', 2147483647),
-(37, 'Jyraia 22', NULL, 1, '232.323.232-32', '', '', '', 2147483647),
-(38, 'Outro 22', NULL, 0, '', '', '', '', 0),
-(39, 'Outro jeca', NULL, 0, '', '', '', '', 2147483647),
-(40, 'Jyraia 22 ataca novamente s', NULL, 0, '234.252.323-42', '', '', '', 2147483647),
-(41, 'adenotsss', NULL, 0, '', '', '', 'marcelomotta@outlook.com.br', 2147483647),
-(42, 'Novo teste', NULL, 0, '', '', '', '', 2147483647),
-(43, 'Outro', NULL, 0, '', '', '', '', 2147483647),
-(44, 'aeaeae', NULL, 0, '', '', '', 'validando@t', 2147483647),
-(45, 'ace', NULL, 0, '', '', '', '', 2147483647),
-(47, 'abc', NULL, 0, '', '', '', 'marcelomotta@outlook.com.br', 2147483647),
-(69, 'Jyraia', NULL, 0, '', '', '', 'super@teste.com', 0),
-(71, 'Outro', NULL, 1, '123.412.312-42', '', '+55(22)9 2323-3233', 'marcelomotta@outlook.com.br', 0),
-(72, 'Novo Teste', NULL, 1, '123.445.232-34', '+55(22)3224-4444', '+55(22)9 3234-2344', 'superdom@teste.com', 0),
-(76, 'teste serio', NULL, 1, '222.223.333-33', '', '', 'marcelomotta@outlook.com.br', 2147483647);
+INSERT INTO `clientes` (`id_cliente`, `nome_cliente`, `empresa`, `sexo`, `tipo_pessoa`, `documento`, `telefone`, `celular`, `email`, `data_cadastro_cliente`) VALUES
+(77, 'Jaspion', NULL, NULL, 0, '', '', '', 'super@teste.com', 2147483647),
+(78, 'Jyraia', NULL, NULL, 0, '', '', '', 'super@teste.com', 2147483647);
 
 -- --------------------------------------------------------
 
@@ -139,58 +110,11 @@ CREATE TABLE `enderecos` (
   `rua` varchar(80) NOT NULL,
   `bairro` varchar(50) NOT NULL,
   `cidade` varchar(80) NOT NULL,
-  `referencia` varchar(150) DEFAULT NULL,
+  `complemento` varchar(150) DEFAULT NULL,
   `numero` int(30) NOT NULL,
   `uf` int(11) NOT NULL,
   `cep` int(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `enderecos`
---
-
-INSERT INTO `enderecos` (`id_endereco`, `rua`, `bairro`, `cidade`, `referencia`, `numero`, `uf`, `cep`) VALUES
-(1, 'teste ', '1234', 'SG', '', 0, 19, 0),
-(3, 'teste 3', 'qqqqqqqqqq', 'qqqq', '', 0, 14, 0),
-(4, 'teste ', 'rrrrrrrrrrr', 'qqqq', '', 0, 18, 0),
-(5, 'teste 3', 'sdsds', 'SG', '', 0, 18, 0),
-(6, 'novo teste de rua', 'sdsds', 'SG', '', 0, 18, 0),
-(7, 'Rua ali', 'bairro ali', 'outra la', 'um aqui', 2123, 19, 123123),
-(8, 'Novo Endereço', 'outro bairro', 'mesma cidade', '', 0, 17, 0),
-(9, 'teste de captação', 'valores', 'de estados', '', 0, 19, 0),
-(11, 'Rua ali novo teste', 'teste', 'outra la', '', 0, 19, 123123),
-(12, 'anfitriao', 'generoso', 'boa praça', '', 0, 18, 0),
-(13, 'Ultimato', 'Borne', 'boa praça', '', 0, 9, 1255555),
-(14, 'Ipanema Beach Paradise', 'Coca', 'No mundo', '', 123, 6, 252525),
-(15, 'Foi ali e volta Ja', 'Ja', 'Jo', 'Soares', 0, 16, 0),
-(16, 'Rua ali novo teste', 'aaaa', 'outra la', '', 123123123, 19, 123123),
-(17, 'Rua ali novo teste', 'aaaa', 'outra la', '', 123123123, 19, 123123),
-(28, 'teste o ajax', 'oia', 'ae', '', 0, 19, 0),
-(29, 'teste o ajax', 'oia', 'ae', '', 0, 19, 0),
-(30, 'Ipanema Beach ', 'Paradise', 'No mundo', 'coca', 0, 19, 252525),
-(31, 'Ipanema Beach ', 'Paradise', 'No mundo', 'coca', 0, 19, 252525),
-(32, 'Rua ali novo teste', 'outro bairro', 'outra la', '', 0, 19, 123123),
-(33, 'Rua ali novo teste2', 'outro bairro', 'outra la', '', 0, 19, 123123),
-(34, 'Rua ali novo teste3', 'outro bairro', 'outra la', '', 0, 19, 123123),
-(35, 'Ipanema Beach', 'el', 'No mundo', '', 0, 19, 252525),
-(36, 'Ipanema Beach', 'el', 'No mundo', '', 0, 19, 252525),
-(37, 'eldorado', '123', 'quatro', 'cinco', 0, 19, 0),
-(38, 'eldorado', '123', 'quatro', 'cinco', 0, 19, 0),
-(39, 'abc', 'sdsds', 'outra la', '', 0, 19, 123123),
-(40, 'Rua ali novo teste', 'ss', 'outra la', '', 0, 19, 123123),
-(41, 'Rua ali novo teste', '23', 'outra la', '', 0, 19, 123123),
-(42, 'Rua ali novo teste', '23', 'outra la', '', 0, 19, 123123),
-(43, 'Ipanema Beach Paradise', '2332', 'No mundo', '', 0, 6, 252525),
-(44, 'abc', 'sds', 'outra la', '', 0, 19, 123123),
-(45, 'abc', 'ssssssssssssss', 'outra la', '', 0, 19, 123123),
-(46, 'Ipanema Beach Paradise', 's', 'No mundo', '', 0, 6, 252525),
-(47, 'Ipanema Beach Paradise', '2222222222', 'No mundo', '', 0, 6, 252525),
-(48, 'abc', 'ddd', 'outra la', '', 0, 19, 123123),
-(49, 'Rua ali novo teste', '222222222', 'outra la', '', 0, 19, 123123),
-(50, 'Ipanema Beach Paradise', 's', 'No mundo', '', 0, 6, 252525),
-(51, 'Ipanema Beach Paradise', 'outro bairro', 'No mundo', '', 0, 6, 252525),
-(52, 'Ipanema Beach Paradise', 'outro bairro', 'No mundo', '', 0, 6, 252525),
-(53, 'Rua ali novo teste', 'outro bairro', 'outra la', '', 0, 19, 123123);
 
 -- --------------------------------------------------------
 
@@ -199,25 +123,16 @@ INSERT INTO `enderecos` (`id_endereco`, `rua`, `bairro`, `cidade`, `referencia`,
 --
 
 CREATE TABLE `enderecos_cliente` (
-  `id_endereco_cliente` int(11) NOT NULL,
-  `endereco_id_cliente` int(11) NOT NULL,
-  `cliente_id_endereco` int(11) NOT NULL
+  `id_endereco` int(11) NOT NULL,
+  `rua` varchar(80) NOT NULL,
+  `bairro` varchar(50) NOT NULL,
+  `cidade` varchar(80) NOT NULL,
+  `complemento` varchar(150) DEFAULT NULL,
+  `numero` int(30) NOT NULL,
+  `uf` int(11) NOT NULL,
+  `cep` int(20) DEFAULT NULL,
+  `cliente_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `enderecos_cliente`
---
-
-INSERT INTO `enderecos_cliente` (`id_endereco_cliente`, `endereco_id_cliente`, `cliente_id_endereco`) VALUES
-(1, 7, 18),
-(2, 9, 7),
-(3, 9, 7),
-(4, 14, 37),
-(5, 14, 37),
-(7, 9, 8),
-(8, 9, 8),
-(10, 44, 45),
-(11, 44, 45);
 
 -- --------------------------------------------------------
 
@@ -231,31 +146,6 @@ CREATE TABLE `endereco_rede_social_cliente` (
   `redesocial_id` int(11) NOT NULL,
   `cliente_redesocial` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `endereco_rede_social_cliente`
---
-
-INSERT INTO `endereco_rede_social_cliente` (`id_endereco_redesocial`, `cliente_id`, `redesocial_id`, `cliente_redesocial`) VALUES
-(1, 71, 3, 'outrao_oficial'),
-(2, 76, 3, 'fulano-de-tal'),
-(3, 72, 1, 'fulano_72'),
-(4, 76, 2, 'mesmo_fulano'),
-(5, 47, 2, 'oia'),
-(11, 69, 3, 'fulano-de-tal'),
-(12, 69, 3, 'fulano-de-tal'),
-(13, 69, 3, 'Algo'),
-(20, 45, 2, 'Jonas'),
-(21, 45, 1, '12'),
-(22, 45, 1, 'jonas-racing'),
-(23, 72, 3, 'json'),
-(25, 76, 2, 'outrao_oficial'),
-(26, 42, 2, 'zezin'),
-(34, 69, 2, 'fulano'),
-(35, 47, 3, 'tuit'),
-(51, 72, 2, 'asd'),
-(52, 72, 2, 'asds'),
-(53, 76, 3, 'ssss');
 
 -- --------------------------------------------------------
 
@@ -504,9 +394,8 @@ ALTER TABLE `enderecos`
 -- Indexes for table `enderecos_cliente`
 --
 ALTER TABLE `enderecos_cliente`
-  ADD PRIMARY KEY (`id_endereco_cliente`),
-  ADD KEY `fk_endereco_id` (`endereco_id_cliente`),
-  ADD KEY `fk_cliente_id_endereco` (`cliente_id_endereco`);
+  ADD PRIMARY KEY (`id_endereco`),
+  ADD KEY `fk_cliente_endereco` (`cliente_id`);
 
 --
 -- Indexes for table `endereco_rede_social_cliente`
@@ -610,7 +499,7 @@ ALTER TABLE `anexos`
 -- AUTO_INCREMENT for table `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 --
 -- AUTO_INCREMENT for table `dados_empresa`
 --
@@ -620,17 +509,17 @@ ALTER TABLE `dados_empresa`
 -- AUTO_INCREMENT for table `enderecos`
 --
 ALTER TABLE `enderecos`
-  MODIFY `id_endereco` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id_endereco` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 --
 -- AUTO_INCREMENT for table `enderecos_cliente`
 --
 ALTER TABLE `enderecos_cliente`
-  MODIFY `id_endereco_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_endereco` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `endereco_rede_social_cliente`
 --
 ALTER TABLE `endereco_rede_social_cliente`
-  MODIFY `id_endereco_redesocial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id_endereco_redesocial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 --
 -- AUTO_INCREMENT for table `fornecedores`
 --
@@ -706,8 +595,7 @@ ALTER TABLE `dados_empresa`
 -- Limitadores para a tabela `enderecos_cliente`
 --
 ALTER TABLE `enderecos_cliente`
-  ADD CONSTRAINT `cons_fk_cliente_id_endereco` FOREIGN KEY (`cliente_id_endereco`) REFERENCES `clientes` (`id_cliente`),
-  ADD CONSTRAINT `cons_fk_endereco_id` FOREIGN KEY (`endereco_id_cliente`) REFERENCES `enderecos` (`id_endereco`);
+  ADD CONSTRAINT `cons_fk_endereco_cliente` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id_cliente`);
 
 --
 -- Limitadores para a tabela `endereco_rede_social_cliente`
