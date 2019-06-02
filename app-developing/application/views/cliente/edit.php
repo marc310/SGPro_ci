@@ -193,18 +193,20 @@
           <table class="table table-striped">
               <tr>
       <th hidden>Id Endereco Redesocial</th>
-      <th>Redesocial Id</th>
-      <th>Cliente Redesocial</th>
-      <th>Actions</th>
+      <th>Rede Social</th>
+      <th>Url</th>
+      <th>Perfil do Cliente</th>
+      <th></th>
               </tr>
               <?php foreach($endereco_rede_social_cliente as $e){ ?>
               <tr>
       <td hidden><?php echo $e['id_endereco_redesocial']; ?></td>
       <td><?php echo $e['nome_redesocial']; ?></td>
-      <td><?php echo $e['cliente_redesocial']; ?></td>
+      <td><?php echo "http://" . $e['url_base_redesocial'] . "/" . $e['cliente_redesocial'] ?>
+      <td><?php echo $e['tag_redesocial'] . " " . $e['cliente_redesocial']; ?></td>
       <td>
-                      <a href="<?php echo site_url('endereco_rede_social_cliente/edit/'.$e['id_endereco_redesocial']); ?>" class="btn btn-info btn-xs"><span class="fa fa-pencil"></span> Edit</a>
-                      <a href="<?php echo site_url('endereco_rede_social_cliente/remove/'.$e['id_endereco_redesocial']); ?>" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span> Delete</a>
+                      <a href="<?php echo site_url('endereco_rede_social_cliente/edit/'.$e['id_endereco_redesocial']); ?>" class="btn btn-info btn-xs"><span class="fa fa-pencil"></span></a>
+                      <a href="<?php echo site_url('endereco_rede_social_cliente/remove/'.$e['id_endereco_redesocial']); ?>" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span></a>
                   </td>
               </tr>
               <?php } ?>
