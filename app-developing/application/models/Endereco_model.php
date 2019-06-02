@@ -47,7 +47,16 @@ class Endereco_model extends CI_Model
     function add_endereco($params)
     {
         $this->db->insert('enderecos',$params);
-        return $this->db->insert_id();
+        $id_retornado = $this->db->insert_id();
+        return $id_retornado;
+        // return $this->db->insert_id();
+    }
+
+    // get data by id
+    function buscaPeloID($id_endereco)
+    {
+        $this->db->where($this->id_endereco, $id_endereco);
+        return $this->db->get($this->table)->row();
     }
 
     /*

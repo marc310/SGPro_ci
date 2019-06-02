@@ -4,9 +4,44 @@
             <div class="box-header with-border">
               	<h3 class="box-title">Endereco Edit</h3>
             </div>
+
+            <?php $this->load->view('enderecos_cliente/add'); ?>
+
 			<?php echo form_open('endereco/edit/'.$endereco['id_endereco']); ?>
 			<div class="box-body">
 				<div class="row clearfix">
+
+          <!-- IDENTIFICADORES DE ENDERECO -->
+          <div class="col-md-12" id="identificadorEnderecos" hidden>
+
+            <div class="col-md-6">
+  						<label for="id_endereco" class="control-label"><span class="text-danger">*</span>ID ENDEREÇO</label>
+  						<div class="form-group">
+  							<input type="text" name="id_endereco" value="<?php echo ($this->input->post('id_endereco') ? $this->input->post('id_endereco') : $endereco['id_endereco']); ?>" class="form-control" id="id_endereco" />
+  							<span class="text-danger"><?php echo form_error('id_endereco');?></span>
+  						</div>
+  					</div>
+
+            <div class="col-md-6">
+  						<label for="id_referencia" class="control-label"><span class="text-danger">*</span>ID CLIENTE</label>
+  						<div class="form-group">
+  							<input type="text" name="id_referencia" value="<?php echo ($this->input->post('id_referencia') ? $this->input->post('id_referencia') : $endereco['id_referencia']); ?>" class="form-control" id="id_referencia" />
+  							<span class="text-danger"><?php echo form_error('id_referencia');?></span>
+  						</div>
+  					</div>
+
+            <div class="col-md-6">
+  						<label for="grupo" class="control-label"><span class="text-danger">*</span>ID GRUPO</label>
+  						<div class="form-group">
+  							<input type="text" name="grupo" value="<?php echo ($this->input->post('grupo') ? $this->input->post('grupo') : $endereco['grupo']); ?>" class="form-control" id="grupo" />
+  							<span class="text-danger"><?php echo form_error('grupo');?></span>
+  						</div>
+  					</div>
+
+          </div>
+          <!-- IDENTIFICADORES DE ENDERECO -->
+
+
 					<div class="col-md-6">
 						<label for="rua" class="control-label"><span class="text-danger">*</span>Rua</label>
 						<div class="form-group">
@@ -29,9 +64,9 @@
 						</div>
 					</div>
 					<div class="col-md-6">
-						<label for="referencia" class="control-label">Referencia</label>
+						<label for="complemento" class="control-label">complemento</label>
 						<div class="form-group">
-							<input type="text" name="referencia" value="<?php echo ($this->input->post('referencia') ? $this->input->post('referencia') : $endereco['referencia']); ?>" class="form-control" id="referencia" />
+							<input type="text" name="complemento" value="<?php echo ($this->input->post('complemento') ? $this->input->post('complemento') : $endereco['complemento']); ?>" class="form-control" id="complemento" />
 						</div>
 					</div>
 					<div class="col-md-6">
@@ -62,9 +97,28 @@
 				</button>
 
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        
+
 	        </div>
 			<?php echo form_close(); ?>
 		</div>
     </div>
 </div>
+
+
+<script>
+
+$(document).ready(function(){
+
+var idCliente = document.getElementById("endereco_id_cliente"); //select cliente
+var idClienteRef = document.getElementById("id_referencia").value; //id do cliente referenciado
+var idEndereco = document.getElementById("cliente_id_endereco"); //select endereco cliente
+var idEnderecoRef = document.getElementById("id_endereco").value; //id do endereco referenciado
+
+idEndereco.value = idEnderecoRef;
+idCliente.value = idClienteRef;
+
+
+
+});
+
+</script>

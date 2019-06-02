@@ -35,37 +35,75 @@ class Endereco extends CI_Controller{
     /*
      * Adding a new endereco
      */
-    function add()
+    // function add()
+    // {
+    // $this->load->library('form_validation');
+    //
+		// $this->form_validation->set_rules('numero','Numero','numeric');
+		// $this->form_validation->set_rules('rua','Rua','required');
+		// $this->form_validation->set_rules('cidade','Cidade','required');
+		// $this->form_validation->set_rules('bairro','Bairro','required');
+		// $this->form_validation->set_rules('uf','Uf','required');
+    //
+		// if($this->form_validation->run())
+    //     {
+    //         $params = array(
+    //   				'rua' => $this->input->post('rua'),
+    //   				'bairro' => $this->input->post('bairro'),
+    //   				'cidade' => $this->input->post('cidade'),
+    //   				'complemento' => $this->input->post('complemento'),
+    //   				'numero' => $this->input->post('numero'),
+    //   				'uf' => $this->input->post('uf'),
+    //   				'cep' => $this->input->post('cep'),
+    //         );
+    //
+    //
+    //         $endereco_id = $this->Endereco_model->add_endereco($params);
+    //
+    //         // if ( is_numeric($cliente_id = $this->Cliente_model->add_cliente($params, true)) ) {
+    //         //     redirect('cliente/edit/'.$cliente_id);
+    //         //
+    //         // } else {
+    //         //
+    //         //     $this->data['custom_error'] = '<div class="form_error"><p>An Error Occured.</p></div>';
+    //         // }
+    //         // redirect('endereco/index');
+    //     }
+    //     else
+    //     {
+    //         //$data['_view'] = 'endereco/add';
+    //         $this->load->view('endereco/add');
+    //     }
+    // }
+
+    /*
+     * Adding a new enderecos_cliente
+     */
+    function addEnderecoCliente()
     {
-        $this->load->library('form_validation');
-
-		$this->form_validation->set_rules('numero','Numero','numeric');
-		$this->form_validation->set_rules('rua','Rua','required');
-		$this->form_validation->set_rules('cidade','Cidade','required');
-		$this->form_validation->set_rules('bairro','Bairro','required');
-		$this->form_validation->set_rules('uf','Uf','required');
-
-		if($this->form_validation->run())
+        if(isset($_POST) && count($_POST) > 0)
         {
             $params = array(
-      				'rua' => $this->input->post('rua'),
-      				'bairro' => $this->input->post('bairro'),
-      				'cidade' => $this->input->post('cidade'),
-      				'complemento' => $this->input->post('complemento'),
-      				'numero' => $this->input->post('numero'),
-      				'uf' => $this->input->post('uf'),
-      				'cep' => $this->input->post('cep'),
+        'endereco_id_cliente' => $this->input->post('endereco_id_cliente'),
+        'cliente_id_endereco' => $this->input->post('cliente_id_endereco'),
             );
 
-            $endereco_id = $this->Endereco_model->add_endereco($params);
-            redirect('endereco/index');
+            $enderecos_cliente_id = $this->Enderecos_cliente_model->add_enderecos_cliente($params);
+            redirect('enderecos_cliente/index');
         }
         else
         {
-            //$data['_view'] = 'endereco/add';
-            $this->load->view('endereco/add');
+      $this->load->model('Endereco_model');
+      $data['all_enderecos'] = $this->Endereco_model->get_all_enderecos();
+
+      $this->load->model('Cliente_model');
+      $data['all_clientes'] = $this->Cliente_model->get_all_clientes();
+
+            $data['_view'] = 'enderecos_cliente/add';
+            $this->load->view('layouts/main',$data);
         }
     }
+
 
     /*
      * Editing a endereco
@@ -88,27 +126,65 @@ class Endereco extends CI_Controller{
 			if($this->form_validation->run())
             {
                 $params = array(
-					'rua' => $this->input->post('rua'),
-					'bairro' => $this->input->post('bairro'),
-					'cidade' => $this->input->post('cidade'),
-					'complemento' => $this->input->post('complemento'),
-					'numero' => $this->input->post('numero'),
-					'uf' => $this->input->post('uf'),
-					'cep' => $this->input->post('cep'),
+        					'rua' => $this->input->post('rua'),
+        					'bairro' => $this->input->post('bairro'),
+        					'cidade' => $this->input->post('cidade'),
+        					'complemento' => $this->input->post('complemento'),
+        					'numero' => $this->input->post('numero'),
+        					'uf' => $this->input->post('uf'),
+        					'cep' => $this->input->post('cep'),
                 );
 
+                // if ( is_numeric($id_endereco = $this->Endereco_model->add_endereco($params, true)) ) {
+                //
+                //
+                // } else {
+                //
+                //     $this->data['custom_error'] = '<div class="form_error"><p>An Error Occured.</p></div>';
+                // }
+
                 $this->Endereco_model->update_endereco($id_endereco,$params);
-                redirect('endereco/index');
+                redirect('cliente/index');
             }
             else
             {
-                //$data['_view'] = 'endereco/edit';
-                $this->load->view('endereco/edit',$data);
+                $this->load->model('Endereco_model');
+          			$data['all_enderecos'] = $this->Endereco_model->get_all_enderecos();
+
+          			$this->load->model('Cliente_model');
+          			$data['all_clientes'] = $this->Cliente_model->get_all_clientes();
+
+                $data['_view'] = 'endereco/edit';
+                $this->load->view('layouts/main',$data);
             }
         }
         else
             show_error('The endereco you are trying to edit does not exist.');
     }
+
+
+
+    /*
+     * Ler produto
+     */
+    public function lerEndereco($id_endereco)
+    {
+
+        $row = $this->Endereco_model->buscaPeloID($id_endereco);
+        if ($row) {
+            $data = array(
+                'id_endereco' => $row->id_endereco,
+                'rua' => $row->rua,
+                    );
+
+
+        } else {
+            $this->session->set_flashdata('message', 'Record Not Found');
+            redirect(site_url('produtos'));
+        }
+    }
+
+
 
     /*
      * Deleting endereco
@@ -121,7 +197,8 @@ class Endereco extends CI_Controller{
         if(isset($endereco['id_endereco']))
         {
             $this->Endereco_model->delete_endereco($id_endereco);
-            redirect('endereco/index');
+
+            redirect('cliente/index');
         }
         else
             show_error('The endereco you are trying to delete does not exist.');

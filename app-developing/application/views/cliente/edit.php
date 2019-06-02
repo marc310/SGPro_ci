@@ -256,72 +256,45 @@
                      <div class="col-md-12">
                              <div class="box-header with-border">
                                	<h3 class="box-title">Cadastrar Novo Endereço</h3>
+
                              </div>
 
 
 
-                             <!-- FORM 1 -->
-                             <?php echo form_open('enderecos_cliente/add',array("class"=>"form-horizontal")); ?>
-
-                             <div class="form-group">
-                               <label for="endereco_id_cliente" class="col-md-4 control-label">Endereco</label>
-                               <div class="col-md-8">
-                                 <select id="endereco_id_cliente" name="endereco_id_cliente" class="form-control">
-                                   <option value="">select endereco</option>
-                                   <?php
-                                   foreach($all_enderecos as $endereco)
-                                   {
-                                     $selected = ($endereco['id_endereco'] == $this->input->post('endereco_id_cliente')) ? ' selected="selected"' : "";
-
-                                     echo '<option value="'.$endereco['id_endereco'].'" '.$selected.'>'.$endereco['id_endereco'].'</option>';
-                                   }
-                                   ?>
-                                 </select>
-                               </div>
-                             </div>
-                             <div class="form-group">
-                               <label for="cliente_id_endereco" class="col-md-4 control-label">Cliente</label>
-                               <div class="col-md-8">
-                                 <select id="cliente_id_endereco" name="cliente_id_endereco" class="form-control">
-                                   <option value="">select cliente</option>
-                                   <?php
-                                   foreach($all_clientes as $cliente)
-                                   {
-                                     $selected = ($cliente['id_cliente'] == $this->input->post('cliente_id_endereco')) ? ' selected="selected"' : "";
-
-                                     echo '<option value="'.$cliente['id_cliente'].'" '.$selected.'>'.$cliente['id_cliente'].'</option>';
-                                   }
-                                   ?>
-                                 </select>
-                               </div>
-                             </div>
-
-                             <div class="form-group">
-                               <div class="col-sm-offset-4 col-sm-8">
-                                 <button type="submit" class="btn btn-success">Salvar</button>
-                               </div>
-                             </div>
-
-                             <?php echo form_close(); ?>
-                             <!-- FIM DO FORM 1 -->
 
                                    <!-- FORM 2 -->
                              <form
                              name="frmAddEndereco"
                              id="frmAddEndereco"
                              method="post"
-                             action="<?php echo site_url('endereco/add');?>"
+                             action="<?php echo site_url('cliente/addEndereco');?>"
                              > <!-- form open -->
+
 
                            	<div class="box-body">
                            		<div class="row clearfix">
-                                <div class="col-md-6">
-                       						<label for="id_endereco" class="control-label"><span class="text-danger">*</span>ID</label>
-                       						<div class="form-group">
-                       							<input type="text" id_endereco="rua" value="<?php echo $this->input->post('id_endereco'); ?>" class="form-control" id="id_endereco" />
-                       							<span class="text-danger"><?php echo form_error('id_endereco');?></span>
-                       						</div>
-                       					</div>
+
+                                <div class="col-md-12 btn-danger" id="referenciadores" hidden>
+
+                                  <div class="col-md-6">
+                                    <label for="grupo" class="control-label"><span class="text-danger">*</span>Grupo</label>
+                                    <div class="form-group">
+                                      <!-- grupo valor setado como 2 = cliente -->
+                                      <input type="text" name="grupo" value="2" class="form-control" id="grupo" />
+                                      <span class="text-danger"><?php echo form_error('grupo');?></span>
+                                    </div>
+                                  </div>
+
+                                  <div class="col-md-6">
+                                    <label for="id_referencia" class="control-label"><span class="text-danger">*</span>ID Referencia</label>
+                                    <div class="form-group">
+                                      <input type="text" name="id_referencia" value="<?php echo $this->input->post('id_referencia'); ?>" class="form-control" id="id_referencia" />
+                                      <span class="text-danger"><?php echo form_error('id_referencia');?></span>
+                                    </div>
+                                  </div>
+
+                                </div>
+
                                 <div class="col-md-6">
                        						<label for="rua" class="control-label"><span class="text-danger">*</span>Rua</label>
                        						<div class="form-group">
@@ -401,6 +374,7 @@
 
                </div>
              </div>
+
              <!-- FIM DO ENDEREÇO ADD -->
                    </div>
                    <div class="box-info" id="listaEnderecos">
@@ -429,10 +403,8 @@
                  <td><?php echo $e['cep']; ?></td>
                  <td>
                  <a
-                 href="<?php echo site_url('endereco/edit/'.$e['id_endereco']); ?>"
+                 href="<?php echo site_url('cliente/editarEndereco/'.$e['id_endereco']); ?>"
                  class="btn btn-info btn-xs"
-                 data-toggle="modal"
-                 data-target="#modalEditar"
                  >
                  <span class="fa fa-pencil"></span>
                </a>
@@ -465,33 +437,6 @@
     </div>
 </div>
 
-
-<!-- ########################################################################################### -->
-<!-- ###################################  MODAL EDITAR  ######################################## -->
-<!-- ########################################################################################### -->
-
-<!-- Modal -->
-<div class="modal fade" id="modalEditar" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Editando Endereço</h4>
-      </div>
-      <div class="modal-body">
-
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-      </div>
-    </div>
-
-  </div>
-</div>
-
 <!-- ########################################################################################### -->
 <!-- ########################################################################################### -->
 <!-- ########################################################################################### -->
@@ -513,16 +458,12 @@ $(document).ready(function(){
   // PREENCHE VALOR DO SELECT DE CLIENTE DE REDE SOCIAL
   var idCliente = document.getElementById("idClienteShow").innerHTML;
   document.getElementById("selectClienteIdRedeSocial").value = idCliente;
+  document.getElementById("id_referencia").value = idCliente;
   // PREENCHE VALOR DO SELECT DE ENDEREÇO
   var selectClienteEndereco = document.getElementById("cliente_id_endereco").value = idCliente;
 });
 // fim do construtor
 //######################################################################################
-
-$("#modalEditar").on('shown.bs.modal', function(){
-    //alert('The modal is fully shown.');
-
-  });
 
 $("#modalAdicionar").on('shown.bs.modal', function(){
   //alert('The modal is fully shown.');
@@ -533,37 +474,6 @@ $("#modalAdicionar").on('shown.bs.modal', function(){
 //######################################################################################
 //######################################################################################
 $(function(){
-// SALVA CLIENTE COM AJAX
-	// $("#frmEditarCliente").submit(function(){
-	// 	dataString = $("#frmEditarCliente").serialize();
-  //   var frm = document.getElementById("frmEditarCliente");
-  //   //VALIDAÇÃO ANTES DE SALVAR ALTERAÇÕES
-  //   //Verifica se o campo nome foi preenchido e
-  //   //contém no mínimo três caracteres.
-  //   validaCliente(frm);
-  //
-	// 	$.ajax({
-	// 		type: "POST",
-	// 		url: "<?php echo base_url('cliente/edit/'.$cliente['id_cliente']);?>",
-	// 		data: dataString,
-	// 		//target: "#listaClientes",
-	// 		success: function(data){
-	// 			// alert('Successful!');
-	// 			$("#resultCliente").html('Cliente Alterado com Sucesso!').show().fadeOut( 5000 );
-	// 			$("#resultCliente").addClass("alert alert-success");
-	// 			//$("#listaClientes").load("<?php echo current_url();?> #listaClientes");
-  //
-	// 		}
-  //
-	// 	});
-  //
-	// 	return false;  //stop the actual form post !important!
-  //
-	// });
-  // cliente salvo
-  //
-
-
 
   $("#frmAddRedeSocial").submit(function(){
     dataString = $("#frmAddRedeSocial").serialize();
@@ -589,33 +499,32 @@ $(function(){
 
   // validação de formulario de endereço
   // verifica se campos estao nulos se for diferente entao prossegue
-  $("#frmAddEndereco").submit(function(){
-		dataString = $("#frmAddEndereco").serialize();
-    // pre codigo
-    if (1 == 1){
-      //your before submit logic
-      $.ajax({
-  			type: "POST",
-  			url: "<?php echo base_url('endereco/add');?>",
-  			data: dataString,
-  			target: "#listaEnderecos",
-  			success: function(data){
-  				// alert('Successful!');
-  				$("#resultendereco").html('Endereço Adicionado com Sucesso!').show().fadeOut( 3000 );
-  				$("#resultendereco").addClass("alert alert-success");
-  				$("#listaEnderecos").load("<?php echo current_url();?> #listaEnderecos");
-  			}
-  		});
-      alert("fim do ajax");
-
-      // fim do pre-loader
-    }
-    var id = document.getElementById("id_endereco").innerHTML;
-    var endereco = "teste";
-    // aqui seque o cod..
-    alert("aqui segue" + endereco + " " + id);
-    return false;  //stop the actual form post !important!
-	});
+  // $("#frmAddEndereco").submit(function(){
+	// 	dataString = $("#frmAddEndereco").serialize();
+  //   // pre codigo
+  //   if (1 == 1){
+  //     //your before submit logic
+  //     $.ajax({
+  // 			type: "POST",
+  // 			url: "<?php echo base_url('cliente/addEndereco');?>",
+  // 			data: dataString,
+  // 			target: "#listaEnderecos",
+  // 			success: function(data){
+  // 				// alert('Successful!');
+  // 				$("#resultendereco").html('Endereço Adicionado com Sucesso!').show().fadeOut( 3000 );
+  // 				$("#resultendereco").addClass("alert alert-success");
+  // 				$("#listaEnderecos").load("<?php echo current_url();?> #listaEnderecos");
+  // 			}
+  // 		});
+  //
+  //     // fim do pre-loader
+  //   }
+  //   var id = document.getElementById("id_endereco").innerHTML;
+  //   var endereco = "teste";
+  //   // aqui seque o cod..
+  //   // alert("aqui segue" + endereco + " " + id);
+  //   return false;  //stop the actual form post !important!
+	// });
 // fim da function
 });
 //######################################################################################
