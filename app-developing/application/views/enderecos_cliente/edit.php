@@ -1,6 +1,6 @@
 <?php echo form_open('enderecos_cliente/edit/'.$enderecos_cliente['id_endereco'],array("class"=>"form-horizontal")); ?>
 
-	<div class="form-group">
+	<div class="form-group" hidden>
 		<label for="cliente_id" class="col-md-4 control-label"><span class="text-danger">*</span>Cliente</label>
 		<div class="col-md-8">
 			<select name="cliente_id" class="form-control">

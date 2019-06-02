@@ -272,7 +272,7 @@
                              		<div class="row clearfix">
 
 
-                                  	<div class="form-group">
+                                  	<div class="form-group" hidden>
                                   		<label for="cliente_id" class="col-md-4 control-label"><span class="text-danger">*</span>Cliente</label>
                                   		<div class="col-md-8">
                                   			<select id="cliente_id_endereco" name="cliente_id" class="form-control">
@@ -395,16 +395,14 @@
                  <td><?php echo $e['cep']; ?></td>
                  <td>
                  <a
-                 href="<?php echo site_url('endereco/edit/'.$e['id_endereco']); ?>"
+                 href="<?php echo site_url('enderecos_cliente/edit/'.$e['id_endereco']); ?>"
                  class="btn btn-info btn-xs"
-                 data-toggle="modal"
-                 data-target="#modalEditar"
                  >
                  <span class="fa fa-pencil"></span>
                </a>
 
                  <a
-                 href="<?php echo site_url('endereco/remove/'.$e['id_endereco']); ?>"
+                 href="<?php echo site_url('enderecos_cliente/remove/'.$e['id_endereco']); ?>"
                  class="btn btn-danger btn-xs"
                  onclick="return confirm('Tem certeza que deseja deletar este item?');">
                  <span class="fa fa-trash"></span>

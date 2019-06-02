@@ -131,8 +131,6 @@ class Cliente extends CI_Controller{
             }
             else
             {
-            $this->load->model('Enderecos_cliente_model');
-    				$data['all_enderecos'] = $this->Enderecos_cliente_model->get_all_enderecos_cliente();
 
             $this->load->model('Cliente_model');
       			$data['all_clientes'] = $this->Cliente_model->get_all_clientes();
@@ -143,6 +141,9 @@ class Cliente extends CI_Controller{
             $this->load->model('Endereco_rede_social_cliente_model');
             $data['endereco_rede_social_cliente'] = $this->Endereco_rede_social_cliente_model->get_redesPeloId_Cliente($id_cliente);
 
+            $this->load->model('Enderecos_cliente_model');
+            $data['enderecos_cliente'] = $this->Enderecos_cliente_model->get_all_enderecos_ByClienteID($id_cliente);
+
             // LISTA DE ENDEREÇOS DO CLIENTE
             $params['limit'] = 20;
             $params['offset'] = ($this->input->get('per_page')) ? $this->input->get('per_page') : 0;
@@ -152,7 +153,6 @@ class Cliente extends CI_Controller{
             $config['per_page'] = 20;
             $this->pagination->initialize($config);
 
-            $data['enderecos_cliente'] = $this->Enderecos_cliente_model->get_all_enderecos_cliente($params);
 
             //
             //
