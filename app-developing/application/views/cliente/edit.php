@@ -361,7 +361,7 @@
                              		<i class="fa fa-check"></i> Adicionar Endereço
                              	</button>
 
-                              <button class="btn btn-danger" id="btnEsconderPainelEndereco" onclick="escondeCamposEndereco()">
+                              <button type="button" class="btn btn-danger" id="btnEsconderPainelEndereco" onclick="escondeCamposEndereco()">
                              		<i class="fa fa-arrow-up"></i> Esconder Painel
                              	</button>
                             </div>
