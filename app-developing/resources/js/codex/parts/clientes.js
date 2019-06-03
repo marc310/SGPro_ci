@@ -166,7 +166,7 @@ editaCliente = function(){
 	// });
   // document.forms['frmEditarCliente'].submit();
 }
-
+//
 //
 //
 loadClienteDoc = function(){

@@ -63,8 +63,32 @@ definida na tag form.
         frm.email.value == null) {
           alert("Por favor, insira um e-mail válido.");
           frm.email.focus();
-          return false;
+          return 0;
       }
     }
+
+}
+
+function validaRedeSocial(frm) {
+/*
+o parâmetro frm desta função significa: this.form,
+pois a chamada da função - validaForm(this) foi
+definida na tag form.
+*/
+    //Verifica se o campo nome_cliente foi preenchido e
+    //contém no mínimo três caracteres.
+    if(frm.cliente_redesocial.value == "" || frm.cliente_redesocial.value == null || frm.cliente_redesocial.value.lenght < 3) {
+        alert("Por favor, você deve selecionar uma Rede Social.");
+        //É mostrado um alerta, caso o campo esteja vazio.
+        var msgErro = "Por favor, insira o seu Nome.";
+
+        $("#resultsocial").html(msgErro).show().fadeOut( 5000 );
+        $("#resultsocial").addClass("alert alert-danger");
+        //Foi definido um focus no campo.
+        frm.cliente_redesocial.focus();
+        //o form não é enviado.
+        return 0;
+    }
+
 
 }

@@ -153,7 +153,7 @@
     <div class="col-md-4">
       <label for="redesocial_id" class="control-label">Redes Sociais</label>
       <div class="form-group">
-        <select name="redesocial_id" class="form-control">
+        <select id="selectRedeSocial" name="redesocial_id" class="form-control" onchange="habilitaCadastroRedeSocial()">
           <option value="">Selecione a Rede Social</option>
           <?php
           foreach($all_redes_sociais as $redes_sociais)
@@ -169,7 +169,7 @@
     <div class="col-md-6">
       <label for="cliente_redesocial" class="control-label">Cliente Redesocial</label>
       <div class="form-group">
-        <input type="text" name="cliente_redesocial" value="<?php echo $this->input->post('cliente_redesocial'); ?>" class="form-control" id="cliente_redesocial" />
+        <input id="cliente_redesocial" type="text" name="cliente_redesocial" value="<?php echo $this->input->post('cliente_redesocial'); ?>" class="form-control" id="cliente_redesocial" onkeypress="validaBtnRedeSocial()"/>
       </div>
     </div>
     <div class="col-md-2 pull-right" style="padding-top:25px;">
@@ -465,6 +465,13 @@
 <script>
 
 $(document).ready(function(){
+  document.getElementById("cliente_redesocial").disabled=true;
+  document.getElementById("btnAddRedeSocial").disabled=true;
+  document.getElementById("cliente_redesocial").addEventListener("keydown", validaBtnRedeSocial);
+  document.getElementById("cliente_redesocial").addEventListener("keypress", validaBtnRedeSocial);
+  document.getElementById("cliente_redesocial").addEventListener("blur", validaBtnRedeSocial);
+  document.getElementById("btnAddRedeSocial").addEventListener("mouseover", validaBtnRedeSocial);
+
 
   loadClienteDoc();
   documentoCliente();
@@ -496,40 +503,36 @@ $("#modalAdicionar").on('shown.bs.modal', function(){
 });
 //######################################################################################
 //######################################################################################
+function habilitaCadastroRedeSocial(){
+  var social = document.getElementById("selectRedeSocial");
+  var nome_social = document.getElementById("cliente_redesocial");
+  if(social.value >= 1){
+    // alert("habilitado");
+    nome_social.disabled=false;
+  }
+  else {
+    // alert("desabilita");
+    nome_social.disabled=true;
+
+  }
+}
+//######################################################################################
+//######################################################################################
+function validaBtnRedeSocial(){
+  var nome_social = document.getElementById("cliente_redesocial");
+  var btn = document.getElementById("btnAddRedeSocial");
+  if(nome_social.value.length > 2){
+    btn.disabled=false;
+  }
+  else {
+    // alert("desabilita");
+    btn.disabled=true;
+
+  }
+}
 //######################################################################################
 //######################################################################################
 $(function(){
-// SALVA CLIENTE COM AJAX
-	// $("#frmEditarCliente").submit(function(){
-	// 	dataString = $("#frmEditarCliente").serialize();
-  //   var frm = document.getElementById("frmEditarCliente");
-  //   //VALIDAÇÃO ANTES DE SALVAR ALTERAÇÕES
-  //   //Verifica se o campo nome foi preenchido e
-  //   //contém no mínimo três caracteres.
-  //   validaCliente(frm);
-  //
-	// 	$.ajax({
-	// 		type: "POST",
-	// 		url: "<?php echo base_url('cliente/edit/'.$cliente['id_cliente']);?>",
-	// 		data: dataString,
-	// 		//target: "#listaClientes",
-	// 		success: function(data){
-	// 			// alert('Successful!');
-	// 			$("#resultCliente").html('Cliente Alterado com Sucesso!').show().fadeOut( 5000 );
-	// 			$("#resultCliente").addClass("alert alert-success");
-	// 			//$("#listaClientes").load("<?php echo current_url();?> #listaClientes");
-  //
-	// 		}
-  //
-	// 	});
-  //
-	// 	return false;  //stop the actual form post !important!
-  //
-	// });
-  // cliente salvo
-  //
-
-
 
   $("#frmAddRedeSocial").submit(function(){
     dataString = $("#frmAddRedeSocial").serialize();
@@ -585,7 +588,36 @@ $(function(){
 });
 //######################################################################################
 //
-
+// DELETA COM AJAX
+//
+// $(document).on('click', 'span', function (event) {
+//     $("#formServicos").click(function(){
+//         dataString = $("#formServicos").serialize();
+//
+//         var idServico = $(this).attr('idAcao');
+//         if ((idServico % 1) == 0) {
+//             $.ajax({
+//                 type: "POST",
+//                 url: "<?php echo site_url('tamanhos_produto/remove');?>",
+//                 data: "idServico=" + idServico,
+//                 // target: "#divServicos",
+//                 success: function (data) {
+//                     if (data.result == true) {
+//                         $("#result").html('Serviço Apagado com Sucesso!').show().fadeOut( 3000 );
+//                         $("#result").addClass("alert alert-success");
+//                         //$("#divServicos").load("<?php //echo current_url();?>// #divServicos");
+//
+//                     }
+//                     else {
+//                         alert('Ocorreu um erro ao tentar excluir serviço.');
+//                     }
+//                 }
+//             });
+//             return false;
+//         }
+//
+//     });
+// });
 
 //
 //
