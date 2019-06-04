@@ -61,42 +61,42 @@ function documentoCliente()
 }
 
 
-function mostraCamposEndereco() {
-  //document.getElementById("demo").innerHTML = Date();
-  //
-  var box;
-  var btnAddEndereco;
-  //
-  box = document.getElementById("box-endereco-add");
-  btnAddEndereco = document.getElementById("divBtnAddEndereco");
-
-
-  if (box.hidden == true){
-  box.hidden = false;
-  btnAddEndereco.hidden = true;
-  // btnAddEndereco.innerHTML = '<i class="fa fa-arrow-up"></i> Esconder Painel';
-  // btnAddEndereco.classList.add("btn-danger");
-  // btnAddEndereco.classList.remove("btn-info");
-  }
-  else {
-    box.hidden = true;
-    btnAddEndereco.hidden = false;
-  }
-}
+// function mostraCamposEndereco() {
+//   //document.getElementById("demo").innerHTML = Date();
+//   //
+//   var box;
+//   var btnAddEndereco;
+//   //
+//   box = document.getElementById("box-endereco-add");
+//   btnAddEndereco = document.getElementById("divBtnAddEndereco");
+//
+//
+//   if (box.hidden == true){
+//   box.hidden = false;
+//   btnAddEndereco.hidden = true;
+//   // btnAddEndereco.innerHTML = '<i class="fa fa-arrow-up"></i> Esconder Painel';
+//   // btnAddEndereco.classList.add("btn-danger");
+//   // btnAddEndereco.classList.remove("btn-info");
+//   }
+//   else {
+//     box.hidden = true;
+//     btnAddEndereco.hidden = false;
+//   }
+// }
 //
 //*************************************************************************************//
 //
-function escondeCamposEndereco() {
-  box = document.getElementById("box-endereco-add");
-  btnAddEndereco = document.getElementById("divBtnAddEndereco");
-
-    box.hidden = true;
-    btnAddEndereco.hidden = false;
-    //btnEsconde.hidden=false;
-    // btnAddEndereco.innerHTML = '<i class="fa fa-plus"></i> Cadastrar Novo Endereço';
-    // btnAddEndereco.classList.add("btn-info");
-    // btnAddEndereco.classList.remove("btn-danger");
-}
+// function escondeCamposEndereco() {
+//   box = document.getElementById("box-endereco-add");
+//   btnAddEndereco = document.getElementById("divBtnAddEndereco");
+//
+//     box.hidden = true;
+//     btnAddEndereco.hidden = false;
+//     //btnEsconde.hidden=false;
+//     // btnAddEndereco.innerHTML = '<i class="fa fa-plus"></i> Cadastrar Novo Endereço';
+//     // btnAddEndereco.classList.add("btn-info");
+//     // btnAddEndereco.classList.remove("btn-danger");
+// }
 
 //
 // Salvar Cliente
@@ -166,7 +166,7 @@ editaCliente = function(){
 	// });
   // document.forms['frmEditarCliente'].submit();
 }
-//
+
 //
 //
 loadClienteDoc = function(){

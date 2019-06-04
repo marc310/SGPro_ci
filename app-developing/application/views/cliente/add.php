@@ -9,8 +9,7 @@
             <ul class="nav nav-tabs">
                <li class="active"><a href="#infoCliente" data-toggle="tab">Informações do Cliente</a></li>
                <li class="disabled disabledTab" ><a href="#redesSociais" data-toggle="tab">Redes Sociais</a></li>
-               <li class="disabled"><a href="#enderecoCliente" data-toggle="tab">Adicionar Endereço</a></li>
-               <li class="disabled"><a href="#listaEnderecosCliente" data-toggle="tab">Lista Endereços</a></li>
+               <li class="disabled"><a href="#enderecoCliente" data-toggle="tab">Endereços</a></li>
             </ul>
 
 <!-- ######################################################################################### -->
@@ -119,7 +118,7 @@
     <div class="box-footer">
 
       <button id="btnSalvarCliente" class="btn btn-success" type="button">
-        <i class="fa fa-check"></i> Salvar
+        <i class="fa fa-check"></i> Salvar & Continuar
       </button>
 
       <button type="button" data-dismiss="modal" class="btn btn-outline-secondary">
