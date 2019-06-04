@@ -97,6 +97,26 @@ function documentoCliente()
 //     // btnAddEndereco.classList.add("btn-info");
 //     // btnAddEndereco.classList.remove("btn-danger");
 // }
+//*************************************************************************************//
+function limpaCamposEndereco(){
+  document.getElementById("rua").value="";
+  document.getElementById("bairro").value="";
+  document.getElementById("cidade").value="";
+  document.getElementById("uf").value="";
+  document.getElementById("complemento").value="";
+  document.getElementById("numero").value="";
+  document.getElementById("cep").value="";
+
+}
+//*************************************************************************************//
+function limpaCamposRedeSocial(){
+  document.getElementById("selectRedeSocial").value="";
+  document.getElementById("cliente_redesocial").value="";
+  document.getElementById("cliente_redesocial").disabled=true;
+}
+
+//*************************************************************************************//
+//*************************************************************************************//
 
 //
 // Salvar Cliente

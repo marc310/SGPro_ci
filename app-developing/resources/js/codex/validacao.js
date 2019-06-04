@@ -39,34 +39,34 @@ definida na tag form.
 //
 
 function validaEndereco(frm) {
-/*
-o parâmetro frm desta função significa: this.form,
-pois a chamada da função - validaForm(this) foi
-definida na tag form.
-*/
-    //Verifica se o campo nome_cliente foi preenchido e
+
     //contém no mínimo três caracteres.
-    if(frm.nome_cliente.value == "" || frm.nome_cliente.value == null || frm.nome_cliente.value.lenght < 3) {
+    if(frm.rua.value == "" || frm.rua.value == null || frm.rua.value.lenght < 3) {
         //É mostrado um alerta, caso o campo esteja vazio.
-        alert("Por favor, insira o seu nome_cliente.");
+        var msgErro = "Por favor, você deve preencher o nome da Rua.";
+
+        $("#resultendereco").addClass("alert alert-danger");
+        $("#resultendereco").html(msgErro).show().fadeOut( 5000 );
         //Foi definido um focus no campo.
-        frm.nome_cliente.focus();
+        frm.rua.focus();
         //o form não é enviado.
         return false;
     }
-    //o campo e-mail precisa de conter: "@", "." e pode estar vazio
-    if (frm.email.value != ""){
-      // se o campo for preenchido deve ser preenchido direito
-      if(frm.email.value.indexOf("@") == -1 ||
-        frm.email.value.indexOf(".") == -1 ||
-        frm.email.value == "" ||
-        frm.email.value == null) {
-          alert("Por favor, insira um e-mail válido.");
-          frm.email.focus();
-          return 0;
-      }
+
+    if(frm.uf.value=="" || frm.uf.value == null){
+
+      var msgErro = "Por favor, selecione o Estado do Cliente";
+
+      $("#resultendereco").addClass("alert alert-danger");
+      $("#resultendereco").html(msgErro).show().fadeOut( 5000 );
+
+      frm.uf.focus();
+
+      return false;
     }
 
+    //
+    // fim da validação de endereço de cliente
 }
 
 function validaRedeSocial(frm) {
@@ -77,18 +77,51 @@ definida na tag form.
 */
     //Verifica se o campo nome_cliente foi preenchido e
     //contém no mínimo três caracteres.
-    if(frm.cliente_redesocial.value == "" || frm.cliente_redesocial.value == null || frm.cliente_redesocial.value.lenght < 3) {
-        alert("Por favor, você deve selecionar uma Rede Social.");
+    if(frm.selectRedeSocial.value == "" || frm.selectRedeSocial.value == null) {
+        // alert("Por favor, você deve selecionar uma Rede Social.");
         //É mostrado um alerta, caso o campo esteja vazio.
-        var msgErro = "Por favor, insira o seu Nome.";
+        var msgErro = "Por favor, primeiro selecione uma Rede Social.";
 
-        $("#resultsocial").html(msgErro).show().fadeOut( 5000 );
         $("#resultsocial").addClass("alert alert-danger");
-        //Foi definido um focus no campo.
-        frm.cliente_redesocial.focus();
+        $("#resultsocial").html(msgErro).show().fadeOut( 5000 );
+        frm.selectRedeSocial.focus();
+        //
         //o form não é enviado.
         return 0;
     }
 
+    if(frm.cliente_redesocial.value == "" ){
+      var msg = "Por favor, o campo não pode estar vazio.";
 
+      $("#resultsocial").addClass("alert alert-danger");
+      $("#resultsocial").html(msg).show().fadeOut( 5000 );
+      frm.cliente_redesocial.focus();
+      return 0;
+
+    }
+//
 }
+
+//
+// validação de campo para aceitar somente numeros e
+
+function somenteNum(num) {
+    var er = /[^0-9]/;
+    er.lastIndex = 0;
+    var campo = num;
+    if (er.test(campo.value)) {
+      campo.value = "";
+      alert("Por favor, digite somente números para preencher este campo.");
+    }
+}
+
+
+// function somenteNum(num) {
+//         var er = /[^0-9]/;
+//         er.lastIndex = 0;
+//         var campo = num;
+//         if (er.test(campo.value)) {
+//           campo.value = "";
+//           alert("Por favor, digite somente números para preencher este campo.");
+//         }
+//     }

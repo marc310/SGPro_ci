@@ -35,25 +35,28 @@ class Enderecos_cliente extends CI_Controller{
      */
     function add()
     {
+      $inputCep = $this->input->post('cep');
+      $cep = str_replace('-', '', $inputCep);
+
+
         $this->load->library('form_validation');
 
 		$this->form_validation->set_rules('numero','Numero','numeric');
 		$this->form_validation->set_rules('uf','Uf','required');
 		$this->form_validation->set_rules('rua','Rua','required');
-		$this->form_validation->set_rules('cep','Cep','numeric');
 		$this->form_validation->set_rules('cliente_id','Cliente Id','required');
 
 		if($this->form_validation->run())
         {
             $params = array(
-				'cliente_id' => $this->input->post('cliente_id'),
-				'rua' => $this->input->post('rua'),
-				'bairro' => $this->input->post('bairro'),
-				'cidade' => $this->input->post('cidade'),
-				'complemento' => $this->input->post('complemento'),
-				'numero' => $this->input->post('numero'),
-				'uf' => $this->input->post('uf'),
-				'cep' => $this->input->post('cep'),
+    				'cliente_id' => $this->input->post('cliente_id'),
+    				'rua' => $this->input->post('rua'),
+    				'bairro' => $this->input->post('bairro'),
+    				'cidade' => $this->input->post('cidade'),
+    				'complemento' => $this->input->post('complemento'),
+    				'numero' => $this->input->post('numero'),
+    				'uf' => $this->input->post('uf'),
+    				'cep' => $cep,
             );
 
             $enderecos_cliente_id = $this->Enderecos_cliente_model->add_enderecos_cliente($params);

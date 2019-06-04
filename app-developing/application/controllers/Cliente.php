@@ -89,61 +89,6 @@ class Cliente extends CI_Controller{
     }
 
     /*
-    * Adding a new cliente
-    */
-    function salvar()
-    {
-
-      $telefone = $this->input->post('telefone');
-      $celular = $this->input->post('celular');
-
-      if ($celular == "+55(__)9 ____-____"){
-        $celular = "";
-      }
-      if ($telefone == "+55(__)____-____"){
-        $telefone = "";
-      }
-
-      $this->load->library('form_validation');
-
-      $this->form_validation->set_rules('nome_cliente','Nome Cliente','required');
-      // $this->form_validation->set_rules('email','Email Cliente','validEmail');
-
-      if($this->form_validation->run())
-      {
-        $params = array(
-          'nome_cliente' => $this->input->post('nome_cliente'),
-          'tipo_pessoa' => $this->input->post('tipo_pessoa'),
-          'documento' => $this->input->post('documento'),
-          'telefone' => $telefone,
-          'celular' => $celular,
-          'email' => $this->input->post('email'),
-          'data_cadastro_cliente' => $this->input->post('data_cadastro_cliente'),
-        );
-
-        //$cliente_id = $this->Cliente_model->add_cliente($params);
-        //redirect('cliente/index');
-        if ( is_numeric($cliente_id = $this->Cliente_model->add_cliente($params, true)) ) {
-            redirect('cliente/index');
-
-        } else {
-
-            $this->data['custom_error'] = '<div class="form_error"><p>An Error Occured.</p></div>';
-        }
-      }
-      else
-      {
-        $this->load->model('Endereco_model');
-        $data['all_enderecos'] = $this->Endereco_model->get_all_enderecos();
-
-
-        //
-        //$data['_view'] = 'cliente/add';
-        $this->load->view('cliente/add');
-      }
-    }
-
-    /*
      * Editing a cliente
      */
     function edit($id_cliente)
@@ -221,50 +166,6 @@ class Cliente extends CI_Controller{
             show_error('O Cliente que você tentou editar parece que não existir ou aconteceu algum problema nos registros.');
     }
 
-
-    /*
-     * Adding a new endereco
-     */
-    function addEndereco()
-    {
-    $this->load->library('form_validation');
-
-		$this->form_validation->set_rules('numero','Numero','numeric');
-		$this->form_validation->set_rules('rua','Rua','required');
-		$this->form_validation->set_rules('cidade','Cidade','required');
-		$this->form_validation->set_rules('bairro','Bairro','required');
-		$this->form_validation->set_rules('uf','Uf','required');
-
-		if($this->form_validation->run())
-        {
-            $params = array(
-      				'rua' => $this->input->post('rua'),
-      				'bairro' => $this->input->post('bairro'),
-      				'cidade' => $this->input->post('cidade'),
-      				'complemento' => $this->input->post('complemento'),
-      				'numero' => $this->input->post('numero'),
-      				'uf' => $this->input->post('uf'),
-      				'cep' => $this->input->post('cep'),
-            );
-
-
-            $endereco_id = $this->Endereco_model->add_endereco($params);
-
-            // if ( is_numeric($cliente_id = $this->Cliente_model->add_cliente($params, true)) ) {
-            //     redirect('cliente/edit/'.$cliente_id);
-            //
-            // } else {
-            //
-            //     $this->data['custom_error'] = '<div class="form_error"><p>An Error Occured.</p></div>';
-            // }
-            // redirect('endereco/index');
-        }
-        else
-        {
-            // $data['_view'] = 'cliente/edit';
-            // $this->load->view('layouts/main', $data);
-        }
-    }
 
     /*
      * Ler produto

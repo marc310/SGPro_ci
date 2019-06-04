@@ -15,6 +15,21 @@
 //
 //*************************************************************************************//
 //
+function formataCep(){
+  var element = document.getElementById('cep');
+  //aceita somente numero
+  var er = /[^0-9-]/;
+  er.lastIndex = 0;
+
+  var phoneMask = IMask(element, {
+  mask: '00000-000',
+  // lazy: false,  // make placeholder always visible
+  placeholderChar: '0'     // defaults to '_'
+});
+}
+//
+//*************************************************************************************//
+//
 function formataTelefone(){
   var element = document.getElementById('telefone');
   var phoneMask = IMask(element, {

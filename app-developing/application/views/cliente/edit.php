@@ -2,7 +2,7 @@
     <div class="col-md-12">
       	<div class="box box-info">
             <div class="box-header with-border">
-              <h3 class="box-title">Editando Cliente  | ID: </h3>
+              <h3 class="box-title">Editando Cadastro de <?php echo $cliente['nome_cliente'];?> | ID: </h3>
               	<h3 id="idClienteShow" class="box-title"><?php echo $cliente['id_cliente'];?></h3>
             </div>
 
@@ -13,7 +13,7 @@
             </ul>
 
             <div class="tab-content">
-               <div class="tab-pane active" id="infoCliente">
+               <div class="tab-pane fade in active" id="infoCliente">
                  <div class="box-body">
                    <div class="row">
                  <div class="col-md-12">
@@ -120,7 +120,7 @@
   </div>
   <!-- ######################################################################################### -->
   <!-- TAB 2 REDES SOCIAIS -->
-  <div class="tab-pane" id="redesSociais">
+  <div class="tab-pane fade" id="redesSociais">
     <div class="box-body">
       <div class="row">
     <div class="col-md-12">
@@ -169,7 +169,7 @@
     <div class="col-md-6">
       <label for="cliente_redesocial" class="control-label">Cliente Redesocial</label>
       <div class="form-group">
-        <input id="cliente_redesocial" type="text" name="cliente_redesocial" value="<?php echo $this->input->post('cliente_redesocial'); ?>" class="form-control" id="cliente_redesocial" onkeypress="validaBtnRedeSocial()"/>
+        <input id="cliente_redesocial" type="text" name="cliente_redesocial" value="<?php echo $this->input->post('cliente_redesocial'); ?>" class="form-control" id="cliente_redesocial"/>
       </div>
     </div>
     <div class="col-md-2 pull-right" style="padding-top:25px;">
@@ -239,15 +239,15 @@
 
  <!-- ######################################################################################### -->
  <!-- TAB 4 LISTA DE ENDEREÇO -->
- <div class="tab-pane" id="enderecoCliente">
+ <div class="tab-pane fade" id="enderecoCliente">
    <div class="box-body" id="">
      <div class="row">
        <div class="col-md-12">
-         <div class="box-header">
-
+         <div class="box-header" style="padding-bottom:20px">
+           <h3 id="tituloEndereco">Lista de Endereços de <?php echo $cliente['nome_cliente'] ?> </h3>
            <div class="box-tools">
-             <div class="row" id="divBtnAddEndereco">
-               <div style="padding-top:18px">
+             <div class="row" id="divBtnAddEndereco" style="padding-top:20px;">
+               <div>
                <button
                href="#"
                id="btnAddEndereco"
@@ -306,6 +306,13 @@
                                   			<span class="text-danger"><?php echo form_error('rua');?></span>
                                   		</div>
                                   	</div>
+                                    <div class="form-group">
+                                  		<label for="numero" class="col-md-4 control-label">Numero</label>
+                                  		<div class="col-md-8">
+                                  			<input type="text" maxlength="10" name="numero" value="<?php echo $this->input->post('numero'); ?>" class="form-control" id="numero" onkeyup="somenteNum(this)" />
+                                  			<span class="text-danger"><?php echo form_error('numero');?></span>
+                                  		</div>
+                                  	</div>
                                   	<div class="form-group">
                                   		<label for="bairro" class="col-md-4 control-label">Bairro</label>
                                   		<div class="col-md-8">
@@ -318,20 +325,7 @@
                                   			<input type="text" name="cidade" value="<?php echo $this->input->post('cidade'); ?>" class="form-control" id="cidade" />
                                   		</div>
                                   	</div>
-                                  	<div class="form-group">
-                                  		<label for="complemento" class="col-md-4 control-label">Complemento</label>
-                                  		<div class="col-md-8">
-                                  			<input type="text" name="complemento" value="<?php echo $this->input->post('complemento'); ?>" class="form-control" id="complemento" />
-                                  		</div>
-                                  	</div>
-                                  	<div class="form-group">
-                                  		<label for="numero" class="col-md-4 control-label">Numero</label>
-                                  		<div class="col-md-8">
-                                  			<input type="text" name="numero" value="<?php echo $this->input->post('numero'); ?>" class="form-control" id="numero" />
-                                  			<span class="text-danger"><?php echo form_error('numero');?></span>
-                                  		</div>
-                                  	</div>
-                                  	<div class="form-group">
+                                    <div class="form-group">
                                   		<label for="uf" class="col-md-4 control-label"><span class="text-danger">*</span>Uf</label>
                                   		<div class="col-md-8">
                                   			<select name="uf" class="form-control" id="uf">
@@ -349,23 +343,38 @@
                                   		</div>
                                   	</div>
                                   	<div class="form-group">
+                                  		<label for="complemento" class="col-md-4 control-label">Complemento</label>
+                                  		<div class="col-md-8">
+                                  			<input type="text" name="complemento" value="<?php echo $this->input->post('complemento'); ?>" class="form-control" id="complemento" />
+                                  		</div>
+                                  	</div>
+
+
+                                  	<div class="form-group">
                                   		<label for="cep" class="col-md-4 control-label">Cep</label>
                                   		<div class="col-md-8">
-                                  			<input type="text" name="cep" value="<?php echo $this->input->post('cep'); ?>" class="form-control" id="cep" />
+
+                                        <input type="text" name="cep" id="cep"
+                                        value="<?php echo $this->input->post('cep'); ?>"
+                                        class="form-control"
+                                        onchange="formataCep()"
+                                        maxlength="9"
+                                        />
+
                                   			<span class="text-danger"><?php echo form_error('cep');?></span>
                                   		</div>
                                   	</div>
 
                          				</div>
                          			</div>
-                           	<div class="box-footer" id="boxBtnEnderecos" hidden>
+                           	<div class="box-footer" id="boxBtnEnderecos">
                               <div class="pull-right">
-                             	<button class="btn btn-success">
+                             	<button class="btn btn-success" id="btnAdicionaEndereco">
                              		<i class="fa fa-check"></i> Adicionar Endereço
                              	</button>
 
                               <button type="button" class="btn btn-danger" id="btnEsconderPainelEndereco" >
-                             		<i class="fa fa-arrow-up"></i> Esconder Painel
+                             		<i class="fa fa-arrow-up"></i> Esconder
                              	</button>
                             </div>
                            	</div>
@@ -473,18 +482,20 @@
 <script>
 
 $(document).ready(function(){
+
+  //
+  $(".nav-tabs a").click(function(){
+    $(this).tab('show');
+  });
+  //
   document.getElementById("cliente_redesocial").disabled=true;
-  document.getElementById("btnAddRedeSocial").disabled=true;
-  document.getElementById("cliente_redesocial").addEventListener("keypress", validaBtnRedeSocial);
-  document.getElementById("cliente_redesocial").addEventListener("keydown", validaBtnRedeSocial);
-  document.getElementById("cliente_redesocial").addEventListener("blur", validaBtnRedeSocial);
-  document.getElementById("btnAddRedeSocial").addEventListener("mouseover", validaBtnRedeSocial);
-
-
+  // document.getElementById("btnAddRedeSocial").disabled=true;
+  //
   loadClienteDoc();
   documentoCliente();
   formataTelefone();
   formataCelular();
+  formataCep();
   // document.getElementById("btnEsconderPainelEndereco").addEventListener("click", escondeCamposEndereco);
   var inputDataCadastro = new Date().getTime(document.getElementById("data_cadastro_cliente").value);
   var date = new Date(inputDataCadastro);
@@ -499,46 +510,97 @@ $(document).ready(function(){
 
   $("#btnAddEndereco").click(function(){
     $("#box-endereco-add").slideToggle("slow");
-    $("#btnAddEndereco").hide(300);
-    $("#boxBtnEnderecos").fadeIn(3000);
+    $("#divBtnAddEndereco").hide(300);
+    $("#tituloEndereco").hide(200);
+    $("#boxBtnEnderecos").fadeIn(2000);
   });
 
   $("#btnEsconderPainelEndereco").click(function(){
     $("#box-endereco-add").slideToggle("slow");
-    $("#btnAddEndereco").show(500);
+    $("#divBtnAddEndereco").show(500);
+    $("#tituloEndereco").show(700);
     $("#boxBtnEnderecos").hide(300);
   });
 
+
+  //######################################################################################
   $(function(){
-    $("#frmAddRedeSocial").submit(function(){
-      dataString = $("#frmAddRedeSocial").serialize();
 
-      $.ajax({
-        type: "POST",
-        url: "<?php echo base_url('endereco_rede_social_cliente/add');?>",
-        data: dataString,
-        target: "#listaRedeSocial",
-        success: function(data){
-          // alert('Successful!');
-          $("#resultsocial").html('Rede Social Adicionada com Sucesso!').show().fadeOut( 3000 );
-          $("#resultsocial").addClass("alert alert-success");
-          $("#listaRedeSocial").load("<?php echo current_url();?> #listaRedeSocial");
-        }
+    // FUNCTION ADICIONAR ENDEREÇO DE REDE SOCIAL COM AJAX
+    // $("#btnAddRedeSocial").click(function(){
+    //   var frm = document.getElementById("frmAddRedeSocial");
+    //   //
+    //   if (1 == 1){
+    //     //your before submit logic
+    //     // alert("se for falso cancela");
+    //     if(validaRedeSocial(frm)==0){
+    //       // $("#resultCliente").html('Cliente não pode ser adicionado!').show().fadeOut( 5000 );
+    //       // $("#resultCliente").addClass("alert alert-danger");
+    //       return false;
+    //     }
+    //     // fim do pre-loader
+    //   }
+
+    // $("#btnAddRedeSocial").click(function(){
+
+      $("#frmAddRedeSocial").submit(function(){
+          var frm = document.getElementById("frmAddRedeSocial");
+          //
+          if (1 == 1){
+            //your before submit logic
+            // alert("se for falso cancela");
+            if(validaRedeSocial(frm)==0){
+              // $("#resultCliente").html('Cliente não pode ser adicionado!').show().fadeOut( 5000 );
+              // $("#resultCliente").addClass("alert alert-danger");
+              return false;
+            }
+            // fim do pre-loader
+          }
+
+        dataString = $("#frmAddRedeSocial").serialize();
+
+        $.ajax({
+          type: "POST",
+          url: "<?php echo base_url('endereco_rede_social_cliente/add');?>",
+          data: dataString,
+          target: "#listaRedeSocial",
+          success: function(data){
+            // alert('Successful!');
+            $("#resultsocial").html('Rede Social Adicionada com Sucesso!').show().fadeOut( 3000 );
+            $("#resultsocial").addClass("alert alert-success");
+            $("#listaRedeSocial").load("<?php echo current_url();?> #listaRedeSocial");
+          }
+        });
+
+        return false;  //stop the actual form post !important!
+
       });
+      // setTimeout( function () {
+      //   limpaCamposRedeSocial();
+      // }, 300);
 
-      return false;  //stop the actual form post !important!
-
-    });
+    // });
     //######################################################################################
-    // SALVA ENDEREÇO COM AJAX
+    // ADICIONA ENDEREÇO COM AJAX
 
     // validação de formulario de endereço
     // verifica se campos estao nulos se for diferente entao prossegue
-    $("#frmAddEndereco").submit(function(){
-  		dataString = $("#frmAddEndereco").serialize();
-      // pre codigo
+    $("#btnAdicionaEndereco").click(function(){
+      var frm = document.getElementById("frmAddEndereco");
+      //
       if (1 == 1){
         //your before submit logic
+          // alert("se for falso cancela");
+        if(validaEndereco(frm)==0){
+          // $("#resultCliente").html('Cliente não pode ser adicionado!').show().fadeOut( 5000 );
+          // $("#resultCliente").addClass("alert alert-danger");
+          return false;
+        }
+        // fim do pre-loader
+      }
+      $("#frmAddEndereco").submit(function(){
+  		dataString = $("#frmAddEndereco").serialize();
+
         $.ajax({
     			type: "POST",
     			url: "<?php echo base_url('enderecos_cliente/add');?>",
@@ -552,15 +614,17 @@ $(document).ready(function(){
     			}
     		});
 
-        // fim do pre-loader
-      }
-      var id = document.getElementById("id_endereco").innerHTML;
-      var endereco = "teste";
+      // fim do pre-loader
       // aqui seque o cod..
       // alert("aqui segue" + endereco + " " + id);
       return false;  //stop the actual form post !important!
   	});
-  // fim da function
+    setTimeout( function () {
+        limpaCamposEndereco();
+    }, 300);
+    // fim da function
+    });
+
   });
   //######################################################################################
   //
@@ -621,19 +685,6 @@ function habilitaCadastroRedeSocial(){
   }
 }
 //######################################################################################
-//######################################################################################
-function validaBtnRedeSocial(){
-  var nome_social = document.getElementById("cliente_redesocial");
-  var btn = document.getElementById("btnAddRedeSocial");
-  if(nome_social.value.length > 2){
-    btn.disabled=false;
-  }
-  else {
-    // alert("desabilita");
-    btn.disabled=true;
-
-  }
-}
 //######################################################################################
 //######################################################################################
 
