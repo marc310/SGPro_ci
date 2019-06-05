@@ -70,12 +70,7 @@ function validaEndereco(frm) {
 }
 
 function validaRedeSocial(frm) {
-/*
-o parâmetro frm desta função significa: this.form,
-pois a chamada da função - validaForm(this) foi
-definida na tag form.
-*/
-    //Verifica se o campo nome_cliente foi preenchido e
+
     //contém no mínimo três caracteres.
     if(frm.selectRedeSocial.value == "" || frm.selectRedeSocial.value == null) {
         // alert("Por favor, você deve selecionar uma Rede Social.");
@@ -90,13 +85,28 @@ definida na tag form.
         return 0;
     }
 
-    if(frm.cliente_redesocial.value == "" ){
-      var msg = "Por favor, o campo não pode estar vazio.";
+    if(frm.cliente_redesocial.value != ""){
+      if(frm.cliente_redesocial.value.length < 3){
 
-      $("#resultsocial").addClass("alert alert-danger");
-      $("#resultsocial").html(msg).show().fadeOut( 5000 );
-      frm.cliente_redesocial.focus();
-      return 0;
+        $("#resultsocial").addClass("alert alert-danger");
+        var msg = "Por favor, o campo deve conter mais de 3 caracteres.";
+
+        $("#resultsocial").html(msg).show().fadeOut( 5000 );
+        frm.cliente_redesocial.focus();
+        return 0;
+
+      }
+
+    }
+    //
+    if(frm.cliente_redesocial.value == ""){
+
+        $("#resultsocial").addClass("alert alert-danger");
+        var msg = "Por favor, o campo não pode estar vazio.";
+
+        $("#resultsocial").html(msg).show().fadeOut( 5000 );
+        frm.cliente_redesocial.focus();
+        return 0;
 
     }
 //

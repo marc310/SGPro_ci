@@ -475,6 +475,7 @@
   </div>
 </div>
 
+
 <!-- ########################################################################################### -->
 <!-- ########################################################################################### -->
 <!-- ########################################################################################### -->
@@ -482,7 +483,6 @@
 <script>
 
 $(document).ready(function(){
-
   //
   $(".nav-tabs a").click(function(){
     $(this).tab('show');
@@ -525,23 +525,6 @@ $(document).ready(function(){
 
   //######################################################################################
   $(function(){
-
-    // FUNCTION ADICIONAR ENDEREÇO DE REDE SOCIAL COM AJAX
-    // $("#btnAddRedeSocial").click(function(){
-    //   var frm = document.getElementById("frmAddRedeSocial");
-    //   //
-    //   if (1 == 1){
-    //     //your before submit logic
-    //     // alert("se for falso cancela");
-    //     if(validaRedeSocial(frm)==0){
-    //       // $("#resultCliente").html('Cliente não pode ser adicionado!').show().fadeOut( 5000 );
-    //       // $("#resultCliente").addClass("alert alert-danger");
-    //       return false;
-    //     }
-    //     // fim do pre-loader
-    //   }
-
-    // $("#btnAddRedeSocial").click(function(){
 
       $("#frmAddRedeSocial").submit(function(){
           var frm = document.getElementById("frmAddRedeSocial");
@@ -608,8 +591,8 @@ $(document).ready(function(){
     			target: "#listaEnderecos",
     			success: function(data){
     				// alert('Successful!');
+            $("#resultendereco").addClass("alert alert-success");
     				$("#resultendereco").html('Endereço Adicionado com Sucesso!').show().fadeOut( 3000 );
-    				$("#resultendereco").addClass("alert alert-success");
     				$("#listaEnderecos").load("<?php echo current_url();?> #listaEnderecos");
     			}
     		});
@@ -643,8 +626,8 @@ $(document).ready(function(){
                   target: "#listaRedeSocial",
                   success: function (data) {
                       if (data.result == true) {
+                        $("#resultsocial").addClass("alert alert-success");
                           $("#resultsocial").html('Serviço Apagado com Sucesso!').show().fadeOut( 3000 );
-                          $("#resultsocial").addClass("alert alert-success");
                           $("#listaRedeSocial").load("<?php //echo current_url();?>// #listaRedeSocial");
 
                       }

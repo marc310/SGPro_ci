@@ -34,7 +34,7 @@ function formataTelefone(){
   var element = document.getElementById('telefone');
   var phoneMask = IMask(element, {
   mask: '+{55}(00)0000-0000',
-  lazy: false,  // make placeholder always visible
+  // lazy: false,  // make placeholder always visible
   placeholderChar: '_'     // defaults to '_'
 });
 }
@@ -45,7 +45,7 @@ function formataCelular(){
   var element = document.getElementById('celular');
   var phoneMask = IMask(element, {
   mask: '+{55}(00){9} 0000-0000',
-  lazy: false,  // make placeholder always visible
+  // lazy: false,  // make placeholder always visible
   placeholderChar: '_'     // defaults to '_'
 });
 }
