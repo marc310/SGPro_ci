@@ -205,15 +205,21 @@
       <td><?php echo "http://" . $e['url_base_redesocial'] . "/" . $e['cliente_redesocial'] ?>
       <td><?php echo $e['tag_redesocial'] . " " . $e['cliente_redesocial']; ?></td>
       <td>
-        <a href="<?php echo site_url('endereco_rede_social_cliente/edit/'.$e['id_endereco_redesocial']); ?>" class="btn btn-info btn-xs"><span class="fa fa-pencil"></span></a>
 
 
-        <span idAcao="<?php echo ' . $e->id_endereco_redesocial . '?>" title="Excluir Serviço" >
-           <a href="<?php echo site_url('endereco_rede_social_cliente/remove/'.$e['id_endereco_redesocial']); ?>"
-              class="btn btn-danger btn-xs"
-              onclick="return confirm('Tem certeza que deseja deletar este item?');">
-            <i class="fa fa-trash"></i></a>
-         </span>
+        <a
+        href="<?php echo site_url('endereco_rede_social_cliente/edit/'.$e['id_endereco_redesocial']); ?>"
+        class="btn btn-info btn-xs">
+        <span class="fa fa-pencil"></span>
+        </a>
+
+        <a
+         href"#"
+         class="btn btn-danger btn-xs deleta"
+         id="<?php echo $e['id_endereco_redesocial']; ?>"
+         >
+         <span class="fa fa-trash"></span>
+        </a>
 
       </td>
   </tr>
@@ -483,6 +489,7 @@
 <script>
 
 $(document).ready(function(){
+
   //
   $(".nav-tabs a").click(function(){
     $(this).tab('show');
@@ -613,37 +620,55 @@ $(document).ready(function(){
   //
   // DELETA COM AJAX
   //
-  $(document).on('click', 'span', function (event) {
-      $("#frmAddRedeSocial").click(function(){
-          dataString = $("#frmAddRedeSocial").serialize();
+  $(document).on('click', '.deleta', function (){
+debugger
+// var id_endereco_redesocial = $(this).attr("id");
+// alert("certo" + id_endereco_redesocial);
 
-          var idRedeSocial = $(this).attr('idAcao');
-          if ((idRedeSocial % 1) == 0) {
-              $.ajax({
-                  type: "POST",
-                  url: "<?php echo site_url('endereco_rede_social_cliente/remove/');?>",
-                  data: "idRedeSocial=" + idRedeSocial,
-                  target: "#listaRedeSocial",
-                  success: function (data) {
-                      if (data.result == true) {
-                        $("#resultsocial").addClass("alert alert-success");
-                          $("#resultsocial").html('Serviço Apagado com Sucesso!').show().fadeOut( 3000 );
-                          $("#listaRedeSocial").load("<?php //echo current_url();?>// #listaRedeSocial");
+        var id_endereco_redesocial = $(this).attr('id');
+        // dataString = $("#frmAddRedeSocial").serialize();
 
-                      }
-                      else {
-                          alert('Ocorreu um erro ao tentar excluir serviço.');
-                      }
-                  }
-              });
-              return false;
-          }
+        // alert(id_endereco_redesocial);
+            $.ajax({
+                type: "POST",
+                url: "<?php echo site_url('endereco_rede_social_cliente/remove');?>",
+                data: id_endereco_redesocial,
+                // target: "#listaRedeSocial",
+                success: function (data) {
+                  alert("funcionou");
+                    // if (data.result == true) {
+                    //     $("#resultsocial").html('Rede Social Apagada com Sucesso!').show().fadeOut( 3000 );
+                    //     $("#resultsocial").addClass("alert alert-success");
+                    //     //$("#listaRedeSocial").load("<?php //echo current_url();?>// #listaRedeSocial");
+                    //
+                    // }
+                    // else {
+                    //     alert('Ocorreu um erro ao tentar excluir serviço.');
+                    // }
+                }
+            });
+            return false;
+          //   $.ajax({
+          //       url: "<?php echo site_url('endereco_rede_social_cliente/remove');?>",
+          //       type: 'POST',
+          //       data: {id_endereco_redesocial : id_endereco_redesocial},
+          //       target: "#listaRedeSocial",
+          //       success: function (data) {
+          //         alert (data);
+          //           if (data.result == true) {
+          //             $("#resultsocial").addClass("alert alert-success");
+          //             $("#resultsocial").html('Serviço Apagado com Sucesso!').show().fadeOut( 3000 );
+          //               $("#listaRedeSocial").load("<?php //echo current_url();?>// #listaRedeSocial");
+          //           }
+          //           else {
+          //               alert('Ocorreu um erro ao tentar excluir serviço.');
+          //           }
+          //       }
+          //   });
 
       });
   });
 
-
-});
 // fim do construtor
 //######################################################################################
 
