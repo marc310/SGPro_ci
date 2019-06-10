@@ -49,9 +49,10 @@
               </a>
 
               <a
+                id="<?php echo $c['id_cliente']?>"
                 href="<?php echo site_url('cliente/remove/'.$c['id_cliente']); ?>"
-                class="btn btn-danger btn-xs"
-                onclick="return confirm('Tem certeza que deseja deletar este item?');">
+                class="btn btn-danger btn-xs deletaCliente"
+                onclick="return confirm('Tem certeza que deseja deletar este cliente?');">
                 <span class="fa fa-trash"></span>
               </a>
               </td>
@@ -61,6 +62,8 @@
         <div class="pull-right">
           <?php echo $this->pagination->create_links(); ?>
         </div>
+        <div id="resultsocial" class="col-md-12"></div>
+
       </div>
     </div>
   </div>
@@ -144,6 +147,55 @@ $(document).ready(function(){
     formataTelefone();
     formataCelular();
   });
+
+  $('#modalAdd').on('hidden.bs.modal', function () {
+    location.reload();
+  });
+});
+
+$(function(){
+
+//######################################################################################
+//
+// DELETA CLIENTE COM AJAX
+//
+$(document).on('click', '.deletaCliente', function (){
+
+      var id = $(this).attr('id');
+      var el = this;
+      var tr = $(this).closest('tr');
+          $.ajax({
+              type: "POST",
+              url: "<?php echo site_url('cliente/remove/');?>" + id,
+              data: {id : id},
+              // target: "#listaClientes",
+              success: function (data) {
+                 // Remove row from HTML Table
+                 // $(el).closest('tr').css('background','tomato');
+                 $(el).closest('tr').fadeOut(2300,function(){
+                    $(this).remove();
+                 });
+
+                // if (data.result == true) {
+                    $("#result").html('Cliente Apagado com Sucesso!').show().fadeOut( 3000 );
+                    $("#result").addClass("alert alert-success");
+                    $("#listaClientes").load("<?php //echo current_url();?>// #listaEnderecos");
+                //
+                // }
+                // else {
+                //     alert('Ocorreu um erro ao tentar excluir serviço.');
+                // }
+              }
+          });
+
+          return false;
+
+    });
+
+  });
+
+    //######################################################################################
+
 //   $("#modalEditar").on('shown.bs.modal', function(){
 //     //alert('The modal is fully shown.');
 //     formataTelefone();
@@ -177,9 +229,5 @@ $(document).ready(function(){
  //  $('#modalEditar').on('hidden.bs.modal', function () {
  //   location.reload();
  // });
- $('#modalAdd').on('hidden.bs.modal', function () {
-  location.reload();
-});
-});
 
 </script>

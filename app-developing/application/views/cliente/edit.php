@@ -185,7 +185,6 @@
         </button>
       </div> -->
     </form>
-    <div id="resultsocial" class="col-md-12"></div>
 
 
 
@@ -227,6 +226,7 @@
           </table>
 
       </div>
+      <div id="resultsocial" class="col-md-12"></div>
 
 
 
