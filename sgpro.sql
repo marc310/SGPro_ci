@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 02-Jun-2019 às 16:33
+-- Generation Time: 10-Jun-2019 às 01:25
 -- Versão do servidor: 10.1.13-MariaDB
 -- PHP Version: 7.0.8
 
@@ -79,8 +79,8 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`id_cliente`, `nome_cliente`, `empresa`, `sexo`, `tipo_pessoa`, `documento`, `telefone`, `celular`, `email`, `data_cadastro_cliente`) VALUES
-(77, 'Jaspion', NULL, NULL, 0, '', '', '', 'super@teste.com', 2147483647),
-(78, 'Jyraia', NULL, NULL, 0, '', '', '', 'super@teste.com', 2147483647);
+(81, 'Novo teste', NULL, NULL, 0, '', '', '', '', 2147483647),
+(83, 'Outro', NULL, NULL, 0, '', '', '', '', 2147483647);
 
 -- --------------------------------------------------------
 
@@ -499,7 +499,7 @@ ALTER TABLE `anexos`
 -- AUTO_INCREMENT for table `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 --
 -- AUTO_INCREMENT for table `dados_empresa`
 --
@@ -509,17 +509,17 @@ ALTER TABLE `dados_empresa`
 -- AUTO_INCREMENT for table `enderecos`
 --
 ALTER TABLE `enderecos`
-  MODIFY `id_endereco` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `id_endereco` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `enderecos_cliente`
 --
 ALTER TABLE `enderecos_cliente`
-  MODIFY `id_endereco` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_endereco` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 --
 -- AUTO_INCREMENT for table `endereco_rede_social_cliente`
 --
 ALTER TABLE `endereco_rede_social_cliente`
-  MODIFY `id_endereco_redesocial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id_endereco_redesocial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=194;
 --
 -- AUTO_INCREMENT for table `fornecedores`
 --
@@ -595,14 +595,14 @@ ALTER TABLE `dados_empresa`
 -- Limitadores para a tabela `enderecos_cliente`
 --
 ALTER TABLE `enderecos_cliente`
-  ADD CONSTRAINT `cons_fk_endereco_cliente` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id_cliente`);
+  ADD CONSTRAINT `cons_fk_endereco_cliente` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id_cliente`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `endereco_rede_social_cliente`
 --
 ALTER TABLE `endereco_rede_social_cliente`
-  ADD CONSTRAINT `cons_fk_cliente_redesocial` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id_cliente`),
-  ADD CONSTRAINT `cons_fk_redesocial` FOREIGN KEY (`redesocial_id`) REFERENCES `redes_sociais` (`id_redesocial`);
+  ADD CONSTRAINT `cons_fk_cliente_redesocial` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id_cliente`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `cons_fk_redesocial` FOREIGN KEY (`redesocial_id`) REFERENCES `redes_sociais` (`id_redesocial`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `fornecedores`
