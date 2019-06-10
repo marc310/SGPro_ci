@@ -385,7 +385,6 @@
                             </div>
                            	</div>
                           </form>
-                          <div id="resultendereco" class="col-md-12"></div>
 
                      </div>
                  </div>
@@ -427,9 +426,11 @@
                </a>
 
                  <a
+                 id="<?php echo $e['id_endereco']; ?>"
                  href="<?php echo site_url('enderecos_cliente/remove/'.$e['id_endereco']); ?>"
-                 class="btn btn-danger btn-xs"
-                 onclick="return confirm('Tem certeza que deseja deletar este item?');">
+                 class="btn btn-danger btn-xs deletaEndereco"
+                 onclick="return confirm('Tem certeza que deseja deletar este item?');"
+                 >
                  <span class="fa fa-trash"></span>
                  </a>
                              </td>
@@ -442,6 +443,7 @@
                    </div>
                  </div>
                </div>
+               <div id="resultendereco" class="col-md-12"></div>
 
                </div>
                </div>
@@ -531,6 +533,8 @@ $(document).ready(function(){
 
 
   //######################################################################################
+  // ADICIONA ENDEREÇO DE REDE SOCIAL COM AJAX
+
   $(function(){
 
       $("#frmAddRedeSocial").submit(function(){
@@ -562,12 +566,12 @@ $(document).ready(function(){
           }
         });
 
-        return false;  //stop the actual form post !important!
+        setTimeout( function () {
+          limpaCamposRedeSocial();
+        }, 300);
 
+        return false;  //stop the actual form post !important!
       });
-      // setTimeout( function () {
-      //   limpaCamposRedeSocial();
-      // }, 300);
 
     // });
     //######################################################################################
@@ -618,33 +622,40 @@ $(document).ready(function(){
   });
   //######################################################################################
   //
-  // DELETA COM AJAX
+  // DELETA REDE SOCIAL COM AJAX
   //
   $(document).on('click', '.deleta', function (){
 debugger
 // var id_endereco_redesocial = $(this).attr("id");
 // alert("certo" + id_endereco_redesocial);
+// alert(id_endereco_redesocial);
 
         var id_endereco_redesocial = $(this).attr('id');
+        var el = this;
+        var tr = $(this).closest('tr');
         // dataString = $("#frmAddRedeSocial").serialize();
-
-        // alert(id_endereco_redesocial);
             $.ajax({
                 type: "POST",
-                url: "<?php echo site_url('endereco_rede_social_cliente/remove');?>",
-                data: id_endereco_redesocial,
+                url: "<?php echo site_url('endereco_rede_social_cliente/remove/');?>" + id_endereco_redesocial,
+                data: {id_endereco_redesocial : id_endereco_redesocial},
                 // target: "#listaRedeSocial",
                 success: function (data) {
-                  alert("funcionou");
-                    // if (data.result == true) {
-                    //     $("#resultsocial").html('Rede Social Apagada com Sucesso!').show().fadeOut( 3000 );
-                    //     $("#resultsocial").addClass("alert alert-success");
-                    //     //$("#listaRedeSocial").load("<?php //echo current_url();?>// #listaRedeSocial");
-                    //
-                    // }
-                    // else {
-                    //     alert('Ocorreu um erro ao tentar excluir serviço.');
-                    // }
+                  // alert("funcionou");
+                	 // Remove row from HTML Table
+                	 // $(el).closest('tr').css('background','tomato');
+                	 $(el).closest('tr').fadeOut(2300,function(){
+                	    $(this).remove();
+                	 });
+
+                  // if (data.result == true) {
+                      $("#resultsocial").html('Rede Social Apagada com Sucesso!').show().fadeOut( 3000 );
+                      $("#resultsocial").addClass("alert alert-success");
+                      $("#listaRedeSocial").load("<?php //echo current_url();?>// #listaRedeSocial");
+                  //
+                  // }
+                  // else {
+                  //     alert('Ocorreu um erro ao tentar excluir serviço.');
+                  // }
                 }
             });
             return false;
@@ -667,6 +678,45 @@ debugger
           //   });
 
       });
+
+      //######################################################################################
+      //
+      // DELETA ENDEREÇO COM AJAX
+      //
+      $(document).on('click', '.deletaEndereco', function (){
+
+            var id_endereco = $(this).attr('id');
+            var el = this;
+            var tr = $(this).closest('tr');
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo site_url('enderecos_cliente/remove/');?>" + id_endereco,
+                    data: {id_endereco : id_endereco},
+                    // target: "#listaEnderecos",
+                    success: function (data) {
+                    	 // Remove row from HTML Table
+                    	 // $(el).closest('tr').css('background','tomato');
+                    	 $(el).closest('tr').fadeOut(2300,function(){
+                    	    $(this).remove();
+                    	 });
+
+                      // if (data.result == true) {
+                          $("#resultendereco").html('Endereço Apagado com Sucesso!').show().fadeOut( 3000 );
+                          $("#resultendereco").addClass("alert alert-success");
+                          $("#listaEnderecos").load("<?php //echo current_url();?>// #listaEnderecos");
+                      //
+                      // }
+                      // else {
+                      //     alert('Ocorreu um erro ao tentar excluir serviço.');
+                      // }
+                    }
+                });
+
+                return false;
+
+          });
+          //######################################################################################
+          //######################################################################################
   });
 
 // fim do construtor
