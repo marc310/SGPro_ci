@@ -2,9 +2,9 @@
     <div class="col-md-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Os Listing</h3>
+                <h3 class="box-title">Ordens de Serviço Cadastradas</h3>
             	<div class="box-tools">
-                    <a href="<?php echo site_url('os/add'); ?>" class="btn btn-success btn-sm">Add</a> 
+                    <a href="<?php echo site_url('os/add'); ?>" class="btn btn-success btn-sm">Nova OS</a>
                 </div>
             </div>
             <div class="box-body">
@@ -33,15 +33,15 @@
 						<td><?php echo $o['os_faturada']; ?></td>
 						<td><?php echo $o['descricao_os']; ?></td>
 						<td>
-                            <a href="<?php echo site_url('os/edit/'.$o['id_os']); ?>" class="btn btn-info btn-xs"><span class="fa fa-pencil"></span> Edit</a> 
+                            <a href="<?php echo site_url('os/edit/'.$o['id_os']); ?>" class="btn btn-info btn-xs"><span class="fa fa-pencil"></span> Edit</a>
                             <a href="<?php echo site_url('os/remove/'.$o['id_os']); ?>" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span> Delete</a>
                         </td>
                     </tr>
                     <?php } ?>
                 </table>
                 <div class="pull-right">
-                    <?php echo $this->pagination->create_links(); ?>                    
-                </div>                
+                    <?php echo $this->pagination->create_links(); ?>
+                </div>
             </div>
         </div>
     </div>
