@@ -10,9 +10,10 @@ function formataEmailCliente(){
 //*************************************************************************************//
 //
 function dataCadastro(){
-  var date = new Date();
-  var dataTempo = date.getTime();
-  var dataFormatada = formatDate(date);
+  var dataTempo = Date.now();
+  var DataH = new Date();
+  DataH.setTime(dataTempo);
+  var dataFormatada = formatDate(DataH);
   var dataCadastroLabel = "Data Cadastro: ";
   //alert("data do cadastro é: " + dataTempo + "<br>" + date);
   var inputDataCadastro = document.getElementById("dataCadastro");

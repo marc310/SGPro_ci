@@ -228,11 +228,6 @@
       </div>
       <div id="resultsocial" class="col-md-12"></div>
 
-
-
-
-
-
       <!-- INNER -->
     </div>
   </div>
@@ -506,8 +501,9 @@ $(document).ready(function(){
   formataCelular();
   formataCep();
   // document.getElementById("btnEsconderPainelEndereco").addEventListener("click", escondeCamposEndereco);
-  var inputDataCadastro = new Date().getTime(document.getElementById("data_cadastro_cliente").value);
-  var date = new Date(inputDataCadastro);
+  var inputDataCadastro = document.getElementById("data_cadastro_cliente").value;
+  var date = new Date();
+  date.setTime(inputDataCadastro);
   var dataFormatada = formatDate(date);
   document.getElementById("labelDataCliente").innerHTML = "Cadastrado desde: " + dataFormatada;
   document.getElementById("salvarEditarCliente").addEventListener("click", editaCliente);
