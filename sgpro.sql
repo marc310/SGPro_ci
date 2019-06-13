@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 10-Jun-2019 às 01:25
+-- Generation Time: 13-Jun-2019 às 11:07
 -- Versão do servidor: 10.1.13-MariaDB
 -- PHP Version: 7.0.8
 
@@ -71,7 +71,7 @@ CREATE TABLE `clientes` (
   `telefone` varchar(20) NOT NULL,
   `celular` varchar(20) DEFAULT NULL,
   `email` varchar(100) NOT NULL,
-  `data_cadastro_cliente` int(30) DEFAULT NULL
+  `data_cadastro_cliente` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -79,8 +79,7 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`id_cliente`, `nome_cliente`, `empresa`, `sexo`, `tipo_pessoa`, `documento`, `telefone`, `celular`, `email`, `data_cadastro_cliente`) VALUES
-(81, 'Novo teste', NULL, NULL, 0, '', '', '', '', 2147483647),
-(83, 'Outro', NULL, NULL, 0, '', '', '', '', 2147483647);
+(81, 'Novo teste', NULL, NULL, 0, '', '+55(22)2604-6565', '', 'marcelomotta@outlook.com.br', '2147483647');
 
 -- --------------------------------------------------------
 
@@ -147,6 +146,14 @@ CREATE TABLE `endereco_rede_social_cliente` (
   `cliente_redesocial` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Extraindo dados da tabela `endereco_rede_social_cliente`
+--
+
+INSERT INTO `endereco_rede_social_cliente` (`id_endereco_redesocial`, `cliente_id`, `redesocial_id`, `cliente_redesocial`) VALUES
+(1, 81, 2, 'fulano-de-tal'),
+(2, 81, 1, 'etc');
+
 -- --------------------------------------------------------
 
 --
@@ -210,14 +217,21 @@ INSERT INTO `material` (`id_material`, `nome_material`, `descricao_material`, `p
 CREATE TABLE `os` (
   `id_os` int(11) NOT NULL,
   `tipo_os` int(1) NOT NULL,
-  `data_inicio` int(50) NOT NULL,
-  `data_final` int(50) DEFAULT NULL,
+  `data_inicio` varchar(100) NOT NULL,
+  `data_final` varchar(100) DEFAULT NULL,
   `descricao_os` text,
   `status_os` int(1) DEFAULT NULL,
   `total_os` int(50) DEFAULT NULL,
   `cliente_id` int(11) NOT NULL,
   `os_faturada` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `os`
+--
+
+INSERT INTO `os` (`id_os`, `tipo_os`, `data_inicio`, `data_final`, `descricao_os`, `status_os`, `total_os`, `cliente_id`, `os_faturada`) VALUES
+(3, 2, '2147483647', '0', '', 0, 0, 81, NULL);
 
 -- --------------------------------------------------------
 
@@ -499,7 +513,7 @@ ALTER TABLE `anexos`
 -- AUTO_INCREMENT for table `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 --
 -- AUTO_INCREMENT for table `dados_empresa`
 --
@@ -514,12 +528,12 @@ ALTER TABLE `enderecos`
 -- AUTO_INCREMENT for table `enderecos_cliente`
 --
 ALTER TABLE `enderecos_cliente`
-  MODIFY `id_endereco` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id_endereco` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `endereco_rede_social_cliente`
 --
 ALTER TABLE `endereco_rede_social_cliente`
-  MODIFY `id_endereco_redesocial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=194;
+  MODIFY `id_endereco_redesocial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `fornecedores`
 --
@@ -539,7 +553,7 @@ ALTER TABLE `material`
 -- AUTO_INCREMENT for table `os`
 --
 ALTER TABLE `os`
-  MODIFY `id_os` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_os` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `pagamentos`
 --
@@ -620,7 +634,7 @@ ALTER TABLE `funcionarios`
 -- Limitadores para a tabela `os`
 --
 ALTER TABLE `os`
-  ADD CONSTRAINT `fk_os_clientes1` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id_cliente`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_os_clientes` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id_cliente`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `pagamentos`
