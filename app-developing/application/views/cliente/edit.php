@@ -500,6 +500,7 @@ $(document).ready(function(){
   formataTelefone();
   formataCelular();
   formataCep();
+  
   // document.getElementById("btnEsconderPainelEndereco").addEventListener("click", escondeCamposEndereco);
   var inputDataCadastro = document.getElementById("data_cadastro_cliente").value;
   var date = new Date();

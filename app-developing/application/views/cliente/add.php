@@ -25,7 +25,7 @@
      name="frmAddCliente"
      id="frmAddCliente"
      method="post"
-     action="<?php echo site_url('cliente/add');?>"
+     action="<?php echo site_url('cliente/');?>"
      > <!-- form open -->
 
 
@@ -117,11 +117,15 @@
 
     <div class="box-footer">
 
-      <button id="btnSalvarCliente" class="btn btn-success" type="button">
-        <i class="fa fa-check"></i> Salvar & Continuar
+      <button id="btnSalvareSair" class="btn btn-success" type="button">
+        <i class="fa fa-check"></i> Salvar
       </button>
 
-      <button type="button" data-dismiss="modal" class="btn btn-outline-secondary">
+      <button id="btnSalvarCliente" class="btn btn-primary" type="button">
+        <i class="fa fa-edit"></i> Salvar & Continuar
+      </button>
+
+      <button type="button" data-dismiss="modal" class="btn btn-secondary">
     		<i class="fa fa-check"></i> Fechar
     	</button>
 
@@ -148,6 +152,7 @@
 $(document).ready(function(){
 
   document.getElementById("btnSalvarCliente").addEventListener("click", salvaCliente);
+  document.getElementById("btnSalvareSair").addEventListener("click", salvareSair);
 
   // construtor iniciando
   // code...

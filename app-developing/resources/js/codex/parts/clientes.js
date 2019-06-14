@@ -140,10 +140,35 @@ salvaCliente = function(){
   $("#resultCliente").addClass("alert alert-success");
   $("#resultCliente").html('Cliente Cadastrado com Sucesso!').show().fadeOut( 5000 );
 
+  frm.action += "add";
   document.forms['frmAddCliente'].submit();
 
 }
 
+//
+
+salvareSair = function(){
+
+  var frm = document.getElementById("frmAddCliente");
+
+  if (1 == 1){
+    //your before submit logic
+    if(validaCliente(frm)==0){
+      // alert("se for falso cancela");
+      // $("#resultCliente").html('Cliente não pode ser adicionado!').show().fadeOut( 5000 );
+      // $("#resultCliente").addClass("alert alert-danger");
+      return false;
+    }
+    // fim do pre-loader
+  }
+  // alertas de confirmação
+  $("#resultCliente").addClass("alert alert-success");
+  $("#resultCliente").html('Cliente Cadastrado com Sucesso!').show().fadeOut( 5000 );
+
+  frm.action += "SalvaESai";
+  document.forms['frmAddCliente'].submit();
+
+}
 //
 // editar clientes
 

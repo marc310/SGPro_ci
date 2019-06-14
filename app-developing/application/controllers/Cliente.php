@@ -88,6 +88,63 @@ class Cliente extends CI_Controller{
       }
     }
 
+
+    /*
+    * Adding a new cliente
+    */
+    function SalvaESai()
+    {
+
+      $telefone = $this->input->post('telefone');
+      $celular = $this->input->post('celular');
+
+      if ($celular == "+55(__)9 ____-____"){
+        $celular = "";
+      }
+      if ($telefone == "+55(__)____-____"){
+        $telefone = "";
+      }
+
+      $this->load->library('form_validation');
+
+      $this->form_validation->set_rules('nome_cliente','Nome Cliente','required');
+      // $this->form_validation->set_rules('email','Email Cliente','validEmail');
+
+      if($this->form_validation->run())
+      {
+        $params = array(
+          'nome_cliente' => $this->input->post('nome_cliente'),
+          'tipo_pessoa' => $this->input->post('tipo_pessoa'),
+          'documento' => $this->input->post('documento'),
+          'telefone' => $telefone,
+          'celular' => $celular,
+          'email' => $this->input->post('email'),
+          'data_cadastro_cliente' => $this->input->post('data_cadastro_cliente'),
+        );
+
+        //$cliente_id = $this->Cliente_model->add_cliente($params);
+        //redirect('cliente/index');
+        if ( is_numeric($cliente_id = $this->Cliente_model->add_cliente($params, true)) ) {
+            redirect('cliente/index');
+
+        } else {
+
+            $this->data['custom_error'] = '<div class="form_error"><p>An Error Occured.</p></div>';
+        }
+      }
+      else
+      {
+        $this->load->model('Endereco_model');
+        $data['all_enderecos'] = $this->Endereco_model->get_all_enderecos();
+
+
+        //
+        //$data['_view'] = 'cliente/add';
+        $this->load->view('cliente/add');
+      }
+    }
+
+
     /*
      * Editing a cliente
      */
