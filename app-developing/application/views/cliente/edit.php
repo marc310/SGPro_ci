@@ -207,8 +207,11 @@
 
 
         <a
-        href="<?php echo site_url('endereco_rede_social_cliente/edit/'.$e['id_endereco_redesocial']); ?>"
-        class="btn btn-info btn-xs">
+        href="<?php echo site_url('cliente/editaRedesocial/'.$e['id_endereco_redesocial']); ?>"
+        class="btn btn-info btn-xs mEditRedeSocial"
+        data-toggle="modal"
+        data-target="#modalEditar"
+        >
         <span class="fa fa-pencil"></span>
         </a>
 
@@ -414,15 +417,17 @@
                  <td><?php echo $e['cep']; ?></td>
                  <td>
                  <a
-                 href="<?php echo site_url('enderecos_cliente/edit/'.$e['id_endereco']); ?>"
+                 href="<?php echo site_url('cliente/editarEndereco/'.$e['id_endereco']); ?>"
                  class="btn btn-info btn-xs"
+                 data-toggle="modal"
+                 data-target="#modalEditar"
                  >
                  <span class="fa fa-pencil"></span>
                </a>
 
                  <a
                  id="<?php echo $e['id_endereco']; ?>"
-                 href="<?php echo site_url('enderecos_cliente/remove/'.$e['id_endereco']); ?>"
+                 href="<?php echo site_url('cliente/removerEndereco/'.$e['id_endereco']); ?>"
                  class="btn btn-danger btn-xs deletaEndereco"
                  onclick="return confirm('Tem certeza que deseja deletar este item?');"
                  >
@@ -500,7 +505,7 @@ $(document).ready(function(){
   formataTelefone();
   formataCelular();
   formataCep();
-  
+
   // document.getElementById("btnEsconderPainelEndereco").addEventListener("click", escondeCamposEndereco);
   var inputDataCadastro = document.getElementById("data_cadastro_cliente").value;
   var date = new Date();
@@ -633,7 +638,7 @@ debugger
         // dataString = $("#frmAddRedeSocial").serialize();
             $.ajax({
                 type: "POST",
-                url: "<?php echo site_url('endereco_rede_social_cliente/remove/');?>" + id_endereco_redesocial,
+                url: "<?php echo site_url('cliente/removeRedesocial/');?>" + id_endereco_redesocial,
                 data: {id_endereco_redesocial : id_endereco_redesocial},
                 // target: "#listaRedeSocial",
                 success: function (data) {
@@ -719,10 +724,14 @@ debugger
 // fim do construtor
 //######################################################################################
 
+// $(document).on('click', '.mEditRedeSocial', function (){
+//
+// });
+
 $("#modalEditar").on('shown.bs.modal', function(){
     //alert('The modal is fully shown.');
 
-  });
+});
 
 //######################################################################################
 //######################################################################################
