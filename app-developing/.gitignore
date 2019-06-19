@@ -1,5 +1,6 @@
 .DS_Store
 
+/[.]vscode/*
 
 application/cache/*
 !application/cache/index.html
@@ -20,7 +21,7 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 /nbproject/
 .idea/*
 
-.vscode/*
+
 ## Sublime Text cache files
 *.tmlanguage.cache
 *.tmPreferences.cache
