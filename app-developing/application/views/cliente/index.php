@@ -51,8 +51,7 @@
               <a
                 id="<?php echo $c['id_cliente']?>"
                 href="<?php echo site_url('cliente/remove/'.$c['id_cliente']); ?>"
-                class="btn btn-danger btn-xs deletaCliente"
-                onclick="return confirm('Tem certeza que deseja deletar este cliente?');">
+                class="btn btn-danger btn-xs deletaCliente">
                 <span class="fa fa-trash"></span>
               </a>
               </td>
@@ -137,6 +136,7 @@
 <!-- ########################################################################################### -->
 <!-- ########################################################################################### -->
 <!-- ########################################################################################### -->
+<script src="<?php echo site_url('resources/js/codex/parts/clientes.js');?>"></script>
 
 <script>
 $(document).ready(function(){
@@ -164,6 +164,7 @@ $(document).on('click', '.deletaCliente', function (){
       var id = $(this).attr('id');
       var el = this;
       var tr = $(this).closest('tr');
+
           $.ajax({
               type: "POST",
               url: "<?php echo site_url('cliente/remove/');?>" + id,
