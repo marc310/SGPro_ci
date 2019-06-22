@@ -7,6 +7,10 @@ $(document).ready(function(){
   });
   //
   document.getElementById("cliente_redesocial").disabled=true;
+  $("#cliente_redesocial").parent().parent().hide();
+  $("#selectRedeSocial").parent().parent().animate({width:"80%"});
+
+
   // document.getElementById("btnAddRedeSocial").disabled=true;
   //
   loadClienteDoc();
@@ -43,183 +47,9 @@ $(document).ready(function(){
   });
 
 
-  //######################################################################################
-  // ADICIONA ENDEREÇO DE REDE SOCIAL COM AJAX
-
-  $(function(){
-
-      $("#frmAddRedeSocial").submit(function(){
-          var frm = document.getElementById("frmAddRedeSocial");
-          //
-          if (1 == 1){
-            //your before submit logic
-            // alert("se for falso cancela");
-            if(validaRedeSocial(frm)==0){
-              // $("#resultCliente").html('Cliente não pode ser adicionado!').show().fadeOut( 5000 );
-              // $("#resultCliente").addClass("alert alert-danger");
-              return false;
-            }
-            // fim do pre-loader
-          }
-
-        dataString = $("#frmAddRedeSocial").serialize();
-
-        $.ajax({
-          type: "POST",
-          url: "<?php echo base_url('endereco_rede_social_cliente/add');?>",
-          data: dataString,
-          target: "#listaRedeSocial",
-          success: function(data){
-            // alert('Successful!');
-            $("#resultsocial").html('Rede Social Adicionada com Sucesso!').show().fadeOut( 3000 );
-            $("#resultsocial").addClass("alert alert-success");
-            $("#listaRedeSocial").load("<?php echo current_url();?> #listaRedeSocial");
-          }
-        });
-
-        setTimeout( function () {
-          limpaCamposRedeSocial();
-        }, 300);
-
-        return false;  //stop the actual form post !important!
-      });
-
-    // });
-    //######################################################################################
-    // ADICIONA ENDEREÇO COM AJAX
-
-    // validação de formulario de endereço
-    // verifica se campos estao nulos se for diferente entao prossegue
-    $("#btnAdicionaEndereco").click(function(){
-      var frm = document.getElementById("frmAddEndereco");
-      //
-      if (1 == 1){
-        //your before submit logic
-          // alert("se for falso cancela");
-        if(validaEndereco(frm)==0){
-          // $("#resultCliente").html('Cliente não pode ser adicionado!').show().fadeOut( 5000 );
-          // $("#resultCliente").addClass("alert alert-danger");
-          return false;
-        }
-        // fim do pre-loader
-      }
-      $("#frmAddEndereco").submit(function(){
-  		dataString = $("#frmAddEndereco").serialize();
-
-          //tratamento de string pra pegar url atual e tratar modificando os dados
-          // e passando os valores pra uma variavel
-        // logica
-        // pega a url atual
-        // conta quantos splits vao ser dados
-        // pega o valor do ultimo split e remove
-        // da um replace no "cliente/edit" para "enderecos_cliente/add"
-        // salva string em uma variavel e passa pra o parametro url 
-
-        $.ajax({
-                type: "POST",
-                //
-                // O PROBLEMA ESTÁ AQUI, O JAVASCRIPT NAO VAI CONSEGUIR CONCLUIR O ECHO BASE_URL
-    			url: "<?php echo base_url('enderecos_cliente/add');?>",
-    			data: dataString,
-    			target: "#listaEnderecos",
-    			success: function(data){
-    				// alert('Successful!');
-            $("#resultendereco").addClass("alert alert-success");
-    				$("#resultendereco").html('Endereço Adicionado com Sucesso!').show().fadeOut( 3000 );
-    				$("#listaEnderecos").load("<?php echo current_url();?> #listaEnderecos");
-    			}
-    		});
-
-      // fim do pre-loader
-      // aqui seque o cod..
-      // alert("aqui segue" + endereco + " " + id);
-      return false;  //stop the actual form post !important!
-  	});
-    setTimeout( function () {
-        limpaCamposEndereco();
-    }, 300);
-    // fim da function
-    });
-
+//######################################################################################
+//######################################################################################
   });
-  //######################################################################################
-  //
-  // DELETA REDE SOCIAL COM AJAX
-  //
-  $(document).on('click', '.deleta', function (){
-
-        var id_endereco_redesocial = $(this).attr('id');
-        var el = this;
-        var tr = $(this).closest('tr');
-        // dataString = $("#frmAddRedeSocial").serialize();
-            $.ajax({
-                type: "POST",
-                url: "<?php echo site_url('cliente/removeRedesocial/');?>" + id_endereco_redesocial,
-                data: {id_endereco_redesocial : id_endereco_redesocial},
-                // target: "#listaRedeSocial",
-                success: function (data) {
-                  // alert("funcionou");
-                	 // Remove row from HTML Table
-                	 // $(el).closest('tr').css('background','tomato');
-                	 $(el).closest('tr').fadeOut(2300,function(){
-                	    $(this).remove();
-                	 });
-
-                  // if (data.result == true) {
-                      $("#resultsocial").html('Rede Social Apagada com Sucesso!').show().fadeOut( 3000 );
-                      $("#resultsocial").addClass("alert alert-success");
-                      $("#listaRedeSocial").load("<?php //echo current_url();?>// #listaRedeSocial");
-                  //
-                  // }
-                  // else {
-                  //     alert('Ocorreu um erro ao tentar excluir serviço.');
-                  // }
-                }
-            });
-            return false;
-
-      });
-
-      //######################################################################################
-      //
-      // DELETA ENDEREÇO COM AJAX
-      //
-      $(document).on('click', '.deletaEndereco', function (){
-
-            var id_endereco = $(this).attr('id');
-            var el = this;
-            var tr = $(this).closest('tr');
-                $.ajax({
-                    type: "POST",
-                    url: "<?php echo site_url('enderecos_cliente/remove/');?>" + id_endereco,
-                    data: {id_endereco : id_endereco},
-                    // target: "#listaEnderecos",
-                    success: function (data) {
-                    	 // Remove row from HTML Table
-                    	 // $(el).closest('tr').css('background','tomato');
-                    	 $(el).closest('tr').fadeOut(2300,function(){
-                    	    $(this).remove();
-                    	 });
-
-                      // if (data.result == true) {
-                          $("#resultendereco").html('Endereço Apagado com Sucesso!').show().fadeOut( 3000 );
-                          $("#resultendereco").addClass("alert alert-success");
-                          $("#listaEnderecos").load("<?php //echo current_url();?>// #listaEnderecos");
-                      //
-                      // }
-                      // else {
-                      //     alert('Ocorreu um erro ao tentar excluir serviço.');
-                      // }
-                    }
-                });
-
-                return false;
-
-          });
-          //######################################################################################
-          //######################################################################################
-  });
-
 // fim do construtor
 //######################################################################################
 
@@ -240,13 +70,25 @@ function habilitaCadastroRedeSocial(){
   if(social.value >= 1){
     // alert("habilitado");
     nome_social.disabled=false;
+    mostraCampoRedeSocial();
   }
   else {
     // alert("desabilita");
     nome_social.disabled=true;
-
+    escondeCampoRedeSocial();
   }
 }
 //######################################################################################
+//
+function mostraCampoRedeSocial(){
+  $("#cliente_redesocial").parent().parent().show(500);
+  $("#selectRedeSocial").parent().parent().animate({width:"30%"}, 200);
+}
+//
+function escondeCampoRedeSocial(){
+  $("#cliente_redesocial").parent().parent().hide(200);
+  $("#selectRedeSocial").parent().parent().animate({width:"80%"}, 400);
+}
+
 //######################################################################################
 //######################################################################################

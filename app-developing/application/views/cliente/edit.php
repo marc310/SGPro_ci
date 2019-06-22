@@ -489,4 +489,178 @@
 <script src="<?php echo site_url('resources/js/codex/parts/clientes.js');?>"></script>
 <script src="<?php echo site_url('resources/js/codex/parts/edit-cliente.js');?>"></script>
 <!-- ########################################################################################### -->
+<script type="text/javascript">
 
+  //######################################################################################
+  // ADICIONA ENDEREÇO DE REDE SOCIAL COM AJAX
+
+  $(function(){
+
+      $("#frmAddRedeSocial").submit(function(){
+          var frm = document.getElementById("frmAddRedeSocial");
+          //
+          if (1 == 1){
+            //your before submit logic
+            // alert("se for falso cancela");
+            if(validaRedeSocial(frm)==0){
+              // $("#resultCliente").html('Cliente não pode ser adicionado!').show().fadeOut( 5000 );
+              // $("#resultCliente").addClass("alert alert-danger");
+              return false;
+            }
+            // fim do pre-loader
+          }
+
+        dataString = $("#frmAddRedeSocial").serialize();
+
+        $.ajax({
+          type: "POST",
+          // TODO..
+          url: "<?php echo base_url('endereco_rede_social_cliente/add');?>",
+          data: dataString,
+          target: "#listaRedeSocial",
+          success: function(data){
+            // alert('Successful!');
+            $("#resultsocial").html('Rede Social Adicionada com Sucesso!').show().fadeOut( 3000 );
+            $("#resultsocial").removeClass("alert-danger");
+            $("#resultsocial").addClass("alert alert-success");
+            $("#listaRedeSocial").load("<?php echo current_url();?> #listaRedeSocial");
+          }
+        });
+
+        setTimeout( function () {
+          limpaCamposRedeSocial();
+          escondeCampoRedeSocial();
+        }, 300);
+
+        return false;  //stop the actual form post !important!
+      });
+
+    // });
+    //######################################################################################
+    // ADICIONA ENDEREÇO COM AJAX
+
+    // validação de formulario de endereço
+    // verifica se campos estao nulos se for diferente entao prossegue
+    $("#btnAdicionaEndereco").click(function(){
+      var frm = document.getElementById("frmAddEndereco");
+      //
+      if (1 == 1){
+        //your before submit logic
+          // alert("se for falso cancela");
+        if(validaEndereco(frm)==0){
+          // $("#resultCliente").html('Cliente não pode ser adicionado!').show().fadeOut( 5000 );
+          // $("#resultCliente").addClass("alert alert-danger");
+          return false;
+        }
+        // fim do pre-loader
+      }
+      $("#frmAddEndereco").submit(function(){
+  		dataString = $("#frmAddEndereco").serialize();
+
+        $.ajax({
+          type: "POST",
+          // TODO..
+    			url: "<?php echo base_url('enderecos_cliente/add');?>",
+    			data: dataString,
+    			target: "#listaEnderecos",
+    			success: function(data){
+    				// alert('Successful!');
+            $("#resultendereco").addClass("alert alert-success");
+    				$("#resultendereco").html('Endereço Adicionado com Sucesso!').show().fadeOut( 3000 );
+    				$("#listaEnderecos").load("<?php echo current_url();?> #listaEnderecos");
+    			}
+    		});
+
+      // fim do pre-loader
+      // aqui seque o cod..
+      return false;  //stop the actual form post !important!
+  	});
+    setTimeout( function () {
+        limpaCamposEndereco();
+        $("#box-endereco-add").slideToggle("slow");
+        $("#divBtnAddEndereco").show(500);
+        $("#tituloEndereco").show(700);
+        $("#boxBtnEnderecos").hide(300);
+    }, 300);
+    // fim da function
+    });
+
+  });
+  //######################################################################################
+  //
+  // DELETA REDE SOCIAL COM AJAX
+  //
+  $(document).on('click', '.deleta', function (){
+
+        var id_endereco_redesocial = $(this).attr('id');
+        var el = this;
+        var tr = $(this).closest('tr');
+        // dataString = $("#frmAddRedeSocial").serialize();
+            $.ajax({
+                type: "POST",
+                // TODO..
+                url: "<?php echo site_url('cliente/removeRedesocial/');?>" + id_endereco_redesocial,
+                data: {id_endereco_redesocial : id_endereco_redesocial},
+                // target: "#listaRedeSocial",
+                success: function (data) {
+                  // alert("funcionou");
+                	 // Remove row from HTML Table
+                	 // $(el).closest('tr').css('background','tomato');
+                	 $(el).closest('tr').fadeOut(2300,function(){
+                	    $(this).remove();
+                	 });
+
+                  // if (data.result == true) {
+                      $("#resultsocial").html('Rede Social Apagada com Sucesso!').show().fadeOut( 3000 );
+                      $("#resultsocial").addClass("alert alert-success");
+                      $("#listaRedeSocial").load("<?php //echo current_url();?>// #listaRedeSocial");
+                  //
+                  // }
+                  // else {
+                  //     alert('Ocorreu um erro ao tentar excluir serviço.');
+                  // }
+                }
+            });
+            return false;
+
+      });
+
+      //######################################################################################
+      //
+      // DELETA ENDEREÇO COM AJAX
+      //
+      $(document).on('click', '.deletaEndereco', function (){
+
+            var id_endereco = $(this).attr('id');
+            var el = this;
+            var tr = $(this).closest('tr');
+                $.ajax({
+                  type: "POST",
+                  // TODO..
+                    url: "<?php echo site_url('enderecos_cliente/remove/');?>" + id_endereco,
+                    data: {id_endereco : id_endereco},
+                    // target: "#listaEnderecos",
+                    success: function (data) {
+                    	 // Remove row from HTML Table
+                    	 // $(el).closest('tr').css('background','tomato');
+                    	 $(el).closest('tr').fadeOut(2300,function(){
+                    	    $(this).remove();
+                    	 });
+
+                      // if (data.result == true) {
+                          $("#resultendereco").html('Endereço Apagado com Sucesso!').show().fadeOut( 3000 );
+                          $("#resultendereco").addClass("alert alert-success");
+                          $("#listaEnderecos").load("<?php //echo current_url();?>// #listaEnderecos");
+                      //
+                      // }
+                      // else {
+                      //     alert('Ocorreu um erro ao tentar excluir serviço.');
+                      // }
+                    }
+                });
+
+                return false;
+
+          });
+
+</script>

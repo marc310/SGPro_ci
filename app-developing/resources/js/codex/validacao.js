@@ -76,7 +76,7 @@ function validaRedeSocial(frm) {
         // alert("Por favor, você deve selecionar uma Rede Social.");
         //É mostrado um alerta, caso o campo esteja vazio.
         var msgErro = "Por favor, primeiro selecione uma Rede Social.";
-
+        $("#resultsocial").removeClass("alert-success");
         $("#resultsocial").addClass("alert alert-danger");
         $("#resultsocial").html(msgErro).show().fadeOut( 5000 );
         frm.selectRedeSocial.focus();
@@ -87,7 +87,7 @@ function validaRedeSocial(frm) {
 
     if(frm.cliente_redesocial.value != ""){
       if(frm.cliente_redesocial.value.length < 3){
-
+        $("#resultsocial").removeClass("alert-success");
         $("#resultsocial").addClass("alert alert-danger");
         var msg = "Por favor, o campo deve conter mais de 3 caracteres.";
 
