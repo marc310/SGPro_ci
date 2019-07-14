@@ -521,7 +521,7 @@
           success: function(data){
             // alert('Successful!');
             $("#resultsocial").html('Rede Social Adicionada com Sucesso!').show().fadeOut( 3000 );
-            $("#resultsocial").removeClass("alert-danger");
+            $("#resultsocial").removeClass("alert alert-danger");
             $("#resultsocial").addClass("alert alert-success");
             $("#listaRedeSocial").load("<?php echo current_url();?> #listaRedeSocial");
           }
@@ -612,6 +612,7 @@
 
                   // if (data.result == true) {
                       $("#resultsocial").html('Rede Social Apagada com Sucesso!').show().fadeOut( 3000 );
+                      $("#resultsocial").removeClass("alert alert-danger");
                       $("#resultsocial").addClass("alert alert-success");
                       $("#listaRedeSocial").load("<?php //echo current_url();?>// #listaRedeSocial");
                   //
